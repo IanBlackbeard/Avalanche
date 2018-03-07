@@ -26,6 +26,6 @@ INSERT INTO obstacles (obstacle) VALUES ("lake");
 
 INSERT INTO obstacles (obstacle) VALUES ("broken leg");
 
-INSERT INTO characters (nanme) VALUES ("Danny Danger");
+INSERT INTO characters (name) VALUES ("Danny Danger");
 
-INSERT INTO characters (nanme) VALUES ("Penny Peril");
+INSERT INTO characters (name) VALUES ("Penny Peril");
