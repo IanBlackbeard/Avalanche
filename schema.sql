@@ -1,4 +1,4 @@
-CREATE DATABASE avalanch;
+CREATE DATABASE avalanche;
 USE avalanche;
 
 CREATE TABLE gear
