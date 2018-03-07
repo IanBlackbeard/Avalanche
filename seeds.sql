@@ -18,14 +18,14 @@ INSERT INTO gear (item) VALUES ("knife");
 
 INSERT INTO gear (item) VALUES ("hand warmers");
 
-INSERT INTO obstacles (obstacle) VALUES ("bear");
+INSERT INTO obstacles (obstacle, delay) VALUES ("bear", 5);
 
-INSERT INTO obstacles (obstacle) VALUES ("river");
+INSERT INTO obstacles (obstacle, delay) VALUES ("river", 3);
 
-INSERT INTO obstacles (obstacle) VALUES ("lake");
+INSERT INTO obstacles (obstacle, delay) VALUES ("lake", 2);
 
-INSERT INTO obstacles (obstacle) VALUES ("broken leg");
+INSERT INTO obstacles (obstacle, delay) VALUES ("broken leg", 4);
 
-INSERT INTO characters (nanme) VALUES ("Danny Danger");
+INSERT INTO characters (name) VALUES ("Danny Danger");
 
-INSERT INTO characters (nanme) VALUES ("Penny Peril");
+INSERT INTO characters (name) VALUES ("Penny Peril");
