@@ -38,19 +38,19 @@ body {
     /*padding: 0px 25%;*/
 }
 
+#start-screen-img {
+  height: 100%;
+  width: 100%;
+}
+
 .start-page {
-  margin: 0px;
-  background-image: url(../img/Avalanche2.gif);
-  max-height: 100%;
-  max-width: 100%;
-  overflow: hidden;
-  max-width: 48%;
-  background-color: #0c0c0c;
-  margin: auto;
-  margin-top: 6%;
-  height: 502px;
-  padding: 3%;
-  border-radius: 20px;
+    margin: 0px;
+    max-width: 48%;
+    margin: auto;
+    margin-top: 6%;
+    height: 502px;
+    border-radius: 20px;
+    display: none;
 }
 
 .black-screen {
@@ -63,4 +63,9 @@ body {
     padding: 3%;
     border-radius: 20px;
     color: #3dc13d;
+    border: solid;
+    border-color: black;
+    border-width: 1px;
+    -webkit-box-shadow:inset 0 0 70px -20px rgba(61,193,61,1);
+    box-shadow:inset 0 0 70px -20px rgba(61,193,61,1);
 }
