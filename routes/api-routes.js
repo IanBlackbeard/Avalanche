@@ -13,7 +13,7 @@ module.exports = function(app) {
     // GET ALL USER INFO FROM DB
     app.get("/api/users", function(req, res) {
         db.Users.findAll({
-        }).then(function(dbusers1234=) {
+        }).then(function(dbusers) {
             res.json(dbUsers);
         });
     });
