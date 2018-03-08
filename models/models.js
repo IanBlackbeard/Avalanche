@@ -32,9 +32,9 @@ module.exports = function(sequelize, DataTypes) {
 module.exports = function(sequelize, DataTypes) {
   var Obstacles = sequelize.define("obstacles", {
     // Giving the characters model a name of type STRING
-    name: DataTypes.STRING
-    delay: DataTypes. INTEGER
-    damage: DataTypes. INTEGER
+    name: DataTypes.STRING,
+    delay: DataTypes.INTEGER,
+    damage: DataTypes.INTEGER
   });
 
   return Obstacles;
@@ -44,9 +44,9 @@ module.exports = function(sequelize, DataTypes) {
 module.exports = function(sequelize, DataTypes) {
   var userScore = sequelize.define("userScore", {
     // Giving the characters model a name of type STRING
-    name: DataTypes.STRING
-    delay: //// integer
-    damage: //// integer
+    name: DataTypes.STRING,
+    delay: DataTypes.INTEGER,
+    damage: DataTypes.INTEGER
   });
 
   return userScore;
