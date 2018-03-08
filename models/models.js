@@ -33,8 +33,8 @@ module.exports = function(sequelize, DataTypes) {
   var Obstacles = sequelize.define("obstacles", {
     // Giving the characters model a name of type STRING
     name: DataTypes.STRING
-    delay: //// integer
-    damage: //// integer
+    delay: DataTypes. INTEGER
+    damage: DataTypes. INTEGER
   });
 
   return Obstacles;
