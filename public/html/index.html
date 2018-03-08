@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Avalanche!!</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link href="../css/styles.css" type="text/css" rel="stylesheet">
+    <script src="js/jquery-3.1.1.js" type="text/javascript"></script>
+    <script src="../js/cats.js" type="text/javascript"></script>
+  </head>
+  <body>
+    <div class="container">
+      <div class="imgHeader">
+      </div>
+      <div class="randomEvent">
+        <span id="checkPoint"></span>
+        <span id="randomEventMessage"></span>
+      </div>
+      <div class="row">
+        <div class="col-md-4">
+          <div class="statsBox">
+            <h1>Time: <span class="totalDays"></span></h1>
+            <h2>Items in Backpack:</h2>
+            <ul class="backpackItems">
+            </ul>
+          </div>
+        </div>
+        <div class="col-md-8" id="homeScreen">
+          <h1 id="start">Choose your character: </h1>
+          <ul class="characters">
+          </ul>
+
+          <h1 id="chooseItems">Choose your items to bring along: </h1>
+          <ul class="itemsList">
+          </ul>
+        </div>
+        <div class="col-md-8" id="gameScreen">
+          <div class="options">
+            <span class="btn btn-default continueOnTrail">Continue Walking</span>
+            <span class="btn btn-default crossRiver">Cross the River</span>
+            <span class="btn btn-default rest">Rest</span>
+          </div>
+        </div>
+        <div class="col-md-8">
+          <div class="playAgain">
+            <a href="index.html">
+              <span class="btn btn-default restartGame">Play Again</span>
+            </a>
+          </div>
+          <div class="events">
+            <p id="event"></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
