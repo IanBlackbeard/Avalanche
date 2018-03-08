@@ -1,0 +1,66 @@
+body {
+  background: url(../img/avalancheBackground2.jpg) no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  max-height: 100%;
+  max-width: 100%;
+  overflow: hidden;
+  font-family: 'CaveStoryRegular';
+};
+
+/*
+#bg {
+  position: fixed; 
+  top: -50%; 
+  left: -50%; 
+  width: 200%; 
+  height: 200%;
+}
+#bg img {
+  position: absolute; 
+  top: 0; 
+  left: 0; 
+  right: 0; 
+  bottom: 0; 
+  margin: auto; 
+  min-width: 50%;
+  min-height: 50%;
+}*/
+
+.arcade {
+  text-align: center;
+}
+
+.game-screen {
+    max-width: 100%;
+    /*padding: 0px 25%;*/
+}
+
+.start-page {
+  margin: 0px;
+  background-image: url(../img/Avalanche2.gif);
+  max-height: 100%;
+  max-width: 100%;
+  overflow: hidden;
+  max-width: 48%;
+  background-color: #0c0c0c;
+  margin: auto;
+  margin-top: 6%;
+  height: 502px;
+  padding: 3%;
+  border-radius: 20px;
+}
+
+.black-screen {
+    margin: 0px;
+    max-width: 48%;
+    background-color: #0c0c0c;
+    margin: auto;
+    margin-top: 6%;
+    height: 502px;
+    padding: 3%;
+    border-radius: 20px;
+    color: #3dc13d;
+}
