@@ -1,15 +1,36 @@
 body {
-  background: url(../img/avalancheBackground2.jpg) no-repeat center center fixed; 
+  background: url(../img/ArcadeWide.jpg) no-repeat center center fixed; 
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
-  max-height: 100%;
-  max-width: 100%;
-  overflow: hidden;
   font-family: 'CaveStoryRegular';
-};
+}
 
+p {
+  font-size: 30px;
+}
+
+h1 {
+  font-size: 50px;
+}
+
+li {
+  font-size: 24px;
+  color: white;
+}
+
+#characterChosen {
+  font-size: 24px;
+}
+
+#chooseCharacter {
+  padding: 0px 150px;
+}
+
+#chooseItems {
+  padding: 0px 220px;
+}
 /*
 #bg {
   position: fixed; 
@@ -29,6 +50,8 @@ body {
   min-height: 50%;
 }*/
 
+
+
 .arcade {
   text-align: center;
 }
@@ -44,28 +67,30 @@ body {
 }
 
 .start-page {
-    margin: 0px;
-    max-width: 48%;
+    max-width: 64%;
     margin: auto;
-    margin-top: 6%;
-    height: 502px;
+    margin-top: 25px;
+    height: 583px;
     border-radius: 20px;
     /*display: none;*/
+/*  margin-top: 5%; these are for 15'' macbook pro
+    height: 585px;*/
 }
 
 .black-screen {
     margin: 0px;
-    max-width: 48%;
     background-color: #0c0c0c;
     margin: auto;
-    margin-top: 6%;
-    height: 502px;
     padding: 3%;
-    border-radius: 20px;
     color: #3dc13d;
     border: solid;
     border-color: black;
     border-width: 1px;
+    max-width: 64%;
+    margin: auto;
+    margin-top: 25px;
+    height: 583px;
+    border-radius: 20px;
     -webkit-box-shadow:inset 0 0 70px -20px rgba(61,193,61,1);
     box-shadow:inset 0 0 70px -20px rgba(61,193,61,1);
 }
