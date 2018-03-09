@@ -28,6 +28,15 @@ module.exports = function(sequelize, DataTypes) {
   return Gear;
 };
 
+module.exports = function(sequelize, DataTypes) {
+  var Gear = sequelize.define("gear", {
+    // Giving the characters model a name of type STRING
+    name: DataTypes.STRING
+  });
+
+  return Gear;
+};
+
 // OBSTACLES MODEL
 module.exports = function(sequelize, DataTypes) {
   var Obstacles = sequelize.define("obstacles", {

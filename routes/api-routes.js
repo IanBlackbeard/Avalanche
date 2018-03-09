@@ -42,6 +42,15 @@ module.exports = function(app) {
         });
     });
 
+//NEWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW
+// GEAR INFORMATION -----------------
+    // GET GEAR BY ID FROM DB
+    app.get("/api/gear/", function(req, res) {
+        db.Gear.findAll({}).then(function(dbgear) {
+            res.json(dbGear);
+        });
+    });
+
 // OBSTACLES INFORMATION ------------
     // GET OBSTACLES FROM DB
     app.get("/api/obstacles/:id", function(req, res) {
