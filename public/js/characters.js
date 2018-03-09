@@ -9,11 +9,13 @@ var backpack = [];
 var characters = [
 	{
 		name: "Danny Danger",
-		image: "./img/danny.jpg"
+		image: "./img/danny.jpg",
+		avatar: ".img/DannyDanger.png"
 	},
 	{
 		name: "Penny Peril",
-		image: "./img/penny.jpg"
+		image: "./img/penny.jpg",
+		avatar: "./img/PennyPeril.png"
 	}
 ];
 
@@ -34,14 +36,28 @@ var allItems = [
 
 // chooseCharacter()
 
-startScreen()
+story()
+
+function story() {
+	$(".story").on("click", function() {
+		$(".story").hide()
+		$(".start-page").show()
+		startScreen()
+	})
+}
 
 function startScreen() {
 	$("#start-screen-img").on("click", function() {
 		$(".start-page").hide()
-        chooseCharacter()
+        $("#user").show()
 	});
 }
+
+$(".userSubmit").on("click", function() {
+	event.preventDefault()
+	$("#user").hide()
+    chooseCharacter()
+});
 
 function chooseCharacter() {
 	$("#chooseCharacter").show()
@@ -65,7 +81,7 @@ function chooseCharacter() {
 		var chosenCharacter = $(this).attr("data-state")
         var id = $(this).attr("data-id")
         var charImage = $("<img>")
-        charImage.attr("src", characters[id].image);
+        charImage.attr("src", characters[id].avatar);
         character += chosenCharacter
         console.log(character)
         $("#characterChosen").append(chosenCharacter, charImage)
@@ -118,6 +134,10 @@ function showItems() {
 
 function game() {
 	$("#game").show()
+	var mainImage = $("<img>")
+    mainImage.attr("src", "./img/pennyLeft.jpg");
+	$(".imgHeader").append(mainImage)
+	
 	
 }
 

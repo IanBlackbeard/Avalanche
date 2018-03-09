@@ -79,6 +79,17 @@ li {
     height: 585px;*/
 }
 
+.imgHeader {
+    max-width: 64%;
+    margin: auto;
+    margin-top: 25px;
+    height: 583px;
+    border-radius: 20px;
+    /*display: none;*/
+/*  margin-top: 5%; these are for 15'' macbook pro
+    height: 585px;*/
+}
+
 .black-screen {
     margin: 0px;
     background-color: #0c0c0c;
