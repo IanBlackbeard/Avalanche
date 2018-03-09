@@ -25,6 +25,13 @@
           <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos vitae fugit laboriosam praesentium maiores ratione ipsam animi accusantium blanditiis a deserunt nobis, impedit sequi molestias, nam quia eum mollitia enim?</p>
         </div>
 
+        <div id="user">
+          <form id="user-form">
+              <input placeholder="Enter your name" id="user-name" type="text" />
+              <button type="submit" class="userSubmit">Create User</button>
+          </form>
+        </div>
+
         <div id="chooseCharacter">
           <div class="row">
             <h1 id="cc">Choose your character: </h1>
@@ -65,31 +72,9 @@
           </div>
         </div>
 
-        <div id="game"> 
-          <div class="imgHeader row"> <!-- this is the top image with the character moving -->
-          </div>
-            
-          <div class="row">
-            <div class="col-md-4">
-              <div class="statsBox">
-                <h1>Time: <span class="time"></span></h1>
-                <h2>Items in Backpack:</h2>
-                <ul class="backpackItems">
-                </ul>
-                <div class="col-md-8" id="characterChosen">
-                </div>
-              </div>
-            </div>
-
-            <div class="col-md-8" id="gameScreen">
-              <div class="options">
-                <span class="btn btn-default continueOnTrail">Continue Walking</span>
-                <span class="btn btn-default crossRiver">Cross the River</span>
-                <span class="btn btn-default rest">Rest</span>
-              </div>
-            </div>
-
-          </div> <!-- end row of stats box -->
+        <div id="game" class="row"> 
+          <div class="imgHeader"> <!-- this is the top image with the character moving --></div>
+          <div class="statsBox"></div>
         </div>
 
         <div class="gameOver">
@@ -114,6 +99,7 @@
     $("#chooseItems").hide()
     $("#game").hide()
     $(".gameOver").hide()
+    $("#user").hide()
 
   </script>
 
