@@ -10,12 +10,12 @@ var characters = [
 	{
 		name: "Danny Danger",
 		image: "./img/danny.jpg",
-		avatar: ".img/DannyDanger.png"
+		avatar: "./img/DannyDangerSmall.png"
 	},
 	{
 		name: "Penny Peril",
 		image: "./img/penny.jpg",
-		avatar: "./img/PennyPeril.png"
+		avatar: "./img/PennyPerilSmall.png"
 	}
 ];
 
@@ -40,6 +40,7 @@ story()
 
 function story() {
 	$(".story").on("click", function() {
+		$(".black-screen").hide()
 		$(".story").hide()
 		$(".start-page").show()
 		startScreen()
@@ -49,6 +50,7 @@ function story() {
 function startScreen() {
 	$("#start-screen-img").on("click", function() {
 		$(".start-page").hide()
+		$(".black-screen").show()
         $("#user").show()
 	});
 }
@@ -80,7 +82,7 @@ function chooseCharacter() {
   	$("img").on("click", function() {
 		var chosenCharacter = $(this).attr("data-state")
         var id = $(this).attr("data-id")
-        var charImage = $("<img>")
+        var charImage = $("<br><img>")
         charImage.attr("src", characters[id].avatar);
         character += chosenCharacter
         console.log(character)
