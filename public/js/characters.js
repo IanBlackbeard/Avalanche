@@ -64,9 +64,11 @@ function chooseCharacter() {
   	$("img").on("click", function() {
 		var chosenCharacter = $(this).attr("data-state")
         var id = $(this).attr("data-id")
+        var charImage = $("<img>")
+        charImage.attr("src", characters[id].image);
         character += chosenCharacter
-        // console.log(character)
-        $("#characterChosen").prepend(chosenCharacter)
+        console.log(character)
+        $("#characterChosen").append(chosenCharacter, charImage)
         $("#chooseCharacter").hide()
         showItems()
   	})
@@ -110,7 +112,13 @@ function showItems() {
 	} else {
 		console.log("backpack full")
 		$("#chooseItems").hide()
+		game()
 	}
+}
+
+function game() {
+	$("#game").show()
+	
 }
 
 
