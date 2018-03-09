@@ -1,122 +1,127 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-  <title>Avalanche!</title>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-  <link rel="stylesheet" media="screen" href="https://fontlibrary.org/face/cave-story" type="text/css"/>
-  <link rel="stylesheet" type="text/css" href="../css/style.css">
-  <script
-  src="https://code.jquery.com/jquery-3.3.1.min.js"
-  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-  crossorigin="anonymous">
-  </script>
+    <title>Avalanche!</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" media="screen" href="https://fontlibrary.org/face/cave-story" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../css/style.css">
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous">
+    </script>
 </head>
+
 <body>
 
-  <div class="start-page">
-    <img id="start-screen-img" src="../img/AvalancheCLICK.gif" style="border-radius: 20px">
-  </div>
+    <div class="start-page">
+        <img id="start-screen-img" src="../img/AvalancheCLICK.gif" style="border-radius: 20px">
+    </div>
 
-  <div class="black-screen">
+    <div class="black-screen">
 
-      <section class="game-screen"><!-- game screen container -->
+        <section class="game-screen">
+            <!-- game screen container -->
 
-        <div id="chooseCharacter">
-          <div class="row">
-            <h1 id="cc">Choose your character: </h1>
-          </div>
-          <div class="row characters">
-            <div class="col-md-6 char1">
-            </div>
-            <div class="col-md-6 char2">
-            </div>
-            <!-- create buttons with characters' images on them -->
-          </div>
-        </div>
-
-        <div id="chooseItems">
-          <div class="row">
-            <h1 id="ci">Click on four items to bring along: </h1>
-          </div>
-          <div class="row">
-            <ul class="col-md-6 itemsList">
-            </ul>
-            <ul class="col-md-6 itemsList2">   
-            </ul>
-          </div>
-
-          <div class="row">
-
-            <div class="col-md-4">
-              <div class="statsBox">
-                <h2>Items in Backpack:</h2>
-                <ul class="backpackItems">
-                </ul>
-              </div>
+            <div class="story">
+              <p>You and a group of friends have gone back country skiing for the weekend.</p>
+              <p>You are having a great time and stop for a group picture.</p>
+              <p>-Click the screen to continue-</p>
             </div>
 
-            <div class="col-md-8">
-              <div id="characterChosen"></div>
-            </div>
-          </div>
-        </div>
-
-        <div id="game"> 
-          <div class="imgHeader row"> <!-- this is the top image with the character moving -->
-          </div>
-            
-          <div class="row">
-            <div class="col-md-4">
-              <div class="statsBox">
-                <h1>Time: <span class="time"></span></h1>
-                <h2>Items in Backpack:</h2>
-                <ul class="backpackItems">
-                </ul>
-                <div class="col-md-8" id="characterChosen">
+            <div id="chooseCharacter">
+                <div class="row">
+                    <h1 id="cc">Choose your character: </h1>
                 </div>
-              </div>
+                <div class="row characters">
+                    <div class="col-md-6 char1">
+                    </div>
+                    <div class="col-md-6 char2">
+                    </div>
+                    <!-- create buttons with characters' images on them -->
+                </div>
             </div>
 
-            <div class="col-md-8" id="gameScreen">
-              <div class="options">
-                <span class="btn btn-default continueOnTrail">Continue Walking</span>
-                <span class="btn btn-default crossRiver">Cross the River</span>
-                <span class="btn btn-default rest">Rest</span>
-              </div>
+            <div id="chooseItems">
+                <div class="row">
+                    <h1 id="ci">Click on four items to bring along: </h1>
+                </div>
+                <div class="row">
+                    <ul class="col-md-6 itemsList">
+                    </ul>
+                    <ul class="col-md-6 itemsList2">
+                    </ul>
+                </div>
+
+                <div class="row">
+
+                    <div class="col-md-4">
+                        <div class="statsBox">
+                            <h2>Items in Backpack:</h2>
+                            <ul class="backpackItems">
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="col-md-8">
+                        <div id="characterChosen"></div>
+                    </div>
+                </div>
             </div>
 
-          </div> <!-- end row of stats box -->
-        </div>
+            <div id="game">
+                <div class="imgHeader row">
+                    <!-- this is the top image with the character moving -->
+                </div>
 
-        <div class="gameOver">
-          <div class="playAgain">
-            <a href="index.html">
-              <span class="btn btn-default restartGame">Play Again</span>
-            </a>
-          </div>
-          <div class="events">
-            <p id="event"></p>
-          </div>
-        </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="statsBox">
+                            <h1>Time: <span class="time"></span></h1>
+                            <h2>Items in Backpack:</h2>
+                            <ul class="backpackItems">
+                            </ul>
+                            <div class="col-md-8" id="characterChosen">
+                            </div>
+                        </div>
+                    </div>
 
-      </section> <!-- end game screen -->
+                    <div class="col-md-8" id="gameScreen">
+                        <div class="options">
+                            <span class="btn btn-default continueOnTrail">Continue Walking</span>
+                            <span class="btn btn-default crossRiver">Cross the River</span>
+                            <span class="btn btn-default rest">Rest</span>
+                        </div>
+                    </div>
 
-  </div>
+                </div>
+                <!-- end row of stats box -->
+            </div>
 
-  <script>
-    
-    $("#chooseCharacter").hide()
-    $("#chooseItems").hide()
-    $("#game").hide()
-    $(".gameOver").hide()
+            <div class="gameOver">
+                <div class="playAgain">
+                    <a href="index.html">
+                        <span class="btn btn-default restartGame">Play Again</span>
+                    </a>
+                </div>
+                <div class="events">
+                    <p id="event"></p>
+                </div>
+            </div>
 
-  </script>
+        </section>
+        <!-- end game screen -->
 
-  <!-- <script type="text/javascript" src="./math.js"></script> -->
-  <script type="text/javascript" src="js/characters.js"></script>
+    </div>
 
+    <script>
+        $("#chooseCharacter").hide()
+        $("#chooseItems").hide()
+        $("#game").hide()
+        $(".gameOver").hide()
+        $(".start-page").hide()
+    </script>
 
-  
+    <!-- <script type="text/javascript" src="./math.js"></script> -->
+    <script type="text/javascript" src="js/characters.js"></script>
 
 </body>
 

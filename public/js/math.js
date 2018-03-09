@@ -5,7 +5,7 @@ var obstacles = [
 		damage: 4
 	},
 	{
-		name: "river",
+		name: "crevasse",
 		damage: 2
 	},
 	{
