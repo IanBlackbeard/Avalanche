@@ -36,24 +36,21 @@ var allItems = [
 
 // chooseCharacter()
 
-story()
+$(".black-screen").show()
+$(".story").show()
+$(".story").on("click", function() {
+	$(".black-screen").hide()
+	$(".story").hide()
+	$(".start-page").show()
+})
 
-function story() {
-	$(".story").on("click", function() {
-		$(".black-screen").hide()
-		$(".story").hide()
-		$(".start-page").show()
-		startScreen()
-	})
-}
 
-function startScreen() {
-	$("#start-screen-img").on("click", function() {
-		$(".start-page").hide()
-		$(".black-screen").show()
-        $("#user").show()
-	});
-}
+$("#start-screen-img").on("click", function() {
+	$(".start-page").hide()
+	$(".black-screen").show()
+    $("#user").show()
+});
+
 
 $(".userSubmit").on("click", function() {
 	event.preventDefault()
@@ -134,6 +131,8 @@ function showItems() {
 	}
 }
 
+// game()
+
 function game() {
 	$("#game").show()
 	var mainImage = $("<img>")
@@ -187,6 +186,5 @@ function game() {
 
 // module.exports = Character;
 // module.exports = Player;
-
 
 })
