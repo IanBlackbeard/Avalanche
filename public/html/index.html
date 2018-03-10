@@ -25,7 +25,7 @@
           <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos vitae fugit laboriosam praesentium maiores ratione ipsam animi accusantium blanditiis a deserunt nobis, impedit sequi molestias, nam quia eum mollitia enim?</p>
         </div>
 
-        <div id="user">
+        <div id="user" class="row">
           <form id="user-form">
               <input placeholder="Enter your name" id="user-name" type="text" />
               <button type="submit" class="userSubmit">Create User</button>
@@ -72,8 +72,8 @@
           </div>
         </div>
 
-        <div id="game" class="row"> 
-          <img id="penny-left" src="../img/pennyLeft.jpg" style="border-radius: 20px">
+        <div id="game"> 
+          <img id="penny-left" class="row" src="../img/pennyLeft.jpg" style="border-radius: 20px">
           <div class="statsBox"></div>
         </div>
 
@@ -94,6 +94,8 @@
 
   <script>
     
+    $(".black-screen").hide()
+    $(".story").hide()
     $(".start-page").hide()
     $("#chooseCharacter").hide()
     $("#chooseItems").hide()

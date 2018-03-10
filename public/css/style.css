@@ -85,31 +85,14 @@ li {
     margin-top: 25px;
     height: 583px;
     border-radius: 20px;
+    overflow: hidden;
 }
 
-#pennyLeft {
-    border-radius: 20px;
-    height: 670px;
-    width: 1040px;
-    margin-top: 0px;
-}
-
-.imgHeader {
-    max-width: 64%;
-    margin: auto;
-    margin-top: 25px;
-    height: 583px;
-    border-radius: 20px;
-    /*display: none;*/
-/*  margin-top: 5%; these are for 15'' macbook pro
-    height: 585px;*/
-}
 
 .black-screen {
     margin: 0px;
     background-color: #0c0c0c;
     margin: auto;
-    padding: 3%;
     color: #3dc13d;
     border: solid;
     border-color: black;
@@ -122,3 +105,17 @@ li {
     -webkit-box-shadow:inset 0 0 70px -20px rgba(61,193,61,1);
     box-shadow:inset 0 0 70px -20px rgba(61,193,61,1);
 }
+
+#penny-left {
+  max-width:100%;
+  margin-left: 0;
+}
+
+.story {
+  padding: 3%;
+}
+
+#user {
+  padding: 5%;
+}
+
