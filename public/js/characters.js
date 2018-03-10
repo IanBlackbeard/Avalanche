@@ -1,25 +1,38 @@
+// var math = require("./math.js");
+
 $(document).ready(function() {
 
 // var Obstacle = require("./obsticles.js");
 
-var time = ["6:00"]
+
+var time;
+
+var timeArray = ["7:00 AM", "8:00 AM", "9:00 AM", "10:00 AM", "11:00 AM", "12:00 PM", "1:00 PM", "2:00 PM", "3:00 PM", "4:00 PM", "5:00 PM", "6:00 PM", "7:00 PM", "8:00 PM", "9:00 PM", "10:00 PM", "11:00 PM", "12:00 AM", "1:00 AM", "2:00 AM", "3:00 AM", "4:00 AM", "5:00 AM", "6:00 AM"]
+
+var distanceTraveled = 0;
 
 var backpack = [];
+
+var lifePoints = 100;
+
+var imageCount = 0;
 
 var characters = [
 	{
 		name: "Danny Danger",
 		image: "./img/danny.jpg",
-		avatar: "./img/DannyDangerSmall.png"
+		avatar: "./img/DannyDangerSmall.png",
+		mainMovement: ["./img/dannyLeft.jpg", "./img/dannyMid.jpg", "./img/dannyRight.jpg"]
 	},
 	{
 		name: "Penny Peril",
 		image: "./img/penny.jpg",
-		avatar: "./img/PennyPerilSmall.png"
+		avatar: "./img/PennyPerilSmall.png",
+		mainMovement: ["./img/pennyLeft.jpg", "./img/pennyMid.jpg", "./img/pennyRight.jpg"]
 	}
 ];
 
-var character = {};
+var character;
 
 var allItems = [
 	"Food",
@@ -81,8 +94,8 @@ function chooseCharacter() {
         var id = $(this).attr("data-id")
         var charImage = $("<br><img>")
         charImage.attr("src", characters[id].avatar);
-        character += chosenCharacter
-        console.log(character)
+        character = id;
+        console.log(character);
         $("#characterChosen").append(chosenCharacter, charImage)
         $("#chooseCharacter").hide()
         showItems()
@@ -126,22 +139,50 @@ function showItems() {
 	    })
 	} else {
 		console.log("backpack full")
-		$("#chooseItems").hide()
-		game()
+		$(".itemColumns").hide()
+		$(".startGame").on("click", function() {
+			$("#chooseItems").hide()
+			game()
+		})
 	}
 }
 
 // game()
 
 function game() {
-	$("#game").show()
-	var mainImage = $("<img>")
-    mainImage.attr("src", "./img/pennyLeft.jpg");
-    mainImage.attr("class", "bigPicture");
-	$("#gameImage").append(mainImage)
-	
+	if (lifePoints > 0) {
+		$("#game").show()
+
+		displayImage()
+
+	} else {
+		console.log("you died")
+	}
 	
 }
+
+function displayImage() {
+	$("#gameImage").empty()
+	var mainImage = $("<img>")
+    mainImage.attr("src", characters[character].mainMovement[imageCount]);
+    mainImage.attr("class", "bigPicture");
+	$("#gameImage").append(mainImage)
+	nextImage()
+}
+
+function nextImage() {
+  imageCount++;
+  if (imageCount === characters[character].mainMovement.length) {
+    imageCount = 0;
+  }
+}
+
+$("#game").on("click", function() {
+	event.preventDefault()
+	game()
+})
+
+
 
 
 // Character Constructor
