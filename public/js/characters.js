@@ -34,6 +34,9 @@ var allItems = [
 	"Hand warmers"
 ];
 
+var nameInput = $("#user-name");
+var newUser;
+
 // chooseCharacter()
 
 $(".black-screen").show()
@@ -54,9 +57,23 @@ $("#start-screen-img").on("click", function() {
 
 $(".userSubmit").on("click", function() {
 	event.preventDefault()
+	newUser = {
+		name: nameInput.val().trim()
+	};
+	console.log(newUser);
+	submitUser(newUser);
 	$("#user").hide()
     chooseCharacter()
 });
+
+function submitUser(User) {
+	// console.log("new user 2: " + newUser.name);
+	$.ajax({
+		method: "POST",
+		url: "/api/users",
+		data: newUser
+	});
+}
 
 function chooseCharacter() {
 	$("#chooseCharacter").show()
