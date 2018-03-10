@@ -1,12 +1,20 @@
-// USERS MODEL
-module.exports = function(sequelize, DataTypes) {
-  var Users = sequelize.define("users", {
-    // Giving the characters model a name of type STRING
-    name: DataTypes.STRING
-  });
+// USER MODEL
+// module.exports = function(sequelize, DataTypes) {
+//   var User = sequelize.define("User", {
+//     // Giving the characters model a name of type STRING
+//     name: {
+//       type: DataTypes.STRING,
+//       allowNull: false
+//     },
+//     score: {
+//       type: DataTypes.INTEGER,
+//       allowNull: true
+//     }
+//   });
 
-  return Users;
-};
+//   return User;
+// };
+
 
 // CHARACTERS MODEL
 module.exports = function(sequelize, DataTypes) {
