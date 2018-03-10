@@ -137,7 +137,8 @@ function game() {
 	$("#game").show()
 	var mainImage = $("<img>")
     mainImage.attr("src", "./img/pennyLeft.jpg");
-	$(".imgHeader").append(mainImage)
+    mainImage.attr("class", "bigPicture");
+	$("#gameImage").append(mainImage)
 	
 	
 }
