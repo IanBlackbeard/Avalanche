@@ -5,7 +5,7 @@ $(document).ready(function() {
 // var Obstacle = require("./obsticles.js");
 
 
-var time;
+var time = "7:00 AM";
 
 var timeArray = ["7:00 AM", "8:00 AM", "9:00 AM", "10:00 AM", "11:00 AM", "12:00 PM", "1:00 PM", "2:00 PM", "3:00 PM", "4:00 PM", "5:00 PM", "6:00 PM", "7:00 PM", "8:00 PM", "9:00 PM", "10:00 PM", "11:00 PM", "12:00 AM", "1:00 AM", "2:00 AM", "3:00 AM", "4:00 AM", "5:00 AM", "6:00 AM"]
 
@@ -169,13 +169,15 @@ function showItems() {
 
 function game() {
 	$("#game").show()
+	$(".statsBox").empty()
+	$(".statsBox").append("Time: " + time + "<br>", "Life Points: " + lifePoints + "<br>", "Backpack Items: " + "<br>", backpack[0] + "<br>", backpack[1] + "<br>", backpack[2] + "<br>", backpack[3] + "<br>")
 	console.log(timeCount)
-	console.log(time)
-	console.log(lifePoints)
+	console.log("Time: " + time)
+	console.log("Life Points: " + lifePoints)
 	if (lifePoints > 0) {
 		if (distanceTraveled < 10) {
 			obstacleChecker()
-			console.log(distanceTraveled)
+			// console.log(distanceTraveled)
 			if (obstacle === "none") {
 				displayImage()
 			} else {
@@ -216,7 +218,7 @@ function distanceMath() {
 	if (obstacle === "none") {
 		if (timeCount < 11) {
 			distanceTraveled += 1;
-			console.log(distanceTraveled)
+			console.log("Distance Traveled: " + distanceTraveled)
 		} else {
 			distanceTraveled += .75;
 
@@ -329,7 +331,8 @@ function obstacleChecker() {
 		obstacleOdds = 10;
 		console.log(obstacle)
 		console.log(obstacleOdds)
-
+		//affect lp etc vars
+		sound = obstacle.sound
 	} else {
 		obstacle = "none";
 		console.log(obstacle)
