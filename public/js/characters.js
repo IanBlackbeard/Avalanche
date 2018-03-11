@@ -267,14 +267,44 @@ var obstacleList = [
 		picture: "../img/river.png"
 	},
 	{
-		name: "wolf",
-		damage: 3,
-		picture: "../img/wolf.jpg"
-	},
-	{
 		name: "broken bone",
 		damage: 1,
 		picture: "../img/leg.jpg"
+	},
+	{
+		name: "cravasse",
+		damage: 2,
+		picture: "../img/river.png"
+	},
+	{
+		name: "frost bite",
+		damage: 2,
+		picture: "../img/river.png"
+	},
+	{
+		name: "altitude sickness",
+		damage: 2,
+		picture: "../img/river.png"
+	},
+	{
+		name: "blizzard",
+		damage: 2,
+		picture: "../img/river.png"
+	},
+	{
+		name: "darkness",
+		damage: 2,
+		picture: "../img/river.png"
+	},
+	{
+		name: "yeti",
+		damage: 2,
+		picture: "../img/wolf.jpg"
+	},
+	{
+		name: "wolf",
+		damage: 2,
+		picture: "../img/river.png"
 	}
 ];
 
