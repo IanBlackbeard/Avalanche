@@ -259,7 +259,7 @@ var obstacleList = [
 	{
 		name: "bear",
 		damage: 4,
-		picture: "../img/bear1.jpg"
+		picture: "../img/dannyBearDay.gif"
 	},
 	{
 		name: "river",
