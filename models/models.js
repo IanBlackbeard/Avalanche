@@ -1,21 +1,3 @@
-// USER MODEL
-// module.exports = function(sequelize, DataTypes) {
-//   var User = sequelize.define("User", {
-//     // Giving the characters model a name of type STRING
-//     name: {
-//       type: DataTypes.STRING,
-//       allowNull: false
-//     },
-//     score: {
-//       type: DataTypes.INTEGER,
-//       allowNull: true
-//     }
-//   });
-
-//   return User;
-// };
-
-
 // CHARACTERS MODEL
 module.exports = function(sequelize, DataTypes) {
   var Characters = sequelize.define("characters", {
@@ -27,15 +9,6 @@ module.exports = function(sequelize, DataTypes) {
 };
 
 // GEAR MODEL 
-module.exports = function(sequelize, DataTypes) {
-  var Gear = sequelize.define("gear", {
-    // Giving the characters model a name of type STRING
-    name: DataTypes.STRING
-  });
-
-  return Gear;
-};
-
 module.exports = function(sequelize, DataTypes) {
   var Gear = sequelize.define("gear", {
     // Giving the characters model a name of type STRING

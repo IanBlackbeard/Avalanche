@@ -37,16 +37,16 @@ var characters = [
 var character;
 
 var allItems = [
-	"Food",
-	"Flare gun",
-	"Axe",
-	"Emergency blanket",
-	"Clothes",
-	"Water",
-	"Flint",
-	"Shovel",
-	"Knife",
-	"Hand warmers"
+	"Axe", //- Bear
+	"Flint", //- River
+	"First-Aid-Kit", //- Broken Bone
+	"Climbing gear", //- Cravasse
+	"Hand-Warmers", //- Frost Bite
+	"Water", //- Altitude sickness
+	"Emergency-Blanket", //- Blizzard 
+	"Food" //- Wolf
+	// "Flashlight" //- darkness
+	// "Riddle" //- Yeti
 ];
 
 var nameInput = $("#user-name");
@@ -296,62 +296,72 @@ var obstacleList = [
         damage: 4,
         dayImage: ["../img/dannyBearDay.gif", "../img/pennyBearDay.gif"],
         nightImage: ["../img/dannyBearNight.gif", "../img/pennyBearNight.gif"],
-      	sound: "../sounds/bear.mp3"
+      	sound: "../sounds/bear.mp3",
+      	deterrent: "Axe"
     },
-  
 	{
 		name: "river",
 		damage: 2,
 		picture: "../img/river.png",
-		sound: "../sounds/river.mp3"
+		sound: "../sounds/river.mp3",
+		deterrent: "Flint"
 	},
 	{
 		name: "broken bone",
 		damage: 1,
 		picture: "../img/leg.jpg",
-		sound: "../sounds/scream.mp3"
+		sound: "../sounds/scream.mp3",
+		deterrent: "First-Aid-Kit"
 	},
 	{
 		name: "cravasse",
 		damage: 2,
 		picture: "../img/river.png",
-		sound: "../sounds/falling.mp3"
+		sound: "../sounds/falling.mp3",
+		deterrent: "Climbing gear"
 	},
 	{
 		name: "frost bite",
 		damage: 2,
 		picture: "../img/river.png",
-		sound: "../sounds/frost_bite.mp3"
+		sound: "../sounds/frost_bite.mp3",
+		deterrent: "Hand-Warmers"
 	},
 	{
 		name: "altitude sickness",
 		damage: 2,
 		picture: "../img/river.png",
-		sound: "../sounds/vomit.wav"
+		sound: "../sounds/vomit.wav",
+		deterrent: "Water"
 	},
 	{
 		name: "blizzard",
 		damage: 2,
 		picture: "../img/river.png",
-		sound: "../sounds/snowstorm.mp3"
+		sound: "../sounds/snowstorm.mp3",
+		deterrent: "Emergency-Blanket"
+	},
+	{
+		name: "wolf",
+		damage: 2,
+		picture: "../img/river.png",
+		sound: "../sounds/wolf.mp3",
+		deterrent: "Food"
 	},
 	{
 		name: "darkness",
 		damage: 2,
-		picture: "../img/river.png"
+		picture: "../img/river.png",
+		deterrent: "Flashlight" 
 	},
 	{
 		name: "yeti",
 		damage: 2,
 		picture: "../img/wolf.jpg",
 		sound: "../sounds/yeti.mp3",
+		deterrent: "Riddle"
 	},
-	{
-		name: "wolf",
-		damage: 2,
-		picture: "../img/river.png",
-		sound: "../sounds/wolf.mp3"
-	}
+
 ];
 
 var obstacleOdds = 10;
