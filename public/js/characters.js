@@ -44,8 +44,8 @@ var allItems = [
 	"Hand-Warmers", //------ Frost Bite
 	"Water", //------------- Altitude sickness
 	"Emergency-Blanket", //- Blizzard 
-	"Food" //--------------- Wolf
-	"Flashlight" //--------- darkness
+	"Food", //--------------- Wolf
+	"Flashlight", //--------- darkness
 	"Riddle" //------------- Yeti
 ];
 
