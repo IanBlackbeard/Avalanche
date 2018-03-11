@@ -91,6 +91,14 @@ function submitUser(User) {
 	});
 }
 
+// var questionArray = [{
+// 	question: "What year did Seinfeld Debut?",
+// 	choices: ["1988", "1989", "1990", "1991"],
+// 	answer: "1989",
+// 	picture: "<img src='assets/images/episode1.jpg'/>",
+// 	sound: "assets/sounds/theme.mp3",
+// },
+
 function chooseCharacter() {
 	$("#chooseCharacter").show()
 	for (var c = 0; c < characters.length; c++) {
@@ -167,6 +175,7 @@ function showItems() {
 	}
 }
 
+
 function game() {
 	$("#game").show()
 	console.log(timeCount)
@@ -240,12 +249,19 @@ function nextImage() {
   }
 }
 
+
+// document.getElementById("sound").src = "sounds/bear.mp3";
+//   	$("#sound").trigger("play");
+
 function displayObstacle() {
 	$("#gameImage").empty()
 	var obstacleImage = $("<img>")
     obstacleImage.attr("src", obstacle.picture);
     obstacleImage.attr("class", "bigPicture");
-	$("#gameImage").append(obstacleImage)
+	$("#gameImage").append(obstacleImage);
+	console.log(obstacleImage);
+	document.getElementById("sound").src = obstacle.sound;
+  	$("#sound").trigger("play");
 }
 
 $("#game").on("click", function() {
@@ -259,17 +275,19 @@ var obstacleList = [
 	{
 		name: "bear",
 		damage: 4,
-		picture: "../img/bear1.jpg"
+		picture: "../img/bear1.jpg",
+		sound: "../sounds/bear.mp3"
 	},
 	{
 		name: "river",
 		damage: 2,
-		picture: "../img/river.png"
+		picture: "../img/river.png",
 	},
 	{
 		name: "broken bone",
 		damage: 1,
-		picture: "../img/leg.jpg"
+		picture: "../img/leg.jpg",
+		sound: "../sounds/female_scream.mp3"
 	},
 	{
 		name: "cravasse",
@@ -327,15 +345,18 @@ function obstacleChecker() {
 			obstacle = obstacleList[3]
 		}
 		obstacleOdds = 10;
+		sound = obstacleList[0].sound
 		console.log(obstacle)
 		console.log(obstacleOdds)
-
+		console.log(obstacle.sound)
+		console.log(obstacle.picture)
 	} else {
 		obstacle = "none";
 		console.log(obstacle)
 		console.log("nothing to see here")
 		obstacleOdds += 30;
 		console.log(obstacleOdds)
+
 	}
 
 }
