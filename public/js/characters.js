@@ -296,7 +296,7 @@ var obstacleList = [
         damage: 4,
         dayImage: ["../img/dannyBearDay.gif", "../img/pennyBearDay.gif"],
         nightImage: ["../img/dannyBearNight.gif", "../img/pennyBearNight.gif"],
-      sound: "../sounds/yeti.mp3"
+      	sound: "../sounds/bear.mp3"
     },
   
 	{
@@ -308,22 +308,26 @@ var obstacleList = [
 	{
 		name: "broken bone",
 		damage: 1,
-		picture: "../img/leg.jpg"
+		picture: "../img/leg.jpg",
+		sound: "../sounds/scream.mp3"
 	},
 	{
 		name: "cravasse",
 		damage: 2,
-		picture: "../img/river.png"
+		picture: "../img/river.png",
+		sound: "../sounds/falling.mp3"
 	},
 	{
 		name: "frost bite",
 		damage: 2,
-		picture: "../img/river.png"
+		picture: "../img/river.png",
+		sound: "../sounds/frost_bite.mp3"
 	},
 	{
 		name: "altitude sickness",
 		damage: 2,
-		picture: "../img/river.png"
+		picture: "../img/river.png",
+		sound: "../sounds/vomit.wav"
 	},
 	{
 		name: "blizzard",
@@ -340,12 +344,13 @@ var obstacleList = [
 		name: "yeti",
 		damage: 2,
 		picture: "../img/wolf.jpg",
-		sound: "../sounds/yeti.mp3"
+		sound: "../sounds/yeti.mp3",
 	},
 	{
 		name: "wolf",
 		damage: 2,
-		picture: "../img/river.png"
+		picture: "../img/river.png",
+		sound: "../sounds/wolf.mp3"
 	}
 ];
 
