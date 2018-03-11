@@ -248,6 +248,9 @@ function displayObstacle() {
     obstacleImage.attr("src", obstacle.picture);
     obstacleImage.attr("class", "bigPicture");
 	$("#gameImage").append(obstacleImage)
+	document.getElementById("sound").src = obstacle.sound;
+    $("#sound").trigger("play");
+
 }
 
 $("#game").on("click", function() {
@@ -261,12 +264,14 @@ var obstacleList = [
 	{
 		name: "bear",
 		damage: 4,
-		picture: "../img/bear1.jpg"
+		picture: "../img/bear1.jpg",
+		sound: "../sounds/yeti.mp3"
 	},
 	{
 		name: "river",
 		damage: 2,
-		picture: "../img/river.png"
+		picture: "../img/river.png",
+		sound: "../sounds/river.mp3"
 	},
 	{
 		name: "broken bone",
@@ -291,7 +296,8 @@ var obstacleList = [
 	{
 		name: "blizzard",
 		damage: 2,
-		picture: "../img/river.png"
+		picture: "../img/river.png",
+		sound: "../sounds/snowstorm.mp3"
 	},
 	{
 		name: "darkness",
@@ -301,7 +307,8 @@ var obstacleList = [
 	{
 		name: "yeti",
 		damage: 2,
-		picture: "../img/wolf.jpg"
+		picture: "../img/wolf.jpg",
+		sound: "../sounds/yeti.mp3"
 	},
 	{
 		name: "wolf",
@@ -332,7 +339,7 @@ function obstacleChecker() {
 		console.log(obstacle)
 		console.log(obstacleOdds)
 		//affect lp etc vars
-		sound = obstacle.sound
+		// sound = obstacle.sound
 	} else {
 		obstacle = "none";
 		console.log(obstacle)
