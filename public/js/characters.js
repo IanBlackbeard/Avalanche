@@ -22,13 +22,15 @@ var characters = [
 		name: "Danny Danger",
 		image: "./img/danny.jpg",
 		avatar: "./img/DannyDangerSmall.png",
-		mainMovement: ["./img/dannyLeft.jpg", "./img/dannyMid.jpg", "./img/dannyRight.jpg"]
+		mainMovement: ["./img/dannyLeft.jpg", "./img/dannyMid.jpg", "./img/dannyRight.jpg"],
+		nightMovement: ["./img/dannyNightLeft.jpg", "./img/dannyNightMid.jpg", "./img/dannyNightRight.jpg"]
 	},
 	{
 		name: "Penny Peril",
 		image: "./img/penny.jpg",
 		avatar: "./img/PennyPerilSmall.png",
-		mainMovement: ["./img/pennyLeft.jpg", "./img/pennyMid.jpg", "./img/pennyRight.jpg"]
+		mainMovement: ["./img/pennyLeft.jpg", "./img/pennyMid.jpg", "./img/pennyRight.jpg"],
+		nightMovement: ["./img/pennyNightLeft.jpg", "./img/pennyNightMid.jpg", "./img/pennyNightRight.jpg"]
 	}
 ];
 
@@ -229,9 +231,15 @@ function distanceMath() {
 function displayImage() {
 	$("#gameImage").empty()
 	var mainImage = $("<img>")
-    mainImage.attr("src", characters[character].mainMovement[imageCount]);
-    mainImage.attr("class", "bigPicture");
-	$("#gameImage").append(mainImage)
+	if (timeCount < 11) {
+	    mainImage.attr("src", characters[character].mainMovement[imageCount]);
+	    mainImage.attr("class", "bigPicture");
+		$("#gameImage").append(mainImage)
+	} else {
+		mainImage.attr("src", characters[character].nightMovement[imageCount]);
+	    mainImage.attr("class", "bigPicture");
+		$("#gameImage").append(mainImage)
+	}
 	nextImage()
 }
 
