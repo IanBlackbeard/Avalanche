@@ -152,9 +152,13 @@ function showItems() {
 function game() {
 	if (lifePoints > 0) {
 		$("#game").show()
-
-		displayImage()
-
+		obstacleChecker()
+		console.log(obstacle)
+		if (obstacle === "none") {
+			displayImage()
+		} else {
+			displayObstacle()
+		}
 	} else {
 		console.log("you died")
 	}
@@ -177,11 +181,73 @@ function nextImage() {
   }
 }
 
+function displayObstacle() {
+	$("#gameImage").empty()
+	var obstacleImage = $("<img>")
+    obstacleImage.attr("src", obstacle.picture);
+    obstacleImage.attr("class", "bigPicture");
+	$("#gameImage").append(obstacleImage)
+}
+
 $("#game").on("click", function() {
 	event.preventDefault()
 	game()
-})
+});
 
+var obstacleList = [
+	{
+		name: "bear",
+		damage: 4,
+		picture: "../img/bear1.jpg"
+	},
+	{
+		name: "river",
+		damage: 2,
+		picture: "../img/river.png"
+	},
+	{
+		name: "wolf",
+		damage: 3,
+		picture: "../img/wolf.jpg"
+	},
+	{
+		name: "broken bone",
+		damage: 1,
+		picture: "../img/leg.jpg"
+	}
+];
+
+var obstacleOdds = 10;
+var obstacle = {};
+
+
+function obstacleChecker() {
+	var obstacleChance = Math.floor(Math.random() * 100);
+	if (obstacleChance <= obstacleOdds) {
+		var obstacleNumber = Math.floor(Math.random() * 100);
+		if (obstacleNumber < 35) {
+			obstacle = obstacleList[0]
+			// if ()
+		} else if (obstacleNumber < 65) {
+			obstacle = obstacleList[1]
+		} else if (obstacleNumber < 85) {
+			obstacle = obstacleList[2]
+		} else {
+			obstacle = obstacleList[3]
+		}
+		obstacleOdds = 10;
+		console.log(obstacle)
+		console.log(obstacleOdds)
+
+	} else {
+		obstacle = "none";
+		console.log(obstacle)
+		console.log("nothing to see here")
+		obstacleOdds += 30;
+		console.log(obstacleOdds)
+	}
+
+}
 
 
 
