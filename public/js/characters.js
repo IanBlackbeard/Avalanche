@@ -50,6 +50,9 @@ var allItems = [
 var nameInput = $("#user-name");
 var newUser;
 
+var timeCount = 0;
+var time;
+
 // chooseCharacter()
 
 $(".black-screen").show()
@@ -164,18 +167,27 @@ function showItems() {
 	}
 }
 
-// game()
-
 function game() {
 	$("#game").show()
-	lifePoints -= 4;
+	console.log(timeCount)
+	console.log(time)
+	console.log(lifePoints)
 	if (lifePoints > 0) {
-		obstacleChecker()
-		console.log(obstacle)
-		if (obstacle === "none") {
-			displayImage()
+		if (distanceTraveled < 10) {
+			obstacleChecker()
+			console.log(distanceTraveled)
+			if (obstacle === "none") {
+				displayImage()
+			} else {
+				displayObstacle()
+			}
 		} else {
-			displayObstacle()
+			$("#gameImage").empty()
+			var winnerImage = $("<img>")
+		    winnerImage.attr("src", "./img/winner.jpg");
+		    winnerImage.attr("class", "bigPicture");
+			$("#gameImage").append(winnerImage)
+			console.log("you won")
 		}
 	} else {
 		$("#gameImage").empty()
@@ -186,6 +198,30 @@ function game() {
 		console.log("you died")
 	}
 	
+}
+
+function lpMath() {
+	if (timeCount < 11) {
+		lifePoints -= 4;
+		timeCount ++;
+		time = timeArray[timeCount]
+	} else {
+		lifePoints -= 8;
+		timeCount ++;
+		time = timeArray[timeCount]
+	}
+}
+
+function distanceMath() {
+	if (obstacle === "none") {
+		if (timeCount < 11) {
+			distanceTraveled += 1;
+			console.log(distanceTraveled)
+		} else {
+			distanceTraveled += .75;
+
+		}
+	}
 }
 
 function displayImage() {
@@ -214,6 +250,8 @@ function displayObstacle() {
 
 $("#game").on("click", function() {
 	event.preventDefault()
+	lpMath()
+	distanceMath()
 	game()
 });
 
@@ -229,14 +267,44 @@ var obstacleList = [
 		picture: "../img/river.png"
 	},
 	{
-		name: "wolf",
-		damage: 3,
-		picture: "../img/wolf.jpg"
-	},
-	{
 		name: "broken bone",
 		damage: 1,
 		picture: "../img/leg.jpg"
+	},
+	{
+		name: "cravasse",
+		damage: 2,
+		picture: "../img/river.png"
+	},
+	{
+		name: "frost bite",
+		damage: 2,
+		picture: "../img/river.png"
+	},
+	{
+		name: "altitude sickness",
+		damage: 2,
+		picture: "../img/river.png"
+	},
+	{
+		name: "blizzard",
+		damage: 2,
+		picture: "../img/river.png"
+	},
+	{
+		name: "darkness",
+		damage: 2,
+		picture: "../img/river.png"
+	},
+	{
+		name: "yeti",
+		damage: 2,
+		picture: "../img/wolf.jpg"
+	},
+	{
+		name: "wolf",
+		damage: 2,
+		picture: "../img/river.png"
 	}
 ];
 
