@@ -167,8 +167,9 @@ function showItems() {
 // game()
 
 function game() {
+	$("#game").show()
+	lifePoints -= 4;
 	if (lifePoints > 0) {
-		$("#game").show()
 		obstacleChecker()
 		console.log(obstacle)
 		if (obstacle === "none") {
@@ -177,6 +178,11 @@ function game() {
 			displayObstacle()
 		}
 	} else {
+		$("#gameImage").empty()
+		var deadImage = $("<img>")
+	    deadImage.attr("src", "./img/dead.jpeg");
+	    deadImage.attr("class", "bigPicture");
+		$("#gameImage").append(deadImage)
 		console.log("you died")
 	}
 	
