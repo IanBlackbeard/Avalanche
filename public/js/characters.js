@@ -37,16 +37,16 @@ var characters = [
 var character;
 
 var allItems = [
-	"Axe", //- Bear
-	"Flint", //- River
-	"First-Aid-Kit", //- Broken Bone
-	"Climbing gear", //- Cravasse
-	"Hand-Warmers", //- Frost Bite
-	"Water", //- Altitude sickness
+	"Axe", //--------------- Bear
+	"Flint", //------------- River
+	"First-Aid-Kit", //----- Broken Bone
+	"Climbing gear", //----- Cravasse
+	"Hand-Warmers", //------ Frost Bite
+	"Water", //------------- Altitude sickness
 	"Emergency-Blanket", //- Blizzard 
-	"Food" //- Wolf
-	// "Flashlight" //- darkness
-	// "Riddle" //- Yeti
+	"Food" //--------------- Wolf
+	"Flashlight" //--------- darkness
+	"Riddle" //------------- Yeti
 ];
 
 var nameInput = $("#user-name");
