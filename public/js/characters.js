@@ -250,7 +250,29 @@ function nextImage() {
   }
 }
 
+// function displayObstacle() {
+// 	$("#gameImage").empty()
+// 	var obstacleImage = $("<img>")
+//     obstacleImage.attr("src", obstacle.picture);
+//     obstacleImage.attr("class", "bigPicture");
+// 	$("#gameImage").append(obstacleImage)
+// 	document.getElementById("sound").src = obstacle.sound;
+//     $("#sound").trigger("play");
+
+// }
+
 function displayObstacle() {
+    $("#gameImage").empty()
+    var obstacleImage = $("<img>")
+    if (timeCount < 11) {
+        obstacleImage.attr("src", obstacle.dayImage[character]);
+        obstacleImage.attr("class", "bigPicture");
+        $("#gameImage").append(obstacleImage)
+    } else {
+        mainImage.attr("src", obstacle.nightImage[character]);
+        mainImage.attr("class", "bigPicture");
+        $("#gameImage").append(obstacleImage)
+    }
 	$("#gameImage").empty()
 	var obstacleImage = $("<img>")
     obstacleImage.attr("src", obstacle.picture);
@@ -269,12 +291,14 @@ $("#game").on("click", function() {
 });
 
 var obstacleList = [
-	{
-		name: "bear",
-		damage: 4,
-		picture: "../img/bear1.jpg",
-		sound: "../sounds/yeti.mp3"
-	},
+    {
+        name: "bear",
+        damage: 4,
+        dayImage: ["../img/dannyBearDay.gif", "../img/pennyBearDay.gif"],
+        nightImage: ["../img/dannyBearNight.gif", "../img/pennyBearNight.gif"],
+      sound: "../sounds/yeti.mp3"
+    },
+  
 	{
 		name: "river",
 		damage: 2,
