@@ -281,7 +281,7 @@ var obstacleList = [
 	{
 		name: "river",
 		damage: 2,
-		picture: "../img/river.png",
+		picture: "../img/river.png"
 	},
 	{
 		name: "broken bone",
