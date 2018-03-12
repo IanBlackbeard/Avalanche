@@ -145,6 +145,7 @@ img.bigPicture {
   border-radius: 10px;
   padding: 10px;
   font-size: 16px;
+  color: #3dc13d;
 }
 
 .updateBox {
@@ -156,14 +157,11 @@ img.bigPicture {
   border-radius: 10px;
   padding: 10px;
   font-size: 24px;
+  max-width: 50%;
 }
 
 .story {
   padding: 3%;
-}
-
-.story.p {
-  font-size: 36px;
 }
 
 #user {
@@ -181,6 +179,6 @@ img.bigPicture {
 .startGame {
   font-size: 20px;
   padding: 5px;
-  margin-left: 40%;
   margin-top: 30px;
+  margin-left: 25%;
 }

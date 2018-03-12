@@ -153,7 +153,7 @@ function game() {
 	$("#game").show();
 	$("#sound").trigger("pause");
 	$(".statsBox").empty();
-	$(".statsBox").append("Time: " + time + "<br>", "Life Points: " + lifePoints + "<br>", "Miles Walked: " + distanceTraveled + "<br>", "Backpack Items: " + "<br>", backpack[0] + "<br>", backpack[1] + "<br>", backpack[2] + "<br>", backpack[3] + "<br>");
+	$(".statsBox").append("<big>Time: " + time + "<br>", "<big>Life Points: " + lifePoints + "<br>", "<big>Miles Walked: " + distanceTraveled + "<br>", "<big>Backpack Items: " + "<br>", backpack[0] + "<br>", backpack[1] + "<br>", backpack[2] + "<br>", backpack[3] + "<br>");
 	console.log("Time Count: " + timeCount);
 	console.log("Time: " + time);
 	console.log("Life Points: " + lifePoints);
@@ -414,12 +414,12 @@ function obstacleChecker() {
 			obstacle = obstacleList[8]
 		}
 		$(".updateBox").empty();
-		$(".updateBox").append("YOU HAVE ENCOUNTERED A " + obstacle.name + "!!");
+		$(".updateBox").append(obstacle.text);
 		obstacleOdds = 10;
 		var rightItem = false;
 		for (var a = 0; a < backpack.length; a++) {
 			if (backpack[a] === obstacle.deterrent) {
-				$(".updateBox").append("Thankfully, you had a " + backpack[a] + " on you, which saved you!!");
+				$(".updateBox").append(obstacle.success);
 				console.log("Your " + backpack[a] + " has saved your from the " + obstacle.name + "!");
 				rightItem = true;
 			}
@@ -429,6 +429,7 @@ function obstacleChecker() {
 			timeCount += obstacle.timeAffect;
 			lifePoints -= (obstacle.timeAffect * lpph);
 			speed += obstacle.speedAffect;
+			$(".updateBox").append(obstacle.failure);
 		}
 		console.log("speed: " + speed);
 		console.log(obstacle);
