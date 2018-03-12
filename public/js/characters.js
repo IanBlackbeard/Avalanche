@@ -44,20 +44,27 @@ var backpack = [];
 var nameInput = $("#user-name");
 var newUser;
 
-$(".black-screen").show();
-$(".story").show();
-$(".story").on("click", function() {
-	$(".black-screen").hide();
-	$(".story").hide();
-	$(".start-page").show();
-})
-
-
+$(".start-page").show();
 $("#start-screen-img").on("click", function() {
 	$(".start-page").hide();
 	$(".black-screen").show();
-    $("#user").show();
+    $(".story").show();
 });
+
+$(".story").on("click", function() {
+	$(".story").hide();
+	$("#group").show();
+	var groupImage = $("<img>");
+    groupImage.attr("src", "./img/group.jpg");
+    groupImage.attr("class", "bigPicture");
+	$("#groupImage").append(groupImage);
+
+})
+
+$("#group").on("click", function() {
+	$("#group").hide();
+	$("#user").show();
+})
 
 
 $(".userSubmit").on("click", function() {
@@ -152,8 +159,8 @@ function showItems() {
 function game() {
 	$("#game").show();
 	$("#sound").trigger("pause");
-	$(".statsBox").empty();
-	$(".statsBox").append("<big>Time: " + time + "<br>", "<big>Life Points: " + lifePoints + "<br>", "<big>Miles Walked: " + distanceTraveled + "<br>", "<big>Backpack Items: " + "<br>", backpack[0] + "<br>", backpack[1] + "<br>", backpack[2] + "<br>", backpack[3] + "<br>");
+	// $(".statsBox").empty();
+	// $(".statsBox").append("<big>Time: " + time + "<br>", "<big>Life Points: " + lifePoints + "<br>", "<big>Miles Walked: " + distanceTraveled + "<br>", "<big>Backpack Items: " + "<br>", backpack[0] + "<br>", backpack[1] + "<br>", backpack[2] + "<br>", backpack[3] + "<br>");
 	console.log("Time Count: " + timeCount);
 	console.log("Time: " + time);
 	console.log("Life Points: " + lifePoints);
@@ -171,6 +178,8 @@ function game() {
 	} else {
 		loseGame();
 	}
+	$(".statsBox").empty();
+	$(".statsBox").append("<big>Time: " + time + "<br>", "<big>Life Points: " + lifePoints + "<br>", "<big>Miles Walked: " + distanceTraveled + "<br>", "<big>Backpack Items: " + "<br>", backpack[0] + "<br>", backpack[1] + "<br>", backpack[2] + "<br>", backpack[3] + "<br>");
 	
 }
 
@@ -185,11 +194,11 @@ function winGame() {
 }
 
 function loseGame() {
-	lifePoints = 0;
 	$("#game").hide();
 	$(".gameOver").show();
+	lifePoints = 0;
 	var loserImage = $("<img>");
-    loserImage.attr("src", "./img/dead.jpeg");
+    loserImage.attr("src", "./img/dead.jpg");
     loserImage.attr("class", "bigPicture");
 	$("#gameOverImage").append(loserImage);
 	console.log("you died");
