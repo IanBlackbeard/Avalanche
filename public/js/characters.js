@@ -45,13 +45,8 @@ var backpack = [];
 var nameInput = $("#user-name");
 var newUser;
 
-$(".start-page").show();
-$("#start-screen-img").on("click", function() {
-	$(".start-page").hide();
-	$(".black-screen").show();
-    $(".story").show();
-});
-
+$(".black-screen").show();
+$(".story").show();
 $(".story").on("click", function() {
 	$(".story").hide();
 	$("#group").show();
@@ -59,14 +54,24 @@ $(".story").on("click", function() {
     groupImage.attr("src", "./img/group.jpg");
     groupImage.attr("class", "bigPicture");
 	$("#groupImage").append(groupImage);
-
-})
+});
 
 $("#group").on("click", function() {
 	$("#group").hide();
-	$("#user").show();
-})
+	$(".story2").show();
+});
 
+$(".story2").on("click", function() {
+	$(".story2").hide();
+	$(".black-screen").hide();
+	$(".start-page").show();
+});
+
+$("#start-screen-img").on("click", function() {
+	$(".start-page").hide();
+	$(".black-screen").show();
+	$("#user").show();
+});
 
 $(".userSubmit").on("click", function() {
 	event.preventDefault();
@@ -88,9 +93,9 @@ $(".userSubmit").on("click", function() {
 function chooseCharacter() {
 	$("#chooseCharacter").show();
 	for (var c = 0; c < characters.length; c++) {
-        var characterDiv = $("<div class='characterImage'>")
-        var name = $("<p>").text(characters[c].name)
-        var characterImage = $("<img style='border-radius: 10px;'>")
+        var characterDiv = $("<div class='characterImage'>");
+        var name = $("<p>").text(characters[c].name);
+        var characterImage = $("<img>");
         characterImage.attr("src", characters[c].image);
         characterImage.attr("data-state", characters[c].name);
         characterImage.attr("data-id", c);
@@ -112,9 +117,34 @@ function chooseCharacter() {
         console.log(character);
         $("#characterChosen").append(chosenCharacter, charImage);
         $("#chooseCharacter").hide();
-        showItems();
+        if (id === "1") {
+        	pennyGenerator()
+        	console.log("penny has been clicked!")
+    	} else {
+    		console.log("danny has been clicked!")
+    		dannyGenerator()
+    	}
   	})
-	
+}
+
+function pennyGenerator() {
+	$("#generateCharacterPenny").show();
+
+	$("#generateCharacterPenny").on("click", function() {
+		$("#generateCharacterPenny").hide();
+		$(".black-screen").show();
+		showItems();
+	})
+}
+
+function dannyGenerator() {
+	$("#generateCharacterDanny").show();
+
+	$("#generateCharacterDanny").on("click", function() {
+		$("#generateCharacterDanny").hide();
+		$(".black-screen").show();
+		showItems();
+	})
 }
 
 function showItems() {
@@ -147,7 +177,9 @@ function showItems() {
 	} else {
 		console.log("backpack full");
 		$("#ci").text("Here are your game choices!!");
-		$(".itemColumns").hide();
+		$(".itemColumns").hide()
+		$("#h2transition").text("")
+		$(".startGame").show()
 		$(".startGame").on("click", function() {
 			$("#chooseItems").hide();
 			game();
@@ -158,8 +190,6 @@ function showItems() {
 function game() {
 	$("#game").show();
 	$("#sound").trigger("pause");
-	// $(".statsBox").empty();
-	// $(".statsBox").append("<big>Time: " + time + "<br>", "<big>Life Points: " + lifePoints + "<br>", "<big>Miles Walked: " + distanceTraveled + "<br>", "<big>Backpack Items: " + "<br>", backpack[0] + "<br>", backpack[1] + "<br>", backpack[2] + "<br>", backpack[3] + "<br>");
 	console.log("Time Count: " + timeCount);
 	console.log("Time: " + time);
 	console.log("Life Points: " + lifePoints);
@@ -198,6 +228,7 @@ function winGame() {
 	submitUser(finalScore);
 	console.log(finalScore);
 	console.log("you won");
+	finalScreen()
 }
 
 function loseGame() {
@@ -208,7 +239,16 @@ function loseGame() {
     loserImage.attr("src", "./img/dead.jpg");
     loserImage.attr("class", "bigPicture");
 	$("#gameOverImage").append(loserImage);
-	console.log("you died");
+	document.getElementById("sound").src = "../sounds/soundOfSilence.mp3";
+    $("#sound").trigger("play");
+	finalScreen()
+}
+
+function finalScreen() {
+	$(".gameOver").on("click", function() {
+		$(".gameOver").hide();
+		$(".highScores").show();
+	})
 }
 
 function submitUser(User) {
@@ -389,8 +429,8 @@ var obstacleList = [
 		lpAffect: 0,
 		timeAffect: 0,
 		speedAffect: -.25,
-		dayImage: ["../img/blizzard.gif", "../img/blizzard.gif"],
-        nightImage: ["../img/blizzard.gif", "../img/blizzard.gif"],
+		dayImage: ["../img/blizzard.jpg", "../img/blizzard.jpg"],
+        nightImage: ["../img/blizzard.jpg", "../img/blizzard.jpg"],
 		sound: "../sounds/snowstorm.mp3",
 		deterrent: "Emergency-Blanket",
 		text: "The weather has taken a turn for the worse. The sun is no longer shining and a blizzard has blown in! It's a white out and you can only see a few feet in front of you...  ",
@@ -462,22 +502,25 @@ function obstacleChecker() {
 			obstacle = obstacleList[8]
 		}
 		$(".updateBox").empty();
-		$(".updateBox").append(obstacle.text);
+		$(".updateBox").append("YOU HAVE ENCOUNTERED A " + obstacle.name + "!!");
 		obstacleOdds = 10;
 		var rightItem = false;
 		for (var a = 0; a < backpack.length; a++) {
 			if (backpack[a] === obstacle.deterrent) {
-				$(".updateBox").append(obstacle.success);
+				$(".updateBox").append("Thankfully, you had a " + backpack[a] + " on you, which saved you!!");
 				console.log("Your " + backpack[a] + " has saved your from the " + obstacle.name + "!");
 				rightItem = true;
+				
 			}
 		}
+		
+
+
 		if (!rightItem) {
 			lifePoints += obstacle.lpAffect;
 			timeCount += obstacle.timeAffect;
 			lifePoints -= (obstacle.timeAffect * lpph);
 			speed += obstacle.speedAffect;
-			$(".updateBox").append(obstacle.failure);
 		}
 		console.log("speed: " + speed);
 		console.log(obstacle);
@@ -495,8 +538,6 @@ function obstacleChecker() {
 $(".restartGame").on("click", function() {
 	document.location.reload()
 });
-
-
 
 // Character Constructor
 // var Character = function(name, backpack, lifePoints) {
