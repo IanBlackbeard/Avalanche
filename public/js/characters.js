@@ -273,14 +273,8 @@ function displayObstacle() {
         mainImage.attr("class", "bigPicture");
         $("#gameImage").append(obstacleImage)
     }
-	$("#gameImage").empty()
-	var obstacleImage = $("<img>")
-    obstacleImage.attr("src", obstacle.picture);
-    obstacleImage.attr("class", "bigPicture");
-	$("#gameImage").append(obstacleImage)
-	document.getElementById("sound").src = obstacle.sound;
+	  document.getElementById("sound").src = obstacle.sound;
     $("#sound").trigger("play");
-
 }
 
 $("#game").on("click", function() {
@@ -291,14 +285,14 @@ $("#game").on("click", function() {
 });
 
 var obstacleList = [
-    {
-        name: "bear",
-        damage: 4,
-        dayImage: ["../img/dannyBearDay.gif", "../img/pennyBearDay.gif"],
-        nightImage: ["../img/dannyBearNight.gif", "../img/pennyBearNight.gif"],
-      	sound: "../sounds/bear.mp3",
-      	deterrent: "Axe"
-    },
+  {
+      name: "bear",
+      damage: 4,
+      dayImage: ["../img/dannyBearDay.gif", "../img/pennyBearDay.gif"],
+      nightImage: ["../img/dannyBearNight.gif", "../img/pennyBearNight.gif"],
+      sound: "../sounds/bear.mp3",
+      deterrent: "Axe"
+  },
 	{
 		name: "river",
 		damage: 2,
