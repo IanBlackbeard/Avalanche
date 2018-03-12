@@ -5,8 +5,9 @@ var timeArray = ["7:00 AM", "8:00 AM", "9:00 AM", "10:00 AM", "11:00 AM", "12:00
 var timeCount = 0;
 var lifePoints = 100;
 var lpph = 4;
-var speed = 1;
+var speed = 10;
 var distanceTraveled = 0;
+var finalScore = {};
 var imageCount = 0;
 
 var characters = [
@@ -44,13 +45,8 @@ var backpack = [];
 var nameInput = $("#user-name");
 var newUser;
 
-$(".start-page").show();
-$("#start-screen-img").on("click", function() {
-	$(".start-page").hide();
-	$(".black-screen").show();
-    $(".story").show();
-});
-
+$(".black-screen").show();
+$(".story").show();
 $(".story").on("click", function() {
 	$(".story").hide();
 	$("#group").show();
@@ -58,40 +54,48 @@ $(".story").on("click", function() {
     groupImage.attr("src", "./img/group.jpg");
     groupImage.attr("class", "bigPicture");
 	$("#groupImage").append(groupImage);
-
-})
+});
 
 $("#group").on("click", function() {
 	$("#group").hide();
-	$("#user").show();
-})
+	$(".story2").show();
+});
 
+$(".story2").on("click", function() {
+	$(".story2").hide();
+	$(".black-screen").hide();
+	$(".start-page").show();
+});
+
+$("#start-screen-img").on("click", function() {
+	$(".start-page").hide();
+	$(".black-screen").show();
+	$("#user").show();
+});
 
 $(".userSubmit").on("click", function() {
 	event.preventDefault();
-	newUser = {
-		name: nameInput.val().trim()
-	};
+	newUser = nameInput.val().trim();
 	console.log(newUser);
-	submitUser(newUser);
+	// submitUser(newUser);
 	$("#user").hide();
     chooseCharacter();
 });
 
-function submitUser(User) {
-	$.ajax({
-		method: "POST",
-		url: "/api/users",
-		data: newUser
-	});
-}
+// function submitUser(User) {
+// 	$.ajax({
+// 		method: "POST",
+// 		url: "/api/users",
+// 		data: score
+// 	});
+// }
 
 function chooseCharacter() {
 	$("#chooseCharacter").show();
 	for (var c = 0; c < characters.length; c++) {
-        var characterDiv = $("<div class='characterImage'>")
-        var name = $("<p>").text(characters[c].name)
-        var characterImage = $("<img style='border-radius: 10px;'>")
+        var characterDiv = $("<div class='characterImage'>");
+        var name = $("<p>").text(characters[c].name);
+        var characterImage = $("<img>");
         characterImage.attr("src", characters[c].image);
         characterImage.attr("data-state", characters[c].name);
         characterImage.attr("data-id", c);
@@ -173,7 +177,9 @@ function showItems() {
 	} else {
 		console.log("backpack full");
 		$("#ci").text("Here are your game choices!!");
-		$(".itemColumns").hide();
+		$(".itemColumns").hide()
+		$("#h2transition").text("")
+		$(".startGame").show()
 		$(".startGame").on("click", function() {
 			$("#chooseItems").hide();
 			game();
@@ -184,8 +190,6 @@ function showItems() {
 function game() {
 	$("#game").show();
 	$("#sound").trigger("pause");
-	// $(".statsBox").empty();
-	// $(".statsBox").append("<big>Time: " + time + "<br>", "<big>Life Points: " + lifePoints + "<br>", "<big>Miles Walked: " + distanceTraveled + "<br>", "<big>Backpack Items: " + "<br>", backpack[0] + "<br>", backpack[1] + "<br>", backpack[2] + "<br>", backpack[3] + "<br>");
 	console.log("Time Count: " + timeCount);
 	console.log("Time: " + time);
 	console.log("Life Points: " + lifePoints);
@@ -217,7 +221,14 @@ function winGame() {
     winnerImage.attr("src", "./img/winner.jpg");
     winnerImage.attr("class", "bigPicture");
 	$("#gameOverImage").append(winnerImage);
+	var finalScore = {
+		name: newUser, 
+		score: lifePoints
+	};
+	submitUser(finalScore);
+	console.log(finalScore);
 	console.log("you won");
+	finalScreen()
 }
 
 function loseGame() {
@@ -228,8 +239,38 @@ function loseGame() {
     loserImage.attr("src", "./img/dead.jpg");
     loserImage.attr("class", "bigPicture");
 	$("#gameOverImage").append(loserImage);
-	console.log("you died");
+	document.getElementById("sound").src = "../sounds/soundOfSilence.mp3";
+    $("#sound").trigger("play");
+	finalScreen()
 }
+
+function finalScreen() {
+	$(".gameOver").on("click", function() {
+		$(".gameOver").hide();
+		$(".highScores").show();
+	})
+}
+
+function submitUser(User) {
+	$.ajax({
+		method: "POST",
+		url: "/api/users",
+		data: User
+	});
+	topScores();
+}
+
+function topScores() {
+	$.get("/api/users", function(data) {
+		console.log("Top Scores ", data);
+		console.log(data[0].score);
+	// data.sort();
+	});
+}
+
+
+// #scoresList
+// jQuery create list item, then append
 
 $("#game").on("click", function() {
 	event.preventDefault();
@@ -466,7 +507,7 @@ function obstacleChecker() {
 		var rightItem = false;
 		for (var a = 0; a < backpack.length; a++) {
 			if (backpack[a] === obstacle.deterrent) {
-				$(".updateBox").append(obstacle.success);
+				$(".updateBox").append("Thankfully, you had a " + backpack[a] + " on you, which saved you!!");
 				console.log("Your " + backpack[a] + " has saved your from the " + obstacle.name + "!");
 				rightItem = true;
 				
@@ -480,7 +521,6 @@ function obstacleChecker() {
 			timeCount += obstacle.timeAffect;
 			lifePoints -= (obstacle.timeAffect * lpph);
 			speed += obstacle.speedAffect;
-			$(".updateBox").append(obstacle.failure);
 		}
 		console.log("speed: " + speed);
 		console.log(obstacle);

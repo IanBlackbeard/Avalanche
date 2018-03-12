@@ -35,6 +35,10 @@
           <div id="groupImage"></div>
         </div>
 
+        <div class="story2">
+          <p id="demo2">The Horror! everyone has been swept away by an Avalanche! It is up to you, the lone survivor, to brave the wilderness or let the night consume you. . .</p>
+        </div>
+
         <div id="user" class="row">
           <form id="user-form">
               <input placeholder="Enter your name" id="user-name" type="text" />
@@ -1057,6 +1061,7 @@
         <div id="chooseItems">
           <div class="row">
             <h1 id="ci">Click on four items to bring along: </h1>
+            <h2 id="h2transition">Each item will help overcome a specific obstacle, so choose wisely. . .</h2>
           </div>
           <div class="itemColumns row">
             <ul class="col-md-6 itemsList">
@@ -1091,8 +1096,12 @@
         <div class="gameOver">
           <div id="gameOverImage"></div>
           <div class="statsBox"></div>
-          <button class="restartGame">Start Game Again!!</button>
         </div>
+
+        <div class="highScores">
+          <ul id="scoresList"></ul>
+          <button class="restartGame">Start Game Again!!</button>
+        </div>        
 
       </section> <!-- end game screen -->
 
@@ -1102,6 +1111,7 @@
     
     $(".black-screen").hide()
     $(".story").hide()
+    $(".story2").hide()
     $(".start-page").hide()
     $("#chooseCharacter").hide()
     $("#chooseItems").hide()
@@ -1110,6 +1120,8 @@
     $("#user").hide()
     $("#generateCharacterPenny").hide()
     $("#generateCharacterDanny").hide()
+    $(".startGame").hide()
+    $(".highScores").hide()
 
 
 // three year is 1984. DD, PP and friends hit the back country for some fresh powder. As the trip begins, the group lines up for a photo to commemorate their life-long and unbreakable freindship. Until suddenly. . .
@@ -1121,7 +1133,7 @@
 // Start page. . sick music.
 
 var i = 0;
-var txt = "You and a group of friends have gone skiing in the backcountry. It is cold but the sun is shining and there is fresh powder. As you are posing for a picture mid-mountain, the ground  to shake and the entire group is swept away by an avalanche! Unfortunately, you are the only survivor. You need to walk to the nearest town, which is 10 miles away. All of the supplies have been scattered, however, you find a backpack which has room for four items. Choose carefully! There are many obstacles that will block your path. Good luck and may the odds be ever in your favor!";
+var txt = "The year is 1984. Danny Danger, Penny Peril and friends hit the back country for some fresh powder. As the trip begins, the group lines up for a photo to commemorate their life-long and unbreakable freindship. Until suddenly. . .";
 var speed = 25;
 
 function typeWriter() {
@@ -1130,9 +1142,10 @@ function typeWriter() {
     i++;
     setTimeout(typeWriter, speed);
   }
-}
+};
 
 typeWriter(); // make sure to only run the typewriter function on clicks.
+
 
     // character generator
       var lineDrawingPen = anime({
