@@ -269,8 +269,8 @@ function displayObstacle() {
         obstacleImage.attr("class", "bigPicture");
         $("#gameImage").append(obstacleImage)
     } else {
-        mainImage.attr("src", obstacle.nightImage[character]);
-        mainImage.attr("class", "bigPicture");
+        obstacleImage.attr("src", obstacle.nightImage[character]);
+        obstacleImage.attr("class", "bigPicture");
         $("#gameImage").append(obstacleImage)
     }
 	  document.getElementById("sound").src = obstacle.sound;
@@ -287,7 +287,8 @@ $("#game").on("click", function() {
 var obstacleList = [
   {
       name: "bear",
-      damage: 4,
+      varAffected: lifePoints,
+      affectAmount: -20,
       dayImage: ["../img/dannyBearDay.gif", "../img/pennyBearDay.gif"],
       nightImage: ["../img/dannyBearNight.gif", "../img/pennyBearNight.gif"],
       sound: "../sounds/bear.mp3",
@@ -295,66 +296,85 @@ var obstacleList = [
   },
 	{
 		name: "river",
-		damage: 2,
+		varAffected: lifePoints,
+		affectAmount: -5,
 		picture: "../img/river.png",
+		dayImage: ["../img/river.png", "../img/river.png"],
+        nightImage: ["../img/river.png", "../img/river.png"],
 		sound: "../sounds/river.mp3",
 		deterrent: "Flint"
 	},
 	{
 		name: "broken bone",
-		damage: 1,
-		picture: "../img/leg.jpg",
+		varAffected: 1,
+		affectAmount: -20,
+		dayImage: ["../img/leg.jpg", "../img/leg.jpg"],
+        nightImage: ["../img/leg.jpg", "../img/leg.jpg"],
 		sound: "../sounds/scream.mp3",
 		deterrent: "First-Aid-Kit"
 	},
 	{
 		name: "cravasse",
-		damage: 2,
-		picture: "../img/river.png",
+		varAffected: 2,
+		affectAmount: -20,
+		dayImage: ["../img/cravasse.jpg", "../img/cravasse.jpg"],
+        nightImage: ["../img/cravasse.jpg", "../img/cravasse.jpg"],
 		sound: "../sounds/falling.mp3",
 		deterrent: "Climbing gear"
 	},
 	{
 		name: "frost bite",
-		damage: 2,
-		picture: "../img/river.png",
+		varAffected: 2,
+		affectAmount: -10,
+		dayImage: ["../img/frostbite.jpg", "../img/frostbite.jpg"],
+        nightImage: ["../img/frostbite.jpg", "../img/frostbite.jpg"],
 		sound: "../sounds/frost_bite.mp3",
 		deterrent: "Hand-Warmers"
 	},
 	{
 		name: "altitude sickness",
-		damage: 2,
-		picture: "../img/river.png",
+		varAffected: 2,
+		affectAmount: -20,
+		dayImage: ["../img/altsick.jpg", "../img/altsick.jpg"],
+        nightImage: ["../img/altsick.jpg", "../img/altsick.jpg"],
 		sound: "../sounds/vomit.wav",
 		deterrent: "Water"
 	},
 	{
 		name: "blizzard",
-		damage: 2,
-		picture: "../img/river.png",
+		varAffected: 2,
+		affectAmount: -20,
+		dayImage: ["../img/wolf.jpg", "../img/wolf.jpg"],
+        nightImage: ["../img/wolf.jpg", "../img/wolf.jpg"],
 		sound: "../sounds/snowstorm.mp3",
 		deterrent: "Emergency-Blanket"
 	},
 	{
 		name: "wolf",
-		damage: 2,
-		picture: "../img/river.png",
+		varAffected: 2,
+		affectAmount: -20,
+		dayImage: ["../img/dannyBearDay.gif", "../img/pennyBearDay.gif"],
+        nightImage: ["../img/dannyBearNight.gif", "../img/pennyBearNight.gif"],
 		sound: "../sounds/wolf.mp3",
 		deterrent: "Food"
 	},
-	{
-		name: "darkness",
-		damage: 2,
-		picture: "../img/river.png",
-		deterrent: "Flashlight" 
-	},
+	// {
+	// 	name: "darkness",
+	// 	varAffected: 2,
+	// 	picture: "../img/river.png",
+	// 	dayImage: ["../img/dannyBearDay.gif", "../img/pennyBearDay.gif"],
+ //        nightImage: ["../img/dannyBearNight.gif", "../img/pennyBearNight.gif"],
+	// 	deterrent: "Flashlight" 
+	// },
 	{
 		name: "yeti",
-		damage: 2,
-		picture: "../img/wolf.jpg",
+		varAffected: 2,
+		affectAmount: -20,
+		dayImage: ["../img/yeti.jpg", "../img/yeti.jpg"],
+        nightImage: ["../img/yeti.jpg", "../img/yeti.jpg"],
 		sound: "../sounds/yeti.mp3",
 		deterrent: "Riddle"
-	},
+	}
 
 ];
 
@@ -366,15 +386,24 @@ function obstacleChecker() {
 	var obstacleChance = Math.floor(Math.random() * 100);
 	if (obstacleChance <= obstacleOdds) {
 		var obstacleNumber = Math.floor(Math.random() * 100);
-		if (obstacleNumber < 35) {
+		if (obstacleNumber < 11) {
 			obstacle = obstacleList[0]
-			// if ()
-		} else if (obstacleNumber < 65) {
+		} else if (obstacleNumber < 22) {
 			obstacle = obstacleList[1]
-		} else if (obstacleNumber < 85) {
+		} else if (obstacleNumber < 33) {
 			obstacle = obstacleList[2]
-		} else {
+		} else if (obstacleNumber < 44) {
 			obstacle = obstacleList[3]
+		} else if (obstacleNumber < 55) {
+			obstacle = obstacleList[4]
+		} else if (obstacleNumber < 66) {
+			obstacle = obstacleList[5]
+		} else if (obstacleNumber < 77) {
+			obstacle = obstacleList[6]
+		} else if (obstacleNumber < 88) {
+			obstacle = obstacleList[7]
+		} else {
+			obstacle = obstacleList[8]
 		}
 		obstacleOdds = 10;
 		console.log(obstacle)
