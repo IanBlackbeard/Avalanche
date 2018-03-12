@@ -24,7 +24,7 @@
       <section class="game-screen">
 
         <div class="story">
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos vitae fugit laboriosam praesentium maiores ratione ipsam animi accusantium blanditiis a deserunt nobis, impedit sequi molestias, nam quia eum mollitia enim?</p>
+          <p id="demo"></p>
         </div>
 
         <div id="user" class="row">
@@ -125,6 +125,22 @@
     $("#game").hide()
     $(".gameOver").hide()
     $("#user").hide()
+
+
+var i = 0;
+var txt = 'Lorem ipsum dummy text blabla.';
+var speed = 50;
+
+function typeWriter() {
+  if (i < txt.length) {
+    document.getElementById("demo").innerHTML += txt.charAt(i);
+    i++;
+    setTimeout(typeWriter, speed);
+  }
+}
+
+typeWriter();
+
 
   </script>
 
