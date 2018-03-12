@@ -9,6 +9,10 @@ var time = "7:00 AM";
 
 var timeArray = ["7:00 AM", "8:00 AM", "9:00 AM", "10:00 AM", "11:00 AM", "12:00 PM", "1:00 PM", "2:00 PM", "3:00 PM", "4:00 PM", "5:00 PM", "6:00 PM", "7:00 PM", "8:00 PM", "9:00 PM", "10:00 PM", "11:00 PM", "12:00 AM", "1:00 AM", "2:00 AM", "3:00 AM", "4:00 AM", "5:00 AM", "6:00 AM"]
 
+var speed = 1;
+
+var lpph = 4;
+
 var distanceTraveled = 0;
 
 var backpack = [];
@@ -53,7 +57,6 @@ var nameInput = $("#user-name");
 var newUser;
 
 var timeCount = 0;
-var time;
 
 // chooseCharacter()
 
@@ -171,8 +174,9 @@ function showItems() {
 
 function game() {
 	$("#game").show()
+	$("#sound").trigger("pause");
 	$(".statsBox").empty()
-	$(".statsBox").append("Time: " + time + "<br>", "Life Points: " + lifePoints + "<br>", "Backpack Items: " + "<br>", backpack[0] + "<br>", backpack[1] + "<br>", backpack[2] + "<br>", backpack[3] + "<br>")
+	$(".statsBox").append("Time: " + time + "<br>", "Life Points: " + lifePoints + "<br>", "Miles Walked: " + distanceTraveled + "<br>", "Backpack Items: " + "<br>", backpack[0] + "<br>", backpack[1] + "<br>", backpack[2] + "<br>", backpack[3] + "<br>")
 	console.log(timeCount)
 	console.log("Time: " + time)
 	console.log("Life Points: " + lifePoints)
@@ -204,13 +208,20 @@ function game() {
 	
 }
 
-function lpMath() {
+function speedTimeMath() {
 	if (timeCount < 11) {
-		lifePoints -= 4;
+		lifePoints -= lpph;
+		timeCount ++;
+		time = timeArray[timeCount]
+	} else if (timeCount === 11) {
+		speed -= .25;
+		lpph = 8;
+		lifePoints -= lpph;
 		timeCount ++;
 		time = timeArray[timeCount]
 	} else {
-		lifePoints -= 8;
+		lpph = 8;
+		lifePoints -= lpph;
 		timeCount ++;
 		time = timeArray[timeCount]
 	}
@@ -219,10 +230,11 @@ function lpMath() {
 function distanceMath() {
 	if (obstacle === "none") {
 		if (timeCount < 11) {
-			distanceTraveled += 1;
+			distanceTraveled += speed;
 			console.log("Distance Traveled: " + distanceTraveled)
 		} else {
-			distanceTraveled += .75;
+			// speed = .75;
+			distanceTraveled += speed;
 
 		}
 	}
@@ -250,17 +262,6 @@ function nextImage() {
   }
 }
 
-// function displayObstacle() {
-// 	$("#gameImage").empty()
-// 	var obstacleImage = $("<img>")
-//     obstacleImage.attr("src", obstacle.picture);
-//     obstacleImage.attr("class", "bigPicture");
-// 	$("#gameImage").append(obstacleImage)
-// 	document.getElementById("sound").src = obstacle.sound;
-//     $("#sound").trigger("play");
-
-// }
-
 function displayObstacle() {
     $("#gameImage").empty()
     var obstacleImage = $("<img>")
@@ -273,31 +274,33 @@ function displayObstacle() {
         obstacleImage.attr("class", "bigPicture");
         $("#gameImage").append(obstacleImage)
     }
-	  document.getElementById("sound").src = obstacle.sound;
+	document.getElementById("sound").src = obstacle.sound;
     $("#sound").trigger("play");
 }
 
 $("#game").on("click", function() {
 	event.preventDefault()
-	lpMath()
+	speedTimeMath()
 	distanceMath()
 	game()
 });
 
 var obstacleList = [
-  {
-      name: "bear",
-      varAffected: lifePoints,
-      affectAmount: -20,
-      dayImage: ["../img/dannyBearDay.gif", "../img/pennyBearDay.gif"],
-      nightImage: ["../img/dannyBearNight.gif", "../img/pennyBearNight.gif"],
-      sound: "../sounds/bear.mp3",
-      deterrent: "Axe"
-  },
+	{
+		name: "bear",
+		lpAffect: -20,
+		timeAffect: 0,
+		speedAffect: 0,
+		dayImage: ["../img/dannyBearDay.gif", "../img/pennyBearDay.gif"],
+		nightImage: ["../img/dannyBearNight.gif", "../img/pennyBearNight.gif"],
+		sound: "../sounds/bear.mp3",
+		deterrent: "Axe"
+	},
 	{
 		name: "river",
-		varAffected: lifePoints,
-		affectAmount: -5,
+		lpAffect: -5,
+		timeAffect: 0,
+		speedAffect: 0,
 		picture: "../img/river.png",
 		dayImage: ["../img/river.png", "../img/river.png"],
         nightImage: ["../img/river.png", "../img/river.png"],
@@ -306,8 +309,9 @@ var obstacleList = [
 	},
 	{
 		name: "broken bone",
-		varAffected: 1,
-		affectAmount: -20,
+		lpAffect: 0,
+		timeAffect: 0,
+		speedAffect: -.25,
 		dayImage: ["../img/leg.jpg", "../img/leg.jpg"],
         nightImage: ["../img/leg.jpg", "../img/leg.jpg"],
 		sound: "../sounds/scream.mp3",
@@ -315,8 +319,9 @@ var obstacleList = [
 	},
 	{
 		name: "cravasse",
-		varAffected: 2,
-		affectAmount: -20,
+		lpAffect: 0,
+		timeAffect: 1,
+		speedAffect: 0,
 		dayImage: ["../img/cravasse.jpg", "../img/cravasse.jpg"],
         nightImage: ["../img/cravasse.jpg", "../img/cravasse.jpg"],
 		sound: "../sounds/falling.mp3",
@@ -324,8 +329,9 @@ var obstacleList = [
 	},
 	{
 		name: "frost bite",
-		varAffected: 2,
-		affectAmount: -10,
+		lpAffect: -10,
+		timeAffect: 0,
+		speedAffect: 0,
 		dayImage: ["../img/frostbite.jpg", "../img/frostbite.jpg"],
         nightImage: ["../img/frostbite.jpg", "../img/frostbite.jpg"],
 		sound: "../sounds/frost_bite.mp3",
@@ -333,28 +339,31 @@ var obstacleList = [
 	},
 	{
 		name: "altitude sickness",
-		varAffected: 2,
-		affectAmount: -20,
+		lpAffect: 0,
+		timeAffect: 1,
+		speedAffect: 0,
 		dayImage: ["../img/altsick.jpg", "../img/altsick.jpg"],
         nightImage: ["../img/altsick.jpg", "../img/altsick.jpg"],
-		sound: "../sounds/vomit.wav",
+		sound: "../sounds/scream.mp3",
 		deterrent: "Water"
 	},
 	{
 		name: "blizzard",
-		varAffected: 2,
-		affectAmount: -20,
-		dayImage: ["../img/wolf.jpg", "../img/wolf.jpg"],
-        nightImage: ["../img/wolf.jpg", "../img/wolf.jpg"],
+		lpAffect: 0,
+		timeAffect: 0,
+		speedAffect: -.25,
+		dayImage: ["../img/blizzard.jpg", "../img/blizzard.jpg"],
+        nightImage: ["../img/blizzard.jpg", "../img/blizzard.jpg"],
 		sound: "../sounds/snowstorm.mp3",
 		deterrent: "Emergency-Blanket"
 	},
 	{
 		name: "wolf",
-		varAffected: 2,
-		affectAmount: -20,
-		dayImage: ["../img/dannyBearDay.gif", "../img/pennyBearDay.gif"],
-        nightImage: ["../img/dannyBearNight.gif", "../img/pennyBearNight.gif"],
+		lpAffect: 0,
+		timeAffect: 1,
+		speedAffect: 0,
+		dayImage: ["../img/dannyWolfDay.gif", "../img/pennyWolfDay.gif"],
+        nightImage: ["../img/dannyWolfNight.gif", "../img/pennyWolfNight.gif"],
 		sound: "../sounds/wolf.mp3",
 		deterrent: "Food"
 	},
@@ -368,10 +377,11 @@ var obstacleList = [
 	// },
 	{
 		name: "yeti",
-		varAffected: 2,
-		affectAmount: -20,
-		dayImage: ["../img/yeti.jpg", "../img/yeti.jpg"],
-        nightImage: ["../img/yeti.jpg", "../img/yeti.jpg"],
+		lpAffect: 0,
+		timeAffect: 0,
+		speedAffect: 0,
+		dayImage: ["../img/dannyYetiDay.gif", "../img/pennyYetiDay.gif"],
+        nightImage: ["../img/dannyYetiNight.gif", "../img/pennyYetiNight.gif"],
 		sound: "../sounds/yeti.mp3",
 		deterrent: "Riddle"
 	}
@@ -406,6 +416,24 @@ function obstacleChecker() {
 			obstacle = obstacleList[8]
 		}
 		obstacleOdds = 10;
+		// obsChange = obstacle.varAffected;
+		// obstacle.varAffected = obstacle.varAffected + obstacle.affectAmount;
+		var rightItem = false;
+		for (var a = 0; a < backpack.length; a++) {
+			if (backpack[a] === obstacle.deterrent) {
+				console.log("Your " + backpack[a] + " has saved your from the " + obstacle.name + "!")
+				rightItem = true;
+			}
+		}
+		if (!rightItem) {
+			lifePoints += obstacle.lpAffect;
+			timeCount += obstacle.timeAffect;
+			lifePoints -= (obstacle.timeAffect * lpph);
+			speed += obstacle.speedAffect;
+		}
+		console.log("speed: " + speed)
+		// obstacle.varAffected
+		// console.log("whats the haps: " + obstacle.varAffected)
 		console.log(obstacle)
 		console.log(obstacleOdds)
 		//affect lp etc vars
