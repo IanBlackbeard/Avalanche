@@ -273,9 +273,8 @@ function displayObstacle() {
         obstacleImage.attr("class", "bigPicture");
         $("#gameImage").append(obstacleImage)
     }
-	document.getElementById("sound").src = obstacle.sound;
+	  document.getElementById("sound").src = obstacle.sound;
     $("#sound").trigger("play");
-
 }
 
 $("#game").on("click", function() {
@@ -286,15 +285,15 @@ $("#game").on("click", function() {
 });
 
 var obstacleList = [
-    {
-        name: "bear",
-        varAffected: lifePoints,
-        affectAmount: -20,
-        dayImage: ["../img/dannyBearDay.gif", "../img/pennyBearDay.gif"],
-        nightImage: ["../img/dannyBearNight.gif", "../img/pennyBearNight.gif"],
-      	sound: "../sounds/bear.mp3",
-      	deterrent: "Axe"
-    },
+  {
+      name: "bear",
+      varAffected: lifePoints,
+      affectAmount: -20,
+      dayImage: ["../img/dannyBearDay.gif", "../img/pennyBearDay.gif"],
+      nightImage: ["../img/dannyBearNight.gif", "../img/pennyBearNight.gif"],
+      sound: "../sounds/bear.mp3",
+      deterrent: "Axe"
+  },
 	{
 		name: "river",
 		varAffected: lifePoints,
