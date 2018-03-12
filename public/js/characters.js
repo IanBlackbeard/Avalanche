@@ -249,12 +249,17 @@ function displayObstacle() {
     $("#sound").trigger("play");
 }
 
+if (lifePoints > 0){
 $("#game").on("click", function() {
 	event.preventDefault();
 	speedTimeMath();
 	distanceMath();
 	game();
+
 });
+}else {
+	endGame();
+}
 
 var obstacleList = [
 	{
