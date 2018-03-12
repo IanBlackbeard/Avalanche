@@ -24,7 +24,7 @@
       <section class="game-screen">
 
         <div class="story">
-          <p>You and a group of friends have gone skiing in the backcountry. It is cold but the sun is shining and there is fresh powder. As you are posing for a picture mid mountain, the ground begins to shake and the entire group is swept away by an avalanche. Unfortunately, you are the only survivor. You need to walk to the nearest town, which is 10 miles away. All of the supplies have been scattered, however, you find a backpack which has room for four items. Choose carefully because there are many obstacles that might block your path and your items could prove useful. Good luck and may the odds be ever in your favor!</p>
+          <p id="demo"></p>
         </div>
 
         <div id="group"> 
@@ -127,8 +127,8 @@
 
 
 var i = 0;
-var txt = 'Lorem ipsum dummy text blabla.';
-var speed = 50;
+var txt = "You and a group of friends have gone skiing in the backcountry. It is cold but the sun is shining and there is fresh powder. As you are posing for a picture mid mountain, the ground begins to shake and the entire group is swept away by an avalanche. Unfortunately, you are the only survivor. You need to walk to the nearest town, which is 10 miles away. All of the supplies have been scattered, however, you find a backpack which has room for four items. Choose carefully because there are many obstacles that might block your path and your items could prove useful. Good luck and may the odds be ever in your favor!";
+var speed = 25;
 
 function typeWriter() {
   if (i < txt.length) {
