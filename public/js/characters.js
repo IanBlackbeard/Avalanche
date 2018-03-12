@@ -98,7 +98,7 @@ function chooseCharacter() {
 	for (var c = 0; c < characters.length; c++) {
         var characterDiv = $("<div class='characterImage'>")
         var name = $("<p>").text(characters[c].name)
-        var characterImage = $("<img>")
+        var characterImage = $("<img style='border-radius: 10px;'>")
         characterImage.attr("src", characters[c].image);
         characterImage.attr("data-state", characters[c].name)
         characterImage.attr("data-id", c)
@@ -285,15 +285,18 @@ $("#game").on("click", function() {
 });
 
 var obstacleList = [
-  {
-      name: "bear",
-      varAffected: lifePoints,
-      affectAmount: -20,
-      dayImage: ["../img/dannyBearDay.gif", "../img/pennyBearDay.gif"],
-      nightImage: ["../img/dannyBearNight.gif", "../img/pennyBearNight.gif"],
-      sound: "../sounds/bear.mp3",
-      deterrent: "Axe"
-  },
+	{
+		name: "bear",
+		varAffected: lifePoints,
+		affectAmount: -20,
+		dayImage: ["../img/dannyBearDay.gif", "../img/pennyBearDay.gif"],
+		nightImage: ["../img/dannyBearNight.gif", "../img/pennyBearNight.gif"],
+		sound: "../sounds/bear.mp3",
+		deterrent: "Axe",
+		text: "A wild bear has appeared!",
+		success: "You pull out your axe and start swinging viciously.  You hit him! The bear cowers off. . .",
+		failure: "No where to run, no where to hide! The bear attacks, but you play dead and he gets bored. You miraculously make it out alive. . . but barely."
+	},
 	{
 		name: "river",
 		varAffected: lifePoints,
@@ -302,7 +305,10 @@ var obstacleList = [
 		dayImage: ["../img/river.png", "../img/river.png"],
         nightImage: ["../img/river.png", "../img/river.png"],
 		sound: "../sounds/river.mp3",
-		deterrent: "Flint"
+		deterrent: "Flint",
+		text: "You have reached a cold, raging river. You decide to cross it. . .",
+		success: "The ice cracks as you fall in, scrambling to make it to the shore. You use your flint to start a fire and dry your clothes.",
+		failure: "You fall in, and have no way to dry your clothes. You trudge on with sopping clothing, weary of the night to come."
 	},
 	{
 		name: "broken bone",
@@ -311,7 +317,10 @@ var obstacleList = [
 		dayImage: ["../img/leg.jpg", "../img/leg.jpg"],
         nightImage: ["../img/leg.jpg", "../img/leg.jpg"],
 		sound: "../sounds/scream.mp3",
-		deterrent: "First-Aid-Kit"
+		deterrent: "First-Aid-Kit",
+		text: "SNAP! Your leg is broken!",
+		success: "You wrap it in a splint and carry on.",
+		failure: "You continue on with a disgustingly floppy leg, causing excrusiating pain."
 	},
 	{
 		name: "cravasse",
@@ -320,7 +329,10 @@ var obstacleList = [
 		dayImage: ["../img/cravasse.jpg", "../img/cravasse.jpg"],
         nightImage: ["../img/cravasse.jpg", "../img/cravasse.jpg"],
 		sound: "../sounds/falling.mp3",
-		deterrent: "Climbing gear"
+		deterrent: "Climbing gear",
+		text: "You have encountered a gaping crevasse.",
+		success: "You're a seasoned climber and traverse the gap with the climbing gear",
+		failure: "You have no way across. You lose 4 hours searching for a way around."
 	},
 	{
 		name: "frost bite",
@@ -329,7 +341,10 @@ var obstacleList = [
 		dayImage: ["../img/frostbite.jpg", "../img/frostbite.jpg"],
         nightImage: ["../img/frostbite.jpg", "../img/frostbite.jpg"],
 		sound: "../sounds/frost_bite.mp3",
-		deterrent: "Hand-Warmers"
+		deterrent: "Hand-Warmers",
+		text: "Jack Frost has nipped at your nose. Frostbite!",
+		success: "Luckily you grabbed some hand-warmers to counteract the loss of feeling in your nose",
+		failure: "You have nothing stop the frostbite. Your nose turns black and falls off."
 	},
 	{
 		name: "altitude sickness",
@@ -338,25 +353,34 @@ var obstacleList = [
 		dayImage: ["../img/altsick.jpg", "../img/altsick.jpg"],
         nightImage: ["../img/altsick.jpg", "../img/altsick.jpg"],
 		sound: "../sounds/vomit.wav",
-		deterrent: "Water"
+		deterrent: "Water",
+		text: "Lost at 13,000 feet",
+		success: "You have trained properly and come prepared. You avoid getting altitude sickenss",
+		failure: "Your late night partying and lack of water causes severe altitude sickness."
 	},
 	{
 		name: "blizzard",
 		varAffected: 2,
 		affectAmount: -20,
-		dayImage: ["../img/wolf.jpg", "../img/wolf.jpg"],
-        nightImage: ["../img/wolf.jpg", "../img/wolf.jpg"],
+		dayImage: ["../img/blizzard.gif", "../img/blizzard.gif"],
+        nightImage: ["../img/blizzard.gif", "../img/blizzard.gif"],
 		sound: "../sounds/snowstorm.mp3",
-		deterrent: "Emergency-Blanket"
+		deterrent: "Emergency-Blanket",
+		text: "A blizzard rolls in causing white-out conditions. . .",
+		success: "You wrap yourself in the emergency blanket and shield yourself from the harsh conditions.",
+		failure: "The blizzard takes its toll, battering you relentlessly."
 	},
 	{
 		name: "wolf",
 		varAffected: 2,
 		affectAmount: -20,
-		dayImage: ["../img/dannyBearDay.gif", "../img/pennyBearDay.gif"],
-        nightImage: ["../img/dannyBearNight.gif", "../img/pennyBearNight.gif"],
+		dayImage: ["../img/dannyWolfDay.gif", "../img/pennyWolfDay.gif"],
+        nightImage: ["../img/dannyWolfNight.gif", "../img/pennyWolfNight.gif"],
 		sound: "../sounds/wolf.mp3",
-		deterrent: "Food"
+		deterrent: "Food",
+		text: "A ravenous wolf has appeared, and she looks hungry!",
+		success: "You toss your remaining food and slowly back away. You successfully make your escape.",
+		failure: "You have nothing to distract the hungry mother wolf. She attacks you as you barely make your escape."
 	},
 	// {
 	// 	name: "darkness",
@@ -370,10 +394,13 @@ var obstacleList = [
 		name: "yeti",
 		varAffected: 2,
 		affectAmount: -20,
-		dayImage: ["../img/yeti.jpg", "../img/yeti.jpg"],
-        nightImage: ["../img/yeti.jpg", "../img/yeti.jpg"],
+		dayImage: ["../img/dannyYetiDay.gif", "../img/pennyYetiDay.gif"],
+        nightImage: ["../img/dannyYetiNight.gif", "../img/pennyYetiNight.gif"],
 		sound: "../sounds/yeti.mp3",
-		deterrent: "Riddle"
+		deterrent: "Riddle",
+		text: "Enter witty coding riddle here",
+		success: "You solved the Yeti's riddle! You hop on his back and ride him halfway down the mountain!",
+		failure: "The Yeti is unimpressed. He lifts you up and hurls you into a deep ravine!"
 	}
 
 ];
