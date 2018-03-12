@@ -5,8 +5,9 @@ var timeArray = ["7:00 AM", "8:00 AM", "9:00 AM", "10:00 AM", "11:00 AM", "12:00
 var timeCount = 0;
 var lifePoints = 100;
 var lpph = 4;
-var speed = 1;
+var speed = 10;
 var distanceTraveled = 0;
+var finalScore = {};
 var imageCount = 0;
 
 var characters = [
@@ -69,22 +70,20 @@ $("#group").on("click", function() {
 
 $(".userSubmit").on("click", function() {
 	event.preventDefault();
-	newUser = {
-		name: nameInput.val().trim()
-	};
+	newUser = nameInput.val().trim();
 	console.log(newUser);
-	submitUser(newUser);
+	// submitUser(newUser);
 	$("#user").hide();
     chooseCharacter();
 });
 
-function submitUser(User) {
-	$.ajax({
-		method: "POST",
-		url: "/api/users",
-		data: newUser
-	});
-}
+// function submitUser(User) {
+// 	$.ajax({
+// 		method: "POST",
+// 		url: "/api/users",
+// 		data: score
+// 	});
+// }
 
 function chooseCharacter() {
 	$("#chooseCharacter").show();
@@ -192,6 +191,12 @@ function winGame() {
     winnerImage.attr("src", "./img/winner.jpg");
     winnerImage.attr("class", "bigPicture");
 	$("#gameOverImage").append(winnerImage);
+	var finalScore = {
+		name: newUser, 
+		score: lifePoints
+	};
+	submitUser(finalScore);
+	console.log(finalScore);
 	console.log("you won");
 }
 
@@ -205,6 +210,27 @@ function loseGame() {
 	$("#gameOverImage").append(loserImage);
 	console.log("you died");
 }
+
+function submitUser(User) {
+	$.ajax({
+		method: "POST",
+		url: "/api/users",
+		data: User
+	});
+	topScores();
+}
+
+function topScores() {
+	$.get("/api/users", function(data) {
+		console.log("Top Scores ", data);
+		console.log(data[0].score);
+	// data.sort();
+	});
+}
+
+
+// #scoresList
+// jQuery create list item, then append
 
 $("#game").on("click", function() {
 	event.preventDefault();
