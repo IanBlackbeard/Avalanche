@@ -162,6 +162,10 @@ img.bigPicture {
   padding: 3%;
 }
 
+.story.p {
+  font-size: 36px;
+}
+
 #user {
   padding: 5%;
 }
