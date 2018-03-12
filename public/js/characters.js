@@ -227,9 +227,15 @@ function distanceMath() {
 function displayImage() {
 	$("#gameImage").empty()
 	var mainImage = $("<img>")
-    mainImage.attr("src", characters[character].mainMovement[imageCount]);
-    mainImage.attr("class", "bigPicture");
-	$("#gameImage").append(mainImage)
+	if (timeCount < 11) {
+	    mainImage.attr("src", characters[character].mainMovement[imageCount]);
+	    mainImage.attr("class", "bigPicture");
+		$("#gameImage").append(mainImage)
+	} else {
+		mainImage.attr("src", characters[character].nightMovement[imageCount]);
+	    mainImage.attr("class", "bigPicture");
+		$("#gameImage").append(mainImage)
+	}
 	nextImage()
 }
 
@@ -243,9 +249,15 @@ function nextImage() {
 function displayObstacle() {
 	$("#gameImage").empty()
 	var obstacleImage = $("<img>")
-    obstacleImage.attr("src", obstacle.picture);
-    obstacleImage.attr("class", "bigPicture");
-	$("#gameImage").append(obstacleImage)
+	if (timeCount < 11) {
+	    obstacleImage.attr("src", obstacle.dayImage[character]);
+    	obstacleImage.attr("class", "bigPicture");
+		$("#gameImage").append(obstacleImage)
+	} else {
+		mainImage.attr("src", obstacle.nightImage[character]);
+	    mainImage.attr("class", "bigPicture");
+		$("#gameImage").append(obstacleImage)
+	}
 }
 
 $("#game").on("click", function() {
@@ -259,7 +271,8 @@ var obstacleList = [
 	{
 		name: "bear",
 		damage: 4,
-		picture: "../img/dannyBearDay.gif"
+		dayImage: ["../img/dannyBearDay.gif", "../img/pennyBearDay.gif"],
+		nightImage: ["../img/dannyBearNight.gif", "../img/pennyBearNight.gif"]
 	},
 	{
 		name: "river",
