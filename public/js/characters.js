@@ -1,20 +1,12 @@
-// var math = require("./math.js");
-
 $(document).ready(function() {
 
-// var Obstacle = require("./obsticles.js");
-
-
 var time = "7:00 AM";
-
-var timeArray = ["7:00 AM", "8:00 AM", "9:00 AM", "10:00 AM", "11:00 AM", "12:00 PM", "1:00 PM", "2:00 PM", "3:00 PM", "4:00 PM", "5:00 PM", "6:00 PM", "7:00 PM", "8:00 PM", "9:00 PM", "10:00 PM", "11:00 PM", "12:00 AM", "1:00 AM", "2:00 AM", "3:00 AM", "4:00 AM", "5:00 AM", "6:00 AM"]
-
-var distanceTraveled = 0;
-
-var backpack = [];
-
+var timeArray = ["7:00 AM", "8:00 AM", "9:00 AM", "10:00 AM", "11:00 AM", "12:00 PM", "1:00 PM", "2:00 PM", "3:00 PM", "4:00 PM", "5:00 PM", "6:00 PM", "7:00 PM", "8:00 PM", "9:00 PM", "10:00 PM", "11:00 PM", "12:00 AM", "1:00 AM", "2:00 AM", "3:00 AM", "4:00 AM", "5:00 AM", "6:00 AM"];
+var timeCount = 0;
 var lifePoints = 100;
-
+var lpph = 4;
+var speed = 1;
+var distanceTraveled = 0;
 var imageCount = 0;
 
 var characters = [
@@ -33,7 +25,6 @@ var characters = [
 		nightMovement: ["./img/pennyNightLeft.jpg", "./img/pennyNightMid.jpg", "./img/pennyNightRight.jpg"]
 	}
 ];
-
 var character;
 
 var allItems = [
@@ -48,44 +39,39 @@ var allItems = [
 	"Flashlight", //--------- darkness
 	"Riddle" //------------- Yeti
 ];
+var backpack = [];
 
 var nameInput = $("#user-name");
 var newUser;
 
-var timeCount = 0;
-var time;
-
-// chooseCharacter()
-
-$(".black-screen").show()
-$(".story").show()
+$(".black-screen").show();
+$(".story").show();
 $(".story").on("click", function() {
-	$(".black-screen").hide()
-	$(".story").hide()
-	$(".start-page").show()
+	$(".black-screen").hide();
+	$(".story").hide();
+	$(".start-page").show();
 })
 
 
 $("#start-screen-img").on("click", function() {
-	$(".start-page").hide()
-	$(".black-screen").show()
-    $("#user").show()
+	$(".start-page").hide();
+	$(".black-screen").show();
+    $("#user").show();
 });
 
 
 $(".userSubmit").on("click", function() {
-	event.preventDefault()
+	event.preventDefault();
 	newUser = {
 		name: nameInput.val().trim()
 	};
 	console.log(newUser);
 	submitUser(newUser);
-	$("#user").hide()
-    chooseCharacter()
+	$("#user").hide();
+    chooseCharacter();
 });
 
 function submitUser(User) {
-	// console.log("new user 2: " + newUser.name);
 	$.ajax({
 		method: "POST",
 		url: "/api/users",
@@ -94,15 +80,15 @@ function submitUser(User) {
 }
 
 function chooseCharacter() {
-	$("#chooseCharacter").show()
+	$("#chooseCharacter").show();
 	for (var c = 0; c < characters.length; c++) {
-        var characterDiv = $("<div class='characterImage'>")
-        var name = $("<p>").text(characters[c].name)
-        var characterImage = $("<img>")
+        var characterDiv = $("<div class='characterImage'>");
+        var name = $("<p>").text(characters[c].name);
+        var characterImage = $("<img>");
         characterImage.attr("src", characters[c].image);
-        characterImage.attr("data-state", characters[c].name)
-        characterImage.attr("data-id", c)
-        characterDiv.append(name, characterImage)
+        characterImage.attr("data-state", characters[c].name);
+        characterImage.attr("data-id", c);
+        characterDiv.append(name, characterImage);
         if (c < 1) {
         	$(".char1").append(characterDiv)
         } else {
@@ -112,192 +98,180 @@ function chooseCharacter() {
   	}
 
   	$("img").on("click", function() {
-		var chosenCharacter = $(this).attr("data-state")
-        var id = $(this).attr("data-id")
-        var charImage = $("<br><img>")
+		var chosenCharacter = $(this).attr("data-state");
+        var id = $(this).attr("data-id");
+        var charImage = $("<br><img>");
         charImage.attr("src", characters[id].avatar);
         character = id;
         console.log(character);
-        $("#characterChosen").append(chosenCharacter, charImage)
-        $("#chooseCharacter").hide()
-        showItems()
+        $("#characterChosen").append(chosenCharacter, charImage);
+        $("#chooseCharacter").hide();
+        showItems();
   	})
 	
 }
 
 function showItems() {
-	$("#chooseItems").show()
+	$("#chooseItems").show();
 	if (backpack.length < 4) {
-		$(".itemsList").empty()
-		$(".itemsList2").empty()
+		$(".itemsList").empty();
+		$(".itemsList2").empty();
 	    for (var i = 0; i < allItems.length; i++) {
-	        // var couldUse = $("<li class='possibleItem'>")
-	        var potentialItem = $("<li>").text(allItems[i])
-	        potentialItem.attr("data-state", allItems[i])
-	        potentialItem.attr("data-id", i)
-	        // couldUse.append(p)
+	        var potentialItem = $("<li>").text(allItems[i]);
+	        potentialItem.attr("data-state", allItems[i]);
+	        potentialItem.attr("data-id", i);
 	        if (i < (allItems.length / 2)) {
 	        	$(".itemsList").append(potentialItem)
 	        } else {
 	        	$(".itemsList2").append(potentialItem)
 	        }
-	        
-	    	// console.log(i)
 	    }
 
 	    $("li").on("click", function() {
-	        var chosen = $(this).attr("data-state")
-	        var id = $(this).attr("data-id")
-	        console.log(chosen)
-	        backpack.push(chosen)
-	        console.log(backpack)
-	        allItems.splice(id, 1)
-	        var backpackItem = $("<li>").text(chosen)
-	        $(".backpackItems").append(backpackItem)
-	        // console.log(id)
-	        // console.log(allItems)
-	        // console.log(backpack.length)
-	        showItems()
+	        var chosen = $(this).attr("data-state");
+	        var id = $(this).attr("data-id");
+	        console.log(chosen);
+	        backpack.push(chosen);
+	        console.log(backpack);
+	        allItems.splice(id, 1);
+	        var backpackItem = $("<li>").text(chosen);
+	        $(".backpackItems").append(backpackItem);
+	        showItems();
 	    })
 	} else {
-		console.log("backpack full")
-		$(".itemColumns").hide()
+		console.log("backpack full");
+		$("#ci").text("Here are your game choices!!");
+		$(".itemColumns").hide();
 		$(".startGame").on("click", function() {
-			$("#chooseItems").hide()
-			game()
+			$("#chooseItems").hide();
+			game();
 		})
 	}
 }
 
 function game() {
-	$("#game").show()
-	$(".statsBox").empty()
-	$(".statsBox").append("Time: " + time + "<br>", "Life Points: " + lifePoints + "<br>", "Backpack Items: " + "<br>", backpack[0] + "<br>", backpack[1] + "<br>", backpack[2] + "<br>", backpack[3] + "<br>")
-	console.log(timeCount)
-	console.log("Time: " + time)
-	console.log("Life Points: " + lifePoints)
+	$("#game").show();
+	$("#sound").trigger("pause");
+	$(".statsBox").empty();
+	$(".statsBox").append("Time: " + time + "<br>", "Life Points: " + lifePoints + "<br>", "Miles Walked: " + distanceTraveled + "<br>", "Backpack Items: " + "<br>", backpack[0] + "<br>", backpack[1] + "<br>", backpack[2] + "<br>", backpack[3] + "<br>");
+	console.log("Time Count: " + timeCount);
+	console.log("Time: " + time);
+	console.log("Life Points: " + lifePoints);
 	if (lifePoints > 0) {
 		if (distanceTraveled < 10) {
-			obstacleChecker()
-			// console.log(distanceTraveled)
+			obstacleChecker();
 			if (obstacle === "none") {
-				displayImage()
+				displayImage();
 			} else {
-				displayObstacle()
+				displayObstacle();
 			}
 		} else {
-			$("#gameImage").empty()
-			var winnerImage = $("<img>")
+			$("#gameImage").empty();
+			var winnerImage = $("<img>");
 		    winnerImage.attr("src", "./img/winner.jpg");
 		    winnerImage.attr("class", "bigPicture");
-			$("#gameImage").append(winnerImage)
-			console.log("you won")
+			$("#gameImage").append(winnerImage);
+			console.log("you won");
 		}
 	} else {
-		$("#gameImage").empty()
-		var deadImage = $("<img>")
+		$("#gameImage").empty();
+		var deadImage = $("<img>");
 	    deadImage.attr("src", "./img/dead.jpeg");
 	    deadImage.attr("class", "bigPicture");
-		$("#gameImage").append(deadImage)
-		console.log("you died")
+		$("#gameImage").append(deadImage);
+		console.log("you died");
 	}
 	
 }
 
-function lpMath() {
+function speedTimeMath() {
 	if (timeCount < 11) {
-		lifePoints -= 4;
+		lifePoints -= lpph;
 		timeCount ++;
-		time = timeArray[timeCount]
+		time = timeArray[timeCount];
+	} else if (timeCount === 11) {
+		speed -= .25;
+		lpph = 8;
+		lifePoints -= lpph;
+		timeCount ++;
+		time = timeArray[timeCount];
 	} else {
-		lifePoints -= 8;
+		lpph = 8;
+		lifePoints -= lpph;
 		timeCount ++;
-		time = timeArray[timeCount]
+		time = timeArray[timeCount];
 	}
 }
 
 function distanceMath() {
 	if (obstacle === "none") {
-		if (timeCount < 11) {
-			distanceTraveled += 1;
-			console.log("Distance Traveled: " + distanceTraveled)
-		} else {
-			distanceTraveled += .75;
-
-		}
+		distanceTraveled += speed;
+		$(".updateBox").empty();
+		$(".updateBox").append("Distance (in miles) walked in the last hour: " + speed);
 	}
 }
 
 function displayImage() {
-	$("#gameImage").empty()
-	var mainImage = $("<img>")
+	$("#gameImage").empty();
+	var mainImage = $("<img>");
 	if (timeCount < 11) {
 	    mainImage.attr("src", characters[character].mainMovement[imageCount]);
 	    mainImage.attr("class", "bigPicture");
-		$("#gameImage").append(mainImage)
+		$("#gameImage").append(mainImage);
 	} else {
 		mainImage.attr("src", characters[character].nightMovement[imageCount]);
 	    mainImage.attr("class", "bigPicture");
-		$("#gameImage").append(mainImage)
+		$("#gameImage").append(mainImage);
 	}
-	nextImage()
+	nextImage();
 }
 
 function nextImage() {
-  imageCount++;
-  if (imageCount === characters[character].mainMovement.length) {
-    imageCount = 0;
-  }
+	imageCount++;
+	if (imageCount === characters[character].mainMovement.length) {
+		imageCount = 0;
+	}
 }
 
-// function displayObstacle() {
-// 	$("#gameImage").empty()
-// 	var obstacleImage = $("<img>")
-//     obstacleImage.attr("src", obstacle.picture);
-//     obstacleImage.attr("class", "bigPicture");
-// 	$("#gameImage").append(obstacleImage)
-// 	document.getElementById("sound").src = obstacle.sound;
-//     $("#sound").trigger("play");
-
-// }
-
 function displayObstacle() {
-    $("#gameImage").empty()
-    var obstacleImage = $("<img>")
+    $("#gameImage").empty();
+    var obstacleImage = $("<img>");
     if (timeCount < 11) {
         obstacleImage.attr("src", obstacle.dayImage[character]);
         obstacleImage.attr("class", "bigPicture");
-        $("#gameImage").append(obstacleImage)
+        $("#gameImage").append(obstacleImage);
     } else {
         obstacleImage.attr("src", obstacle.nightImage[character]);
         obstacleImage.attr("class", "bigPicture");
-        $("#gameImage").append(obstacleImage)
+        $("#gameImage").append(obstacleImage);
     }
-	  document.getElementById("sound").src = obstacle.sound;
+	document.getElementById("sound").src = obstacle.sound;
     $("#sound").trigger("play");
 }
 
 $("#game").on("click", function() {
-	event.preventDefault()
-	lpMath()
-	distanceMath()
-	game()
+	event.preventDefault();
+	speedTimeMath();
+	distanceMath();
+	game();
 });
 
 var obstacleList = [
-  {
-      name: "bear",
-      varAffected: lifePoints,
-      affectAmount: -20,
-      dayImage: ["../img/dannyBearDay.gif", "../img/pennyBearDay.gif"],
-      nightImage: ["../img/dannyBearNight.gif", "../img/pennyBearNight.gif"],
-      sound: "../sounds/bear.mp3",
-      deterrent: "Axe"
-  },
+	{
+		name: "bear",
+		lpAffect: -20,
+		timeAffect: 0,
+		speedAffect: 0,
+		dayImage: ["../img/dannyBearDay.gif", "../img/pennyBearDay.gif"],
+		nightImage: ["../img/dannyBearNight.gif", "../img/pennyBearNight.gif"],
+		sound: "../sounds/bear.mp3",
+		deterrent: "Axe"
+	},
 	{
 		name: "river",
-		varAffected: lifePoints,
-		affectAmount: -5,
+		lpAffect: -5,
+		timeAffect: 0,
+		speedAffect: 0,
 		picture: "../img/river.png",
 		dayImage: ["../img/river.png", "../img/river.png"],
         nightImage: ["../img/river.png", "../img/river.png"],
@@ -306,8 +280,9 @@ var obstacleList = [
 	},
 	{
 		name: "broken bone",
-		varAffected: 1,
-		affectAmount: -20,
+		lpAffect: 0,
+		timeAffect: 0,
+		speedAffect: -.25,
 		dayImage: ["../img/leg.jpg", "../img/leg.jpg"],
         nightImage: ["../img/leg.jpg", "../img/leg.jpg"],
 		sound: "../sounds/scream.mp3",
@@ -315,8 +290,9 @@ var obstacleList = [
 	},
 	{
 		name: "cravasse",
-		varAffected: 2,
-		affectAmount: -20,
+		lpAffect: 0,
+		timeAffect: 1,
+		speedAffect: 0,
 		dayImage: ["../img/cravasse.jpg", "../img/cravasse.jpg"],
         nightImage: ["../img/cravasse.jpg", "../img/cravasse.jpg"],
 		sound: "../sounds/falling.mp3",
@@ -324,8 +300,9 @@ var obstacleList = [
 	},
 	{
 		name: "frost bite",
-		varAffected: 2,
-		affectAmount: -10,
+		lpAffect: -10,
+		timeAffect: 0,
+		speedAffect: 0,
 		dayImage: ["../img/frostbite.jpg", "../img/frostbite.jpg"],
         nightImage: ["../img/frostbite.jpg", "../img/frostbite.jpg"],
 		sound: "../sounds/frost_bite.mp3",
@@ -333,28 +310,31 @@ var obstacleList = [
 	},
 	{
 		name: "altitude sickness",
-		varAffected: 2,
-		affectAmount: -20,
+		lpAffect: 0,
+		timeAffect: 1,
+		speedAffect: 0,
 		dayImage: ["../img/altsick.jpg", "../img/altsick.jpg"],
         nightImage: ["../img/altsick.jpg", "../img/altsick.jpg"],
-		sound: "../sounds/vomit.wav",
+		sound: "../sounds/scream.mp3",
 		deterrent: "Water"
 	},
 	{
 		name: "blizzard",
-		varAffected: 2,
-		affectAmount: -20,
-		dayImage: ["../img/wolf.jpg", "../img/wolf.jpg"],
-        nightImage: ["../img/wolf.jpg", "../img/wolf.jpg"],
+		lpAffect: 0,
+		timeAffect: 0,
+		speedAffect: -.25,
+		dayImage: ["../img/blizzard.jpg", "../img/blizzard.jpg"],
+        nightImage: ["../img/blizzard.jpg", "../img/blizzard.jpg"],
 		sound: "../sounds/snowstorm.mp3",
 		deterrent: "Emergency-Blanket"
 	},
 	{
 		name: "wolf",
-		varAffected: 2,
-		affectAmount: -20,
-		dayImage: ["../img/dannyBearDay.gif", "../img/pennyBearDay.gif"],
-        nightImage: ["../img/dannyBearNight.gif", "../img/pennyBearNight.gif"],
+		lpAffect: 0,
+		timeAffect: 1,
+		speedAffect: 0,
+		dayImage: ["../img/dannyWolfDay.gif", "../img/pennyWolfDay.gif"],
+        nightImage: ["../img/dannyWolfNight.gif", "../img/pennyWolfNight.gif"],
 		sound: "../sounds/wolf.mp3",
 		deterrent: "Food"
 	},
@@ -368,17 +348,18 @@ var obstacleList = [
 	// },
 	{
 		name: "yeti",
-		varAffected: 2,
-		affectAmount: -20,
-		dayImage: ["../img/yeti.jpg", "../img/yeti.jpg"],
-        nightImage: ["../img/yeti.jpg", "../img/yeti.jpg"],
+		lpAffect: 0,
+		timeAffect: 0,
+		speedAffect: 0,
+		dayImage: ["../img/dannyYetiDay.gif", "../img/pennyYetiDay.gif"],
+        nightImage: ["../img/dannyYetiNight.gif", "../img/pennyYetiNight.gif"],
 		sound: "../sounds/yeti.mp3",
 		deterrent: "Riddle"
 	}
 
 ];
 
-var obstacleOdds = 10;
+var obstacleOdds = 0;
 var obstacle = {};
 
 
@@ -405,17 +386,32 @@ function obstacleChecker() {
 		} else {
 			obstacle = obstacleList[8]
 		}
+		$(".updateBox").empty();
+		$(".updateBox").append("YOU HAVE ENCOUNTERED A " + obstacle.name + "!!");
 		obstacleOdds = 10;
-		console.log(obstacle)
-		console.log(obstacleOdds)
-		//affect lp etc vars
-		// sound = obstacle.sound
+		var rightItem = false;
+		for (var a = 0; a < backpack.length; a++) {
+			if (backpack[a] === obstacle.deterrent) {
+				$(".updateBox").append("Thankfully, you had a " + backpack[a] + " on you, which saved you!!");
+				console.log("Your " + backpack[a] + " has saved your from the " + obstacle.name + "!");
+				rightItem = true;
+			}
+		}
+		if (!rightItem) {
+			lifePoints += obstacle.lpAffect;
+			timeCount += obstacle.timeAffect;
+			lifePoints -= (obstacle.timeAffect * lpph);
+			speed += obstacle.speedAffect;
+		}
+		console.log("speed: " + speed);
+		console.log(obstacle);
+		console.log(obstacleOdds);
 	} else {
 		obstacle = "none";
-		console.log(obstacle)
-		console.log("nothing to see here")
+		console.log(obstacle);
+		console.log("nothing to see here");
 		obstacleOdds += 30;
-		console.log(obstacleOdds)
+		console.log(obstacleOdds);
 	}
 
 }

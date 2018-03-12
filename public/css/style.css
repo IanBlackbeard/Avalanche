@@ -69,41 +69,41 @@ li {
 }
 
 .start-page {
-    max-width: 64%;
-    margin: auto;
-    margin-top: 25px;
-    height: 583px;
-    border-radius: 10px;
-    /*display: none;*/
+  max-width: 64%;
+  margin: auto;
+  margin-top: 25px;
+  height: 583px;
+  border-radius: 10px;
+  /*display: none;*/
 /*  margin-top: 5%; these are for 15'' macbook pro
-    height: 585px;*/
+  height: 585px;*/
 }
 
 .game {
-    max-width: 64%;
-    margin: auto;
-    margin-top: 25px;
-    height: 583px;
-    border-radius: 10px;
-    overflow: hidden;
+  max-width: 64%;
+  margin: auto;
+  margin-top: 25px;
+  height: 583px;
+  border-radius: 10px;
+  overflow: hidden;
 }
 
 
 .black-screen {
-    margin: 0px;
-    background-color: #0c0c0c;
-    margin: auto;
-    color: #3dc13d;
-    border: solid;
-    border-color: black;
-    border-width: 1px;
-    max-width: 64%;
-    margin: auto;
-    margin-top: 25px;
-    height: 583px;
-    border-radius: 10px;
-    -webkit-box-shadow:inset 0 0 70px -20px rgba(61,193,61,1);
-    box-shadow:inset 0 0 70px -20px rgba(61,193,61,1);
+  margin: 0px;
+  background-color: #0c0c0c;
+  margin: auto;
+  color: #3dc13d;
+  border: solid;
+  border-color: black;
+  border-width: 1px;
+  max-width: 64%;
+  margin: auto;
+  margin-top: 25px;
+  height: 583px;
+  border-radius: 10px;
+  -webkit-box-shadow:inset 0 0 70px -20px rgba(61,193,61,1);
+  box-shadow:inset 0 0 70px -20px rgba(61,193,61,1);
 }
 
 img.bigPicture {
@@ -116,14 +116,24 @@ img.bigPicture {
 
 .statsBox {
   position: absolute;
-  height: 150px;
-  width: 100px;
   background: black;
   color: white;
   top: 40px;
   left: 300px;
   border-radius: 10px;
-  padding: 2px;
+  padding: 10px;
+  font-size: 16px;
+}
+
+.updateBox {
+  position: absolute;
+  background: black;
+  color: white;
+  top: 40px;
+  left: 450px;
+  border-radius: 10px;
+  padding: 10px;
+  font-size: 24px;
 }
 
 .story {
@@ -140,4 +150,11 @@ img.bigPicture {
 
 .char2 {
   border-radius: 10px;
+}
+
+.startGame {
+  font-size: 20px;
+  padding: 5px;
+  margin-left: 40%;
+  margin-top: 30px;
 }
