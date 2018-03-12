@@ -266,9 +266,9 @@ var obstacleList = [
 		nightImage: ["../img/dannyBearNight.gif", "../img/pennyBearNight.gif"],
 		sound: "../sounds/bear.mp3",
 		deterrent: "Axe",
-		text: "A wild bear has appeared!",
-		success: "You pull out your axe and start swinging viciously.  You hit him! The bear cowers off. . .",
-		failure: "No where to run, no where to hide! The bear attacks, but you play dead and he gets bored. You miraculously make it out alive. . . but barely."
+		text: "Oh no! You have encountered a bear and he is angry!",
+		success: "Fortunately, you have an axe in your backpack. You pull out your axe and start swinging viciously. You hit him! The bear cowers off and you continue on your way. Click to continue.",
+		failure: "Nowhere to run, nowhere to hide! The bear attacks, but you play dead and he gets bored. You miraculously make it out alive. . . but barely. You lose 20 life points as a result of your efforts. Click to continue."
 	},
 	{
 		name: "river",
@@ -280,9 +280,9 @@ var obstacleList = [
         nightImage: ["../img/river.png", "../img/river.png"],
 		sound: "../sounds/river.mp3",
 		deterrent: "Flint",
-		text: "You have reached a cold, raging river. You decide to cross it. . .",
-		success: "The ice cracks as you fall in, scrambling to make it to the shore. You use your flint to start a fire and dry your clothes.",
-		failure: "You fall in, and have no way to dry your clothes. You trudge on with sopping clothing, weary of the night to come."
+		text: "Whoa! There is a cold, raging river crossing your path. It is much too far to go around so you must go through it. Unfortunately, you will get wet...",
+		success: "The ice cracks as you fall in and you scramble to make it to the shore. Lucky for you, you have a flint in your backpack so you can start a fire, dry your clothes, and get back on your way quickly.",
+		failure: "You fall in and have no way to dry your clothes. You trudge on but are miserable. You lose 5 life points because you are now cold and wet."
 	},
 	{
 		name: "broken bone",
@@ -293,9 +293,9 @@ var obstacleList = [
         nightImage: ["../img/leg.jpg", "../img/leg.jpg"],
 		sound: "../sounds/scream.mp3",
 		deterrent: "First-Aid-Kit",
-		text: "SNAP! Your leg is broken!",
-		success: "You wrap it in a splint and carry on.",
-		failure: "You continue on with a disgustingly floppy leg, causing excrusiating pain."
+		text: "Bad luck! You have fallen and broken your leg! That's going to make walking pretty difficult.",
+		success: "Good thing you chose that first aid kit. You are able to splint your leg and hit the road again.",
+		failure: "You continue on with a disgustingly floppy leg, causing you excrusiating pain. Your speed drops by 5% and that town is starting to seem a lot farther away."
 	},
 	{
 		name: "cravasse",
@@ -306,9 +306,9 @@ var obstacleList = [
         nightImage: ["../img/cravasse.jpg", "../img/cravasse.jpg"],
 		sound: "../sounds/falling.mp3",
 		deterrent: "Climbing gear",
-		text: "You have encountered a gaping crevasse.",
-		success: "You're a seasoned climber and traverse the gap with the climbing gear",
-		failure: "You have no way across. You lose 4 hours searching for a way around."
+		text: "Holy split in the mountain! You have come upon a very deep and menacing cravasse! What will you do?",
+		success: "You're a seasoned climber and wisely brought the climbing gear in your backpack. You and traverse the gap without falling to your death.",
+		failure: "You have no way to cross the chasm. You lose an hour finding a safer path."
 	},
 	{
 		name: "frost bite",
@@ -319,9 +319,9 @@ var obstacleList = [
         nightImage: ["../img/frostbite.jpg", "../img/frostbite.jpg"],
 		sound: "../sounds/frost_bite.mp3",
 		deterrent: "Hand-Warmers",
-		text: "Jack Frost has nipped at your nose. Frostbite!",
-		success: "Luckily you grabbed some hand-warmers to counteract the loss of feeling in your nose",
-		failure: "You have nothing stop the frostbite. Your nose turns black and falls off."
+		text: "The cold has finally caught up and Jack Frost is nipping. You hands are numb and turning a sickly shade of red. You have frostbite!",
+		success: "Luckily you grabbed some hand-warmers and can warm your hands and are good to go.",
+		failure: "You have nothing stop the frostbite. You lose 10 life points because that frostbite is only going to get worse."
 	},
 	{
 		name: "altitude sickness",
@@ -332,9 +332,9 @@ var obstacleList = [
         nightImage: ["../img/altsick.jpg", "../img/altsick.jpg"],
 		sound: "../sounds/vomit.wav",
 		deterrent: "Water",
-		text: "Lost at 13,000 feet",
-		success: "You have trained properly and come prepared. You avoid getting altitude sickenss",
-		failure: "Your late night partying and lack of water causes severe altitude sickness."
+		text: "The altitude is getting to you and that big breakfast you had is starting to seem like a bad idea. You have altitude sickness!",
+		success: "Good thing you brought some water with you. You can chug it an feel better in no time.",
+		failure: "You lose the contents of your stomach and an hour pulling yourself back together before you can continue."
 	},
 	{
 		name: "blizzard",
@@ -345,9 +345,9 @@ var obstacleList = [
         nightImage: ["../img/blizzard.gif", "../img/blizzard.gif"],
 		sound: "../sounds/snowstorm.mp3",
 		deterrent: "Emergency-Blanket",
-		text: "A blizzard rolls in causing white-out conditions. . .",
-		success: "You wrap yourself in the emergency blanket and shield yourself from the harsh conditions.",
-		failure: "The blizzard takes its toll, battering you relentlessly."
+		text: "The weather has taken a turn for the worse. The sun is no longer shining and a blizzard has blown in! It's a white out and you can only see a few feet in front of you.",
+		success: "You were smart to think that emergency blanket would come in handy. You can wrap yourself in it and forge ahead.",
+		failure: "The blizzard batters you relentlessly and seriously hinders your progress. Your speed drops by 75%."
 	},
 	{
 		name: "wolf",
@@ -358,9 +358,9 @@ var obstacleList = [
         nightImage: ["../img/dannyWolfNight.gif", "../img/pennyWolfNight.gif"],
 		sound: "../sounds/wolf.mp3",
 		deterrent: "Food",
-		text: "A ravenous wolf has appeared, and she looks hungry!",
-		success: "You toss your remaining food and slowly back away. You successfully make your escape.",
-		failure: "You have nothing to distract the hungry mother wolf. She attacks you as you barely make your escape."
+		text: "Gadzooks! There is a wolf in your way and he looks hungry!",
+		success: "You throw the food you brought at him and continue on yuour way without so much as a scratch.",
+		failure: "You have nothing to distract the hungry wolf. You lose an hour running away from it."
 	},
 	// {
 	// 	name: "darkness",
@@ -379,9 +379,9 @@ var obstacleList = [
         nightImage: ["../img/dannyYetiNight.gif", "../img/pennyYetiNight.gif"],
 		sound: "../sounds/yeti.mp3",
 		deterrent: "Riddle",
-		text: "Enter witty coding riddle here",
-		success: "You solved the Yeti's riddle! You hop on his back and ride him halfway down the mountain!",
-		failure: "The Yeti is unimpressed. He lifts you up and hurls you into a deep ravine!"
+		text: "Holy schnikes! Theres a yeti dead ahead! He is offering you a deal...if you answer a riddle correctly, he will personally carry you to safety. However, if your answer is wrong, he will eat you. Tough situation but now you are one of the few to have seen this elusive creature. Hopefully you will live to tell about it.",
+		success: "You solved the Yeti's riddle! Hop on his back and ride down the mountain!",
+		failure: "The Yeti is unimpressed. He eats you and you die!"
 	}
 
 ];
