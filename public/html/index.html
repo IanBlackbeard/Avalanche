@@ -108,8 +108,8 @@
 
           <p id="bizzardStory">The weather has taken a turn for the worse. The sun is no longer shining and a blizzard has blown in! If you have an emergency blanket in your backpack, you will be able to throw it over yourself and forge ahead. If not, that snow is going to seriously hinder your progress and your speed will drop by 75%.</p>
 
-          <p id="darknessStory">Yikes! Darkness is closing in and you are no longer able to see where you are going. If you have a flashlight in your backpack, you will continue to make headway. If not, your speed will drop by 25% as you feel your way through the trees. 
- -->
+          <p id="darknessStory">Yikes! Darkness is closing in and you are no longer able to see where you are going. If you have a flashlight in your backpack, you will continue to make headway. If not, your speed will drop by 25% as you feel your way through the trees.  -->
+
 
       </section> <!-- end game screen -->
 
@@ -125,6 +125,22 @@
     $("#game").hide()
     $(".gameOver").hide()
     $("#user").hide()
+
+
+var i = 0;
+var txt = 'Lorem ipsum dummy text blabla.';
+var speed = 50;
+
+function typeWriter() {
+  if (i < txt.length) {
+    document.getElementById("demo").innerHTML += txt.charAt(i);
+    i++;
+    setTimeout(typeWriter, speed);
+  }
+}
+
+typeWriter();
+
 
   </script>
 
