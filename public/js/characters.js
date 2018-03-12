@@ -44,20 +44,27 @@ var backpack = [];
 var nameInput = $("#user-name");
 var newUser;
 
-$(".black-screen").show();
-$(".story").show();
-$(".story").on("click", function() {
-	$(".black-screen").hide();
-	$(".story").hide();
-	$(".start-page").show();
-})
-
-
+$(".start-page").show();
 $("#start-screen-img").on("click", function() {
 	$(".start-page").hide();
 	$(".black-screen").show();
-    $("#user").show();
+    $(".story").show();
 });
+
+$(".story").on("click", function() {
+	$(".story").hide();
+	$("#group").show();
+	var groupImage = $("<img>");
+    groupImage.attr("src", "./img/group.jpg");
+    groupImage.attr("class", "bigPicture");
+	$("#groupImage").append(groupImage);
+
+})
+
+$("#group").on("click", function() {
+	$("#group").hide();
+	$("#user").show();
+})
 
 
 $(".userSubmit").on("click", function() {
@@ -106,9 +113,34 @@ function chooseCharacter() {
         console.log(character);
         $("#characterChosen").append(chosenCharacter, charImage);
         $("#chooseCharacter").hide();
-        showItems();
+        if (id === "1") {
+        	pennyGenerator()
+        	console.log("penny has been clicked!")
+    	} else {
+    		console.log("danny has been clicked!")
+    		dannyGenerator()
+    	}
   	})
-	
+}
+
+function pennyGenerator() {
+	$("#generateCharacterPenny").show();
+
+	$("#generateCharacterPenny").on("click", function() {
+		$("#generateCharacterPenny").hide();
+		$(".black-screen").show();
+		showItems();
+	})
+}
+
+function dannyGenerator() {
+	$("#generateCharacterDanny").show();
+
+	$("#generateCharacterDanny").on("click", function() {
+		$("#generateCharacterDanny").hide();
+		$(".black-screen").show();
+		showItems();
+	})
 }
 
 function showItems() {
@@ -152,8 +184,6 @@ function showItems() {
 function game() {
 	$("#game").show();
 	$("#sound").trigger("pause");
-	$(".statsBox").empty();
-	$(".statsBox").append("Time: " + time + "<br>", "Life Points: " + lifePoints + "<br>", "Miles Walked: " + distanceTraveled + "<br>", "Backpack Items: " + "<br>", backpack[0] + "<br>", backpack[1] + "<br>", backpack[2] + "<br>", backpack[3] + "<br>");
 	console.log("Time Count: " + timeCount);
 	console.log("Time: " + time);
 	console.log("Life Points: " + lifePoints);
@@ -162,27 +192,49 @@ function game() {
 			obstacleChecker();
 			if (obstacle === "none") {
 				displayImage();
+				$(".updateBox").empty();
+				$(".updateBox").append("Continue on your journey...");
 			} else {
 				displayObstacle();
 			}
 		} else {
-			$("#gameImage").empty();
-			var winnerImage = $("<img>");
-		    winnerImage.attr("src", "./img/winner.jpg");
-		    winnerImage.attr("class", "bigPicture");
-			$("#gameImage").append(winnerImage);
-			console.log("you won");
+			winGame();
 		}
 	} else {
-		$("#gameImage").empty();
-		var deadImage = $("<img>");
-	    deadImage.attr("src", "./img/dead.jpeg");
-	    deadImage.attr("class", "bigPicture");
-		$("#gameImage").append(deadImage);
-		console.log("you died");
+		loseGame();
 	}
+	$(".statsBox").empty();
+	$(".statsBox").append("<big>Time: " + time + "<br>", "<big>Life Points: " + lifePoints + "<br>", "<big>Miles Walked: " + distanceTraveled + "<br>", "<big>Backpack Items: " + "<br>", backpack[0] + "<br>", backpack[1] + "<br>", backpack[2] + "<br>", backpack[3] + "<br>");
 	
 }
+
+function winGame() {
+	$("#game").hide();
+	$(".gameOver").show();
+	var winnerImage = $("<img>");
+    winnerImage.attr("src", "./img/winner.jpg");
+    winnerImage.attr("class", "bigPicture");
+	$("#gameOverImage").append(winnerImage);
+	console.log("you won");
+}
+
+function loseGame() {
+	$("#game").hide();
+	$(".gameOver").show();
+	lifePoints = 0;
+	var loserImage = $("<img>");
+    loserImage.attr("src", "./img/dead.jpg");
+    loserImage.attr("class", "bigPicture");
+	$("#gameOverImage").append(loserImage);
+	console.log("you died");
+}
+
+$("#game").on("click", function() {
+	event.preventDefault();
+	speedTimeMath();
+	distanceMath();
+	game();
+});
 
 function speedTimeMath() {
 	if (timeCount < 11) {
@@ -249,13 +301,6 @@ function displayObstacle() {
     $("#sound").trigger("play");
 }
 
-$("#game").on("click", function() {
-	event.preventDefault();
-	speedTimeMath();
-	distanceMath();
-	game();
-});
-
 var obstacleList = [
 	{
 		name: "bear",
@@ -265,7 +310,10 @@ var obstacleList = [
 		dayImage: ["../img/dannyBearDay.gif", "../img/pennyBearDay.gif"],
 		nightImage: ["../img/dannyBearNight.gif", "../img/pennyBearNight.gif"],
 		sound: "../sounds/bear.mp3",
-		deterrent: "Axe"
+		deterrent: "Axe",
+		text: "Oh no! You have encountered a bear and he is angry!...  ",
+		success: "Fortunately, you have an axe in your backpack. You pull out your axe and start swinging viciously. You hit him! The bear cowers off and you continue on your way.",
+		failure: "Nowhere to run, nowhere to hide! The bear attacks, but you have nothing in your backpack to help. You play dead and he gets bored. You miraculously make it out alive. . . but barely. You lose 20 life points as a result of your efforts."
 	},
 	{
 		name: "river",
@@ -276,7 +324,10 @@ var obstacleList = [
 		dayImage: ["../img/river.png", "../img/river.png"],
         nightImage: ["../img/river.png", "../img/river.png"],
 		sound: "../sounds/river.mp3",
-		deterrent: "Flint"
+		deterrent: "Flint",
+		text: "Whoa! There is a cold, raging river crossing your path. It is much too far to go around so you must go through it. Unfortunately, you will get wet...  ",
+		success: "The ice cracks as you fall in and you scramble to make it to the shore. Lucky for you, you have a flint in your backpack so you can start a fire, dry your clothes, and get back on your way.",
+		failure: "You fall in and have nothing in your backpack to help you dry your clothes. You trudge on but are miserable. You lose 5 life points because you are now cold and wet."
 	},
 	{
 		name: "broken bone",
@@ -286,7 +337,10 @@ var obstacleList = [
 		dayImage: ["../img/leg.jpg", "../img/leg.jpg"],
         nightImage: ["../img/leg.jpg", "../img/leg.jpg"],
 		sound: "../sounds/scream.mp3",
-		deterrent: "First-Aid-Kit"
+		deterrent: "First-Aid-Kit",
+		text: "Bad luck! You have fallen and broken your leg! That's going to make walking pretty difficult...  ",
+		success: "Good thing you chose that first aid kit. You are able to splint your leg and hit the road again.",
+		failure: "Sadly, there is nothing in your backpack to help you and you must continue on with a disgustingly floppy leg, causing you excrusiating pain. Your speed drops by 5% and that town is starting to seem a lot farther away."
 	},
 	{
 		name: "cravasse",
@@ -296,7 +350,10 @@ var obstacleList = [
 		dayImage: ["../img/cravasse.jpg", "../img/cravasse.jpg"],
         nightImage: ["../img/cravasse.jpg", "../img/cravasse.jpg"],
 		sound: "../sounds/falling.mp3",
-		deterrent: "Climbing gear"
+		deterrent: "Climbing gear",
+		text: "Holy split in the mountain! You have come upon a very deep and menacing cravasse! What will you do?...  ",
+		success: "You're a seasoned climber and wisely brought the climbing gear in your backpack. You can traverse the gap without falling to your death.",
+		failure: "Unfortunately, you have brought nothing along that can help you cross the chasm. You lose an hour finding a safer path."
 	},
 	{
 		name: "frost bite",
@@ -306,7 +363,10 @@ var obstacleList = [
 		dayImage: ["../img/frostbite.jpg", "../img/frostbite.jpg"],
         nightImage: ["../img/frostbite.jpg", "../img/frostbite.jpg"],
 		sound: "../sounds/frost_bite.mp3",
-		deterrent: "Hand-Warmers"
+		deterrent: "Hand-Warmers",
+		text: "The cold has finally caught up with you and Jack Frost is nipping. You hands are numb and starting to turn a sickly shade of red. You have frostbite!...  ",
+		success: "Luckily you grabbed some hand-warmers. You warm your hands and are good to go.",
+		failure: "You have nothing in your backpack to stop the frostbite. You lose 10 life points because it is only going to get worse."
 	},
 	{
 		name: "altitude sickness",
@@ -315,8 +375,11 @@ var obstacleList = [
 		speedAffect: 0,
 		dayImage: ["../img/altsick.jpg", "../img/altsick.jpg"],
         nightImage: ["../img/altsick.jpg", "../img/altsick.jpg"],
-		sound: "../sounds/scream.mp3",
-		deterrent: "Water"
+		sound: "../sounds/vomit.wav",
+		deterrent: "Water",
+		text: "The altitude is getting to you and that big breakfast you had is starting to seem like a bad idea. You have altitude sickness!...  ",
+		success: "Good thing you brought some water with you. You can chug it an feel better in no time.",
+		failure: "You should always bring water with you when at altitude! Since you didn't grab the water, you lose the contents of your stomach and an hour pulling yourself back together before you can continue."
 	},
 	{
 		name: "blizzard",
@@ -326,7 +389,10 @@ var obstacleList = [
 		dayImage: ["../img/blizzard.jpg", "../img/blizzard.jpg"],
         nightImage: ["../img/blizzard.jpg", "../img/blizzard.jpg"],
 		sound: "../sounds/snowstorm.mp3",
-		deterrent: "Emergency-Blanket"
+		deterrent: "Emergency-Blanket",
+		text: "The weather has taken a turn for the worse. The sun is no longer shining and a blizzard has blown in! It's a white out and you can only see a few feet in front of you...  ",
+		success: "You were smart to think that emergency blanket would come in handy. You can wrap yourself in it and forge ahead.",
+		failure: "The blizzard batters you relentlessly and with nothing in your backpack to help you, your progress is seriously hindered. Your speed drops by 75%."
 	},
 	{
 		name: "wolf",
@@ -336,7 +402,10 @@ var obstacleList = [
 		dayImage: ["../img/dannyWolfDay.gif", "../img/pennyWolfDay.gif"],
         nightImage: ["../img/dannyWolfNight.gif", "../img/pennyWolfNight.gif"],
 		sound: "../sounds/wolf.mp3",
-		deterrent: "Food"
+		deterrent: "Food",
+		text: "Gadzooks! There is a wolf in your way and he looks hungry!...  ",
+		success: "You throw the food from your backpack at him and continue on yuour way without so much as a scratch.",
+		failure: "Since you brought no food, you have nothing to distract the hungry wolf. You lose an hour running away from him."
 	},
 	// {
 	// 	name: "darkness",
@@ -354,7 +423,10 @@ var obstacleList = [
 		dayImage: ["../img/dannyYetiDay.gif", "../img/pennyYetiDay.gif"],
         nightImage: ["../img/dannyYetiNight.gif", "../img/pennyYetiNight.gif"],
 		sound: "../sounds/yeti.mp3",
-		deterrent: "Riddle"
+		deterrent: "Riddle",
+		text: "Holy schnikes! Theres a yeti dead ahead! He is offering you a deal...if you answer a riddle correctly, he will personally carry you to safety. However, if your answer is wrong, he will eat you. Tough situation but now you are one of the few to have seen this elusive creature. Hopefully you will live to tell about it...  ",
+		success: "You solved the Yeti's riddle! Hop on his back and ride down the mountain!",
+		failure: "The Yeti is unimpressed. He eats you and you die!"
 	}
 
 ];
@@ -395,8 +467,12 @@ function obstacleChecker() {
 				$(".updateBox").append("Thankfully, you had a " + backpack[a] + " on you, which saved you!!");
 				console.log("Your " + backpack[a] + " has saved your from the " + obstacle.name + "!");
 				rightItem = true;
+				
 			}
 		}
+		
+
+
 		if (!rightItem) {
 			lifePoints += obstacle.lpAffect;
 			timeCount += obstacle.timeAffect;
@@ -414,9 +490,11 @@ function obstacleChecker() {
 		console.log(obstacleOdds);
 	}
 
-}
+};
 
-
+$(".restartGame").on("click", function() {
+	document.location.reload()
+});
 
 // Character Constructor
 // var Character = function(name, backpack, lifePoints) {
