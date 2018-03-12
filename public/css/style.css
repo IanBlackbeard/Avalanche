@@ -182,3 +182,11 @@ img.bigPicture {
   margin-top: 30px;
   margin-left: 25%;
 }
+
+.restartGame {
+  position: absolute;
+  font-size: 20px;
+  padding: 5px;
+  left: 45%;
+  top: 65%;
+}

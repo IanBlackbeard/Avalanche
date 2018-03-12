@@ -166,23 +166,41 @@ function game() {
 				displayObstacle();
 			}
 		} else {
-			$("#gameImage").empty();
-			var winnerImage = $("<img>");
-		    winnerImage.attr("src", "./img/winner.jpg");
-		    winnerImage.attr("class", "bigPicture");
-			$("#gameImage").append(winnerImage);
-			console.log("you won");
+			winGame();
 		}
 	} else {
-		$("#gameImage").empty();
-		var deadImage = $("<img>");
-	    deadImage.attr("src", "./img/dead.jpeg");
-	    deadImage.attr("class", "bigPicture");
-		$("#gameImage").append(deadImage);
-		console.log("you died");
+		loseGame();
 	}
 	
 }
+
+function winGame() {
+	$("#game").hide();
+	$(".gameOver").show();
+	var winnerImage = $("<img>");
+    winnerImage.attr("src", "./img/winner.jpg");
+    winnerImage.attr("class", "bigPicture");
+	$("#gameOverImage").append(winnerImage);
+	console.log("you won");
+}
+
+function loseGame() {
+	lifePoints = 0;
+	$("#game").hide();
+	$(".gameOver").show();
+	var loserImage = $("<img>");
+    loserImage.attr("src", "./img/dead.jpeg");
+    loserImage.attr("class", "bigPicture");
+	$("#gameOverImage").append(loserImage);
+	console.log("you died");
+}
+
+$("#game").on("click", function() {
+	event.preventDefault();
+	speedTimeMath();
+	distanceMath();
+	game();
+});
 
 function speedTimeMath() {
 	if (timeCount < 11) {
@@ -248,13 +266,6 @@ function displayObstacle() {
 	document.getElementById("sound").src = obstacle.sound;
     $("#sound").trigger("play");
 }
-
-$("#game").on("click", function() {
-	event.preventDefault();
-	speedTimeMath();
-	distanceMath();
-	game();
-});
 
 var obstacleList = [
 	{
@@ -442,7 +453,11 @@ function obstacleChecker() {
 		console.log(obstacleOdds);
 	}
 
-}
+};
+
+$(".restartGame").on("click", function() {
+	document.location.reload()
+});
 
 
 
