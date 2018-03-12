@@ -5,7 +5,7 @@ $(document).ready(function() {
 // var Obstacle = require("./obsticles.js");
 
 
-var time;
+var time = "7:00 AM";
 
 var timeArray = ["7:00 AM", "8:00 AM", "9:00 AM", "10:00 AM", "11:00 AM", "12:00 PM", "1:00 PM", "2:00 PM", "3:00 PM", "4:00 PM", "5:00 PM", "6:00 PM", "7:00 PM", "8:00 PM", "9:00 PM", "10:00 PM", "11:00 PM", "12:00 AM", "1:00 AM", "2:00 AM", "3:00 AM", "4:00 AM", "5:00 AM", "6:00 AM"]
 
@@ -22,29 +22,31 @@ var characters = [
 		name: "Danny Danger",
 		image: "./img/danny.jpg",
 		avatar: "./img/DannyDangerSmall.png",
-		mainMovement: ["./img/dannyLeft.jpg", "./img/dannyMid.jpg", "./img/dannyRight.jpg"]
+		mainMovement: ["./img/dannyLeft.jpg", "./img/dannyMid.jpg", "./img/dannyRight.jpg"],
+		nightMovement: ["./img/dannyNightLeft.jpg", "./img/dannyNightMid.jpg", "./img/dannyNightRight.jpg"]
 	},
 	{
 		name: "Penny Peril",
 		image: "./img/penny.jpg",
 		avatar: "./img/PennyPerilSmall.png",
-		mainMovement: ["./img/pennyLeft.jpg", "./img/pennyMid.jpg", "./img/pennyRight.jpg"]
+		mainMovement: ["./img/pennyLeft.jpg", "./img/pennyMid.jpg", "./img/pennyRight.jpg"],
+		nightMovement: ["./img/pennyNightLeft.jpg", "./img/pennyNightMid.jpg", "./img/pennyNightRight.jpg"]
 	}
 ];
 
 var character;
 
 var allItems = [
-	"Food",
-	"Flare gun",
-	"Axe",
-	"Emergency blanket",
-	"Clothes",
-	"Water",
-	"Flint",
-	"Shovel",
-	"Knife",
-	"Hand warmers"
+	"Axe", //--------------- Bear
+	"Flint", //------------- River
+	"First-Aid-Kit", //----- Broken Bone
+	"Climbing gear", //----- Cravasse
+	"Hand-Warmers", //------ Frost Bite
+	"Water", //------------- Altitude sickness
+	"Emergency-Blanket", //- Blizzard 
+	"Food", //--------------- Wolf
+	"Flashlight", //--------- darkness
+	"Riddle" //------------- Yeti
 ];
 
 var nameInput = $("#user-name");
@@ -169,13 +171,15 @@ function showItems() {
 
 function game() {
 	$("#game").show()
+	$(".statsBox").empty()
+	$(".statsBox").append("Time: " + time + "<br>", "Life Points: " + lifePoints + "<br>", "Backpack Items: " + "<br>", backpack[0] + "<br>", backpack[1] + "<br>", backpack[2] + "<br>", backpack[3] + "<br>")
 	console.log(timeCount)
-	console.log(time)
-	console.log(lifePoints)
+	console.log("Time: " + time)
+	console.log("Life Points: " + lifePoints)
 	if (lifePoints > 0) {
 		if (distanceTraveled < 10) {
 			obstacleChecker()
-			console.log(distanceTraveled)
+			// console.log(distanceTraveled)
 			if (obstacle === "none") {
 				displayImage()
 			} else {
@@ -216,7 +220,7 @@ function distanceMath() {
 	if (obstacle === "none") {
 		if (timeCount < 11) {
 			distanceTraveled += 1;
-			console.log(distanceTraveled)
+			console.log("Distance Traveled: " + distanceTraveled)
 		} else {
 			distanceTraveled += .75;
 
@@ -246,18 +250,31 @@ function nextImage() {
   }
 }
 
+// function displayObstacle() {
+// 	$("#gameImage").empty()
+// 	var obstacleImage = $("<img>")
+//     obstacleImage.attr("src", obstacle.picture);
+//     obstacleImage.attr("class", "bigPicture");
+// 	$("#gameImage").append(obstacleImage)
+// 	document.getElementById("sound").src = obstacle.sound;
+//     $("#sound").trigger("play");
+
+// }
+
 function displayObstacle() {
-	$("#gameImage").empty()
-	var obstacleImage = $("<img>")
-	if (timeCount < 11) {
-	    obstacleImage.attr("src", obstacle.dayImage[character]);
-    	obstacleImage.attr("class", "bigPicture");
-		$("#gameImage").append(obstacleImage)
-	} else {
-		mainImage.attr("src", obstacle.nightImage[character]);
-	    mainImage.attr("class", "bigPicture");
-		$("#gameImage").append(obstacleImage)
-	}
+    $("#gameImage").empty()
+    var obstacleImage = $("<img>")
+    if (timeCount < 11) {
+        obstacleImage.attr("src", obstacle.dayImage[character]);
+        obstacleImage.attr("class", "bigPicture");
+        $("#gameImage").append(obstacleImage)
+    } else {
+        mainImage.attr("src", obstacle.nightImage[character]);
+        mainImage.attr("class", "bigPicture");
+        $("#gameImage").append(obstacleImage)
+    }
+	  document.getElementById("sound").src = obstacle.sound;
+    $("#sound").trigger("play");
 }
 
 $("#game").on("click", function() {
@@ -268,57 +285,77 @@ $("#game").on("click", function() {
 });
 
 var obstacleList = [
-	{
-		name: "bear",
-		damage: 4,
-		dayImage: ["../img/dannyBearDay.gif", "../img/pennyBearDay.gif"],
-		nightImage: ["../img/dannyBearNight.gif", "../img/pennyBearNight.gif"]
-	},
+  {
+      name: "bear",
+      damage: 4,
+      dayImage: ["../img/dannyBearDay.gif", "../img/pennyBearDay.gif"],
+      nightImage: ["../img/dannyBearNight.gif", "../img/pennyBearNight.gif"],
+      sound: "../sounds/bear.mp3",
+      deterrent: "Axe"
+  },
 	{
 		name: "river",
 		damage: 2,
-		picture: "../img/river.png"
+		picture: "../img/river.png",
+		sound: "../sounds/river.mp3",
+		deterrent: "Flint"
 	},
 	{
 		name: "broken bone",
 		damage: 1,
-		picture: "../img/leg.jpg"
+		picture: "../img/leg.jpg",
+		sound: "../sounds/scream.mp3",
+		deterrent: "First-Aid-Kit"
 	},
 	{
 		name: "cravasse",
 		damage: 2,
-		picture: "../img/river.png"
+		picture: "../img/river.png",
+		sound: "../sounds/falling.mp3",
+		deterrent: "Climbing gear"
 	},
 	{
 		name: "frost bite",
 		damage: 2,
-		picture: "../img/river.png"
+		picture: "../img/river.png",
+		sound: "../sounds/frost_bite.mp3",
+		deterrent: "Hand-Warmers"
 	},
 	{
 		name: "altitude sickness",
 		damage: 2,
-		picture: "../img/river.png"
+		picture: "../img/river.png",
+		sound: "../sounds/vomit.wav",
+		deterrent: "Water"
 	},
 	{
 		name: "blizzard",
 		damage: 2,
-		picture: "../img/river.png"
-	},
-	{
-		name: "darkness",
-		damage: 2,
-		picture: "../img/river.png"
-	},
-	{
-		name: "yeti",
-		damage: 2,
-		picture: "../img/wolf.jpg"
+		picture: "../img/river.png",
+		sound: "../sounds/snowstorm.mp3",
+		deterrent: "Emergency-Blanket"
 	},
 	{
 		name: "wolf",
 		damage: 2,
-		picture: "../img/river.png"
-	}
+		picture: "../img/river.png",
+		sound: "../sounds/wolf.mp3",
+		deterrent: "Food"
+	},
+	{
+		name: "darkness",
+		damage: 2,
+		picture: "../img/river.png",
+		deterrent: "Flashlight" 
+	},
+	{
+		name: "yeti",
+		damage: 2,
+		picture: "../img/wolf.jpg",
+		sound: "../sounds/yeti.mp3",
+		deterrent: "Riddle"
+	},
+
 ];
 
 var obstacleOdds = 10;
@@ -342,7 +379,8 @@ function obstacleChecker() {
 		obstacleOdds = 10;
 		console.log(obstacle)
 		console.log(obstacleOdds)
-
+		//affect lp etc vars
+		// sound = obstacle.sound
 	} else {
 		obstacle = "none";
 		console.log(obstacle)
