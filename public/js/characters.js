@@ -113,9 +113,34 @@ function chooseCharacter() {
         console.log(character);
         $("#characterChosen").append(chosenCharacter, charImage);
         $("#chooseCharacter").hide();
-        showItems();
+        if (id === "1") {
+        	pennyGenerator()
+        	console.log("penny has been clicked!")
+    	} else {
+    		console.log("danny has been clicked!")
+    		dannyGenerator()
+    	}
   	})
-	
+}
+
+function pennyGenerator() {
+	$("#generateCharacterPenny").show();
+
+	$("#generateCharacterPenny").on("click", function() {
+		$("#generateCharacterPenny").hide();
+		$(".black-screen").show();
+		showItems();
+	})
+}
+
+function dannyGenerator() {
+	$("#generateCharacterDanny").show();
+
+	$("#generateCharacterDanny").on("click", function() {
+		$("#generateCharacterDanny").hide();
+		$(".black-screen").show();
+		showItems();
+	})
 }
 
 function showItems() {
@@ -444,8 +469,12 @@ function obstacleChecker() {
 				$(".updateBox").append(obstacle.success);
 				console.log("Your " + backpack[a] + " has saved your from the " + obstacle.name + "!");
 				rightItem = true;
+				
 			}
 		}
+		
+
+
 		if (!rightItem) {
 			lifePoints += obstacle.lpAffect;
 			timeCount += obstacle.timeAffect;
@@ -469,8 +498,6 @@ function obstacleChecker() {
 $(".restartGame").on("click", function() {
 	document.location.reload()
 });
-
-
 
 // Character Constructor
 // var Character = function(name, backpack, lifePoints) {
