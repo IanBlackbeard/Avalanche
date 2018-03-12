@@ -106,9 +106,34 @@ function chooseCharacter() {
         console.log(character);
         $("#characterChosen").append(chosenCharacter, charImage);
         $("#chooseCharacter").hide();
-        showItems();
+        if (id === "1") {
+        	pennyGenerator()
+        	console.log("penny has been clicked!")
+    	} else {
+    		console.log("danny has been clicked!")
+    		dannyGenerator()
+    	}
   	})
-	
+}
+
+function pennyGenerator() {
+	$("#generateCharacterPenny").show();
+
+	$("#generateCharacterPenny").on("click", function() {
+		$("#generateCharacterPenny").hide();
+		$(".black-screen").show();
+		showItems();
+	})
+}
+
+function dannyGenerator() {
+	$("#generateCharacterDanny").show();
+
+	$("#generateCharacterDanny").on("click", function() {
+		$("#generateCharacterDanny").hide();
+		$(".black-screen").show();
+		showItems();
+	})
 }
 
 function showItems() {
@@ -414,22 +439,27 @@ function obstacleChecker() {
 			obstacle = obstacleList[8]
 		}
 		$(".updateBox").empty();
-		$(".updateBox").append("YOU HAVE ENCOUNTERED A " + obstacle.name + "!!");
 		obstacleOdds = 10;
 		var rightItem = false;
 		for (var a = 0; a < backpack.length; a++) {
 			if (backpack[a] === obstacle.deterrent) {
-				$(".updateBox").append("Thankfully, you had a " + backpack[a] + " on you, which saved you!!");
-				console.log("Your " + backpack[a] + " has saved your from the " + obstacle.name + "!");
 				rightItem = true;
+				
 			}
 		}
+		
+
+
 		if (!rightItem) {
 			lifePoints += obstacle.lpAffect;
 			timeCount += obstacle.timeAffect;
 			lifePoints -= (obstacle.timeAffect * lpph);
 			speed += obstacle.speedAffect;
+			txt = obstacle.text += obstacle.failure
+		} else {
+			txt = obstacle.text += obstacle.success
 		}
+		typeWriter()
 		console.log("speed: " + speed);
 		console.log(obstacle);
 		console.log(obstacleOdds);
@@ -443,7 +473,34 @@ function obstacleChecker() {
 
 }
 
+var q = 0;
+var txt = obstacle.text
+var success = obstacle.success
+var failure = obstacle.failure
+var typeWriterSpeed = 25;
 
+	function typeWriter() {
+		var q = 0;
+  		if (q < txt.length) {
+   			document.getElementByClass("updateBox").innerHTML += txt.charAt(q);
+    		q++;
+    		setTimeout(typeWriter, typeWriterSpeed);
+  		}
+	}
+	function successTypeWriter() {
+  		if (i < success.length) {
+   			document.getElementByClass("updateBox").innerHTML += success.charAt(i);
+    		i++;
+    		setTimeout(successTypeWriter, typeWriterSpeed);
+  		}
+	}
+	function failureTypeWriter() {
+  		if (i < failure.length) {
+   			document.getElementByClass("updateBox").innerHTML += failure.charAt(i);
+    		i++;
+    		setTimeout(failureTypeWriter, typeWriterSpeed);
+  		}
+	}
 
 // Character Constructor
 // var Character = function(name, backpack, lifePoints) {
