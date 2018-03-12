@@ -364,8 +364,8 @@ var obstacleList = [
 		timeAffect: 0,
 		speedAffect: 0,
 		picture: "../img/river.png",
-		dayImage: ["../img/river.png", "../img/river.png"],
-        nightImage: ["../img/river.png", "../img/river.png"],
+		dayImage: ["../img/dannyRiverDay.gif", "../img/pennyRiverDay.gif"],
+        nightImage: ["../img/dannyRiverNight.gif", "../img/pennyRiverNight.gif"],
 		sound: "../sounds/river.mp3",
 		deterrent: "Flint",
 		text: "Whoa! There is a cold, raging river crossing your path. It is much too far to go around so you must go through it. Unfortunately, you will get wet...  ",
@@ -416,8 +416,8 @@ var obstacleList = [
 		lpAffect: 0,
 		timeAffect: 1,
 		speedAffect: 0,
-		dayImage: ["../img/altsick.jpg", "../img/altsick.jpg"],
-        nightImage: ["../img/altsick.jpg", "../img/altsick.jpg"],
+		dayImage: ["../img/dannyBarfDay.gif", "../img/pennyBarfDay.gif"],
+        nightImage: ["../img/dannyBarfNight.gif", "../img/pennyBarfNight.gif"],
 		sound: "../sounds/vomit.wav",
 		deterrent: "Water",
 		text: "The altitude is getting to you and that big breakfast you had is starting to seem like a bad idea. You have altitude sickness!...  ",
@@ -429,8 +429,8 @@ var obstacleList = [
 		lpAffect: 0,
 		timeAffect: 0,
 		speedAffect: -.25,
-		dayImage: ["../img/blizzard.jpg", "../img/blizzard.jpg"],
-        nightImage: ["../img/blizzard.jpg", "../img/blizzard.jpg"],
+		dayImage: ["../img/dannyBlizDay.gif", "../img/pennyBlizDay.gif"],
+        nightImage: ["../img/dannyBlizNight.gif", "../img/pennyBlizNight.gif"],
 		sound: "../sounds/snowstorm.mp3",
 		deterrent: "Emergency-Blanket",
 		text: "The weather has taken a turn for the worse. The sun is no longer shining and a blizzard has blown in! It's a white out and you can only see a few feet in front of you...  ",
@@ -502,7 +502,7 @@ function obstacleChecker() {
 			obstacle = obstacleList[8]
 		}
 		$(".updateBox").empty();
-		$(".updateBox").append("YOU HAVE ENCOUNTERED A " + obstacle.name + "!!");
+		$(".updateBox").append(obstacle.text + "<br>");
 		obstacleOdds = 10;
 		var rightItem = false;
 		for (var a = 0; a < backpack.length; a++) {
