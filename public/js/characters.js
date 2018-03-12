@@ -44,13 +44,8 @@ var backpack = [];
 var nameInput = $("#user-name");
 var newUser;
 
-$(".start-page").show();
-$("#start-screen-img").on("click", function() {
-	$(".start-page").hide();
-	$(".black-screen").show();
-    $(".story").show();
-});
-
+$(".black-screen").show();
+$(".story").show();
 $(".story").on("click", function() {
 	$(".story").hide();
 	$("#group").show();
@@ -58,14 +53,24 @@ $(".story").on("click", function() {
     groupImage.attr("src", "./img/group.jpg");
     groupImage.attr("class", "bigPicture");
 	$("#groupImage").append(groupImage);
-
-})
+});
 
 $("#group").on("click", function() {
 	$("#group").hide();
-	$("#user").show();
-})
+	$(".story2").show();
+});
 
+$(".story2").on("click", function() {
+	$(".story2").hide();
+	$(".black-screen").hide();
+	$(".start-page").show();
+});
+
+$("#start-screen-img").on("click", function() {
+	$(".start-page").hide();
+	$(".black-screen").show();
+	$("#user").show();
+});
 
 $(".userSubmit").on("click", function() {
 	event.preventDefault();
@@ -173,7 +178,9 @@ function showItems() {
 	} else {
 		console.log("backpack full");
 		$("#ci").text("Here are your game choices!!");
-		$(".itemColumns").hide();
+		$(".itemColumns").hide()
+		$("#h2transition").text("")
+		$(".startGame").show()
 		$(".startGame").on("click", function() {
 			$("#chooseItems").hide();
 			game();
@@ -217,7 +224,7 @@ function winGame() {
     winnerImage.attr("src", "./img/winner.jpg");
     winnerImage.attr("class", "bigPicture");
 	$("#gameOverImage").append(winnerImage);
-	console.log("you won");
+	finalScreen()
 }
 
 function loseGame() {
@@ -228,7 +235,16 @@ function loseGame() {
     loserImage.attr("src", "./img/dead.jpg");
     loserImage.attr("class", "bigPicture");
 	$("#gameOverImage").append(loserImage);
-	console.log("you died");
+	document.getElementById("sound").src = "../sounds/soundOfSilence.mp3";
+    $("#sound").trigger("play");
+	finalScreen()
+}
+
+function finalScreen() {
+	$(".gameOver").on("click", function() {
+		$(".gameOver").hide();
+		$(".highScores").show();
+	})
 }
 
 $("#game").on("click", function() {
