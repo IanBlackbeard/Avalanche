@@ -7,8 +7,8 @@ module.exports = function(app) {
     app.post("/api/users", function(req, res) {
         console.log(req.body);
         db.User.create({
-            name: req.body.name
-            // score: req.body.score
+            name: req.body.name,
+            score: req.body.score
         })
         .then(function(dbUser) {
             res.json(dbUser);
@@ -22,6 +22,21 @@ module.exports = function(app) {
     //         res.json(dbUser);
     //     });
     // });
+
+    app.get("/api/users", function(req, res) {
+        db.User.findAll({ 
+            limit: 10,
+            // order: '"score" DESC'
+            // sort: [score, descending]
+            order: [[
+                "score", "DESC"
+                ]]
+        })
+        .then(function(dbUser) {
+            res.json(dbUser);
+        });
+    });
+
 
 };
 
