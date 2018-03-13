@@ -222,6 +222,8 @@ function game() {
 function winGame() {
 	$("#game").hide();
 	$(".gameOver").show();
+	$(".updateBox").empty();
+	$(".updateBox").append("You have been spotted by a rescue helicopter!! We'll see you on the slopes again soon...");
 	var winnerImage = $("<img>");
     winnerImage.attr("src", "./img/winner.jpg");
     winnerImage.attr("class", "bigPicture");
@@ -241,6 +243,8 @@ function winGame() {
 function loseGame() {
 	$("#game").hide();
 	$(".gameOver").show();
+	$(".updateBox").empty();
+	$(".updateBox").append("You have been consumed by the mountain.");
 	lifePoints = 0;
 	var loserImage = $("<img>");
     loserImage.attr("src", "./img/dead.jpg");
