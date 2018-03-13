@@ -5,7 +5,7 @@ var timeArray = ["7:00 AM", "8:00 AM", "9:00 AM", "10:00 AM", "11:00 AM", "12:00
 var timeCount = 0;
 var lifePoints = 100;
 var lpph = 4;
-var speed = 1;
+var speed = 10;
 var distanceTraveled = 0;
 var finalScore = {};
 var imageCount = 0;
@@ -262,10 +262,17 @@ function submitUser(User) {
 
 function topScores() {
 	$.get("/api/users", function(data) {
-		console.log("Top Scores ", data);
-		console.log(data[0].score);
-	// data.sort();
-	});
+		// console.log("Top Scores ", data);
+		// console.log(data[0].score);
+		var topTen = data;
+	    for (var i = 0; i < topTen.length; i++) {
+	        var highScore = $("<li>").text("User: " + topTen[i].name +  "\n" + "Score: " + topTen[i].score);
+	        highScore.attr("data-score", topTen[i].name + "\n" +  topTen[i].score);
+	        highScore.attr("data-scoreid", i);
+	        $(".scoresList").append(highScore)
+	        }
+	});	
+	finalScreen();
 }
 
 
