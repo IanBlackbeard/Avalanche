@@ -51,7 +51,7 @@ $(".story").on("click", function() {
 	$(".story").hide();
 	$("#group").show();
 	var groupImage = $("<img>");
-    groupImage.attr("src", "./img/group.jpg");
+    groupImage.attr("src", "./img/groupAvalanche.gif");
     groupImage.attr("class", "bigPicture");
 	$("#groupImage").append(groupImage);
 	document.getElementById("sound").src = "../sounds/avalanche.mp3";
@@ -68,12 +68,11 @@ $(".story2").on("click", function() {
 	$(".story2").hide();
 	$(".black-screen").hide();
 	$(".start-page").show();
-	document.getElementById("sound").src = "../sounds/tickClock.mp3";
-    $("#sound").trigger("play");
+	document.getElementById("themeSong").src = "../sounds/tickClock.mp3";
+    $("#themeSong").trigger("play");
 });
 
 $("#start-screen-img").on("click", function() {
-	$("#sound").trigger("pause");
 	$(".start-page").hide();
 	$(".black-screen").show();
 	$("#user").show();
@@ -93,7 +92,7 @@ function chooseCharacter() {
 	for (var c = 0; c < characters.length; c++) {
         var characterDiv = $("<div class='characterImage'>");
         var name = $("<p>").text(characters[c].name);
-        var characterImage = $("<img>");
+        var characterImage = $("<img style='border-radius: 10px;'>");
         characterImage.attr("src", characters[c].image);
         characterImage.attr("data-state", characters[c].name);
         characterImage.attr("data-id", c);
@@ -182,6 +181,7 @@ function showItems() {
 		$(".startGame").show()
 		$(".startGame").on("click", function() {
 			$("#chooseItems").hide();
+			$("#themeSong").trigger("pause");
 			game();
 		})
 	}

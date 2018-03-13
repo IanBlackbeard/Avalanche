@@ -129,27 +129,34 @@ img.bigPicture {
 }
 
 .statsBox {
-  position: absolute;
-  background: black;
-  color: white;
-  top: 40px;
-  left: 300px;
-  border-radius: 10px;
-  padding: 10px;
-  font-size: 16px;
-  color: #3dc13d;
+    position: absolute;
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    top: 40px;
+    left: 280px;
+    border-radius: 10px;
+    padding: 10px;
+    font-size: 16px;
+    color: #3dc13d;
+    border: solid;
+    -webkit-box-shadow: inset 0 0 70px 0px rgba(0,0,0,1);
+    box-shadow: 0 0 15px 0px rgba(0,0,0,1);
 }
 
 .updateBox {
-  position: absolute;
-  background: black;
-  color: white;
-  top: 40px;
-  left: 450px;
-  border-radius: 10px;
-  padding: 10px;
-  font-size: 24px;
-  max-width: 50%;
+    position: absolute;
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    top: 40px;
+    left: 450px;
+    border-radius: 10px;
+    padding: 10px;
+    font-size: 24px;
+    max-width: 50%;
+    border: solid;
+    border-color: #020202;
+    -webkit-box-shadow: inset 0 0 70px 0px rgba(0,0,0,1);
+    box-shadow: 0 0 15px 0px rgba(0,0,0,1);
 }
 
 .story {
@@ -173,10 +180,11 @@ img.bigPicture {
 }
 
 .startGame {
-  font-size: 20px;
-  padding: 5px;
-  margin-top: 30px;
-  margin-left: 25%;
+    font-size: 20px;
+    padding: 10px 25px;
+    margin-top: 110px;
+    border-radius: 10px;
+    border: solid;
 }
 
 .restartGame {
