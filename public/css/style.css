@@ -13,6 +13,10 @@ p {
 
 h1 {
   font-size: 50px;
+  margin-bottom: 0px;
+}
+
+h2 {
 }
 
 li {
@@ -52,29 +56,17 @@ li {
   padding: 0px 150px;
 }
 
+#generateCharacterPenny {
+  padding: 2.5%
+}
+
+#generateCharacterDanny {
+  padding: 2.5%;
+}
+
 #chooseItems {
   padding: 0px 80px;
 }
-/*
-#bg {
-  position: fixed; 
-  top: -50%; 
-  left: -50%; 
-  width: 200%; 
-  height: 200%;
-}
-#bg img {
-  position: absolute; 
-  top: 0; 
-  left: 0; 
-  right: 0; 
-  bottom: 0; 
-  margin: auto; 
-  min-width: 50%;
-  min-height: 50%;
-}*/
-
-
 
 .arcade {
   text-align: center;
@@ -208,4 +200,8 @@ img.bigPicture {
   80% { transform: translate(-1px, -1px) rotate(1deg); }
   90% { transform: translate(1px, 2px) rotate(0deg); }
   100% { transform: translate(1px, -2px) rotate(-1deg); }
+}
+
+#demo {
+  font-size: 36px;
 }
