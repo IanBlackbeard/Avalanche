@@ -5,7 +5,7 @@ var timeArray = ["7:00 AM", "8:00 AM", "9:00 AM", "10:00 AM", "11:00 AM", "12:00
 var timeCount = 0;
 var lifePoints = 100;
 var lpph = 4;
-var speed = 10;
+var speed = 1;
 var distanceTraveled = 0;
 var finalScore = {};
 var imageCount = 0;
@@ -37,8 +37,8 @@ var allItems = [
 	"Water", //------------- Altitude sickness
 	"Emergency-Blanket", //- Blizzard 
 	"Food", //--------------- Wolf
-	"Flashlight", //--------- darkness
-	"Riddle" //------------- Yeti
+	"Flashlight" //--------- darkness
+	// "Riddle" //------------- Yeti
 ];
 var backpack = [];
 
@@ -65,9 +65,12 @@ $(".story2").on("click", function() {
 	$(".story2").hide();
 	$(".black-screen").hide();
 	$(".start-page").show();
+	document.getElementById("sound").src = "../sounds/tickClock.mp3";
+    $("#sound").trigger("play");
 });
 
 $("#start-screen-img").on("click", function() {
+	$("#sound").trigger("pause");
 	$(".start-page").hide();
 	$(".black-screen").show();
 	$("#user").show();
@@ -81,14 +84,6 @@ $(".userSubmit").on("click", function() {
 	$("#user").hide();
     chooseCharacter();
 });
-
-// function submitUser(User) {
-// 	$.ajax({
-// 		method: "POST",
-// 		url: "/api/users",
-// 		data: score
-// 	});
-// }
 
 function chooseCharacter() {
 	$("#chooseCharacter").show();
@@ -129,7 +124,6 @@ function chooseCharacter() {
 
 function pennyGenerator() {
 	$("#generateCharacterPenny").show();
-
 	$("#generateCharacterPenny").on("click", function() {
 		$("#generateCharacterPenny").hide();
 		$(".black-screen").show();
@@ -139,7 +133,6 @@ function pennyGenerator() {
 
 function dannyGenerator() {
 	$("#generateCharacterDanny").show();
-
 	$("#generateCharacterDanny").on("click", function() {
 		$("#generateCharacterDanny").hide();
 		$(".black-screen").show();
@@ -194,24 +187,29 @@ function game() {
 	console.log("Time: " + time);
 	console.log("Life Points: " + lifePoints);
 	if (lifePoints > 0) {
-		if (distanceTraveled < 10) {
-			obstacleChecker();
-			if (obstacle === "none") {
-				displayImage();
-				$(".updateBox").empty();
-				$(".updateBox").append("Continue on your journey...");
+		if (timeCount != 11) {
+			if (distanceTraveled < 10) {
+				obstacleChecker();
+				if (obstacle === "none") {
+					displayImage();
+					$(".updateBox").empty();
+					$(".updateBox").append("Click to continue on your journey...");
+				} else {
+					displayObstacle();
+				}
 			} else {
-				displayObstacle();
+				winGame();
 			}
 		} else {
-			winGame();
+			darkness()
+			displayImage()
+			console.log(timeCount)
 		}
 	} else {
 		loseGame();
 	}
 	$(".statsBox").empty();
 	$(".statsBox").append("<big>Time: " + time + "<br>", "<big>Life Points: " + lifePoints + "<br>", "<big>Miles Walked: " + distanceTraveled + "<br>", "<big>Backpack Items: " + "<br>", backpack[0] + "<br>", backpack[1] + "<br>", backpack[2] + "<br>", backpack[3] + "<br>");
-	
 }
 
 function winGame() {
@@ -228,6 +226,8 @@ function winGame() {
 	submitUser(finalScore);
 	console.log(finalScore);
 	console.log("you won");
+	document.getElementById("sound").src = "../sounds/winner.mp3";
+    $("#sound").trigger("play");
 	finalScreen()
 }
 
@@ -275,10 +275,6 @@ function topScores() {
 	finalScreen();
 }
 
-
-// #scoresList
-// jQuery create list item, then append
-
 $("#game").on("click", function() {
 	event.preventDefault();
 	speedTimeMath();
@@ -288,28 +284,43 @@ $("#game").on("click", function() {
 
 function speedTimeMath() {
 	if (timeCount < 11) {
-		lifePoints -= lpph;
-		timeCount ++;
-		time = timeArray[timeCount];
+		statsUpdate()
 	} else if (timeCount === 11) {
-		speed -= .25;
+		$(".updateBox").empty()
 		lpph = 8;
-		lifePoints -= lpph;
-		timeCount ++;
-		time = timeArray[timeCount];
+		var hasFlashlight = false;
+		for (var b = 0; b < backpack.length; b++) {
+			if (backpack[b] === "Flashlight") {
+				hasFlashlight = true;
+			}
+		}
+		if (!hasFlashlight) {
+			speed -= .25;
+			$(".updateBox").append(" It is also very had to move quickly in the dark without a flashlight.  Your speed has decreased by .25 mph!!")
+		} else {
+			$(".updateBox").append(" Thankfully you brought a flashlight, so you can at least keep moving at the same speed as during the day!!")
+		}
+		statsUpdate()
 	} else {
-		lpph = 8;
-		lifePoints -= lpph;
-		timeCount ++;
-		time = timeArray[timeCount];
+		statsUpdate()
 	}
+}
+
+function darkness() {
+	$(".updateBox").empty()
+	$(".updateBox").prepend("The bitter cold of night has come.  Your life points are now decreasing at twice the rate as before. If you brought a flashlight, you get to keep up your current speed.  But if not, you'll slow down by .25 mph.");
+	// statsUpdate()
+}
+
+function statsUpdate() {
+	lifePoints -= lpph;
+	timeCount ++;
+	time = timeArray[timeCount];
 }
 
 function distanceMath() {
 	if (obstacle === "none") {
 		distanceTraveled += speed;
-		$(".updateBox").empty();
-		$(".updateBox").append("Distance (in miles) walked in the last hour: " + speed);
 	}
 }
 
@@ -442,7 +453,7 @@ var obstacleList = [
 		deterrent: "Emergency-Blanket",
 		text: "The weather has taken a turn for the worse. The sun is no longer shining and a blizzard has blown in! It's a white out and you can only see a few feet in front of you...  ",
 		success: "You were smart to think that emergency blanket would come in handy. You can wrap yourself in it and forge ahead.",
-		failure: "The blizzard batters you relentlessly and with nothing in your backpack to help you, your progress is seriously hindered. Your speed drops by 75%."
+		failure: "The blizzard batters you relentlessly and with nothing in your backpack to help you, your progress is seriously hindered. Your speed drops by .25 mph."
 	},
 	{
 		name: "wolf",
@@ -467,16 +478,16 @@ var obstacleList = [
 	// },
 	{
 		name: "yeti",
-		lpAffect: 0,
+		lpAffect: 20,
 		timeAffect: 0,
 		speedAffect: 0,
 		dayImage: ["../img/dannyYetiDay.gif", "../img/pennyYetiDay.gif"],
         nightImage: ["../img/dannyYetiNight.gif", "../img/pennyYetiNight.gif"],
 		sound: "../sounds/yeti.mp3",
 		deterrent: "Riddle",
-		text: "Holy schnikes! Theres a yeti dead ahead! He is offering you a deal...if you answer a riddle correctly, he will personally carry you to safety. However, if your answer is wrong, he will eat you. Tough situation but now you are one of the few to have seen this elusive creature. Hopefully you will live to tell about it...  ",
-		success: "You solved the Yeti's riddle! Hop on his back and ride down the mountain!",
-		failure: "The Yeti is unimpressed. He eats you and you die!"
+		text: "Holy schnikes! Theres a yeti dead ahead! This magical and elusive creature is offering you a deal... if you swear on your life to never speak of seeing the creature, it will grant you 20 extra life points!!",  //However, if your answer is wrong, he will eat you. Tough situation but now you are one of the few to have seen this elusive creature. Hopefully you will live to tell about it...,
+		success: "",//You solved the Yeti's riddle! Hop on his back and ride down the mountain!",
+		failure: ""//The Yeti is unimpressed. He eats you and you die!"
 	}
 
 ];
@@ -514,20 +525,18 @@ function obstacleChecker() {
 		var rightItem = false;
 		for (var a = 0; a < backpack.length; a++) {
 			if (backpack[a] === obstacle.deterrent) {
-				$(".updateBox").append("Thankfully, you had a " + backpack[a] + " on you, which saved you!!");
-				console.log("Your " + backpack[a] + " has saved your from the " + obstacle.name + "!");
+				$(".updateBox").append(obstacle.success);
 				rightItem = true;
 				
 			}
 		}
-		
-
 
 		if (!rightItem) {
 			lifePoints += obstacle.lpAffect;
 			timeCount += obstacle.timeAffect;
 			lifePoints -= (obstacle.timeAffect * lpph);
 			speed += obstacle.speedAffect;
+			$(".updateBox").append(obstacle.failure);
 		}
 		console.log("speed: " + speed);
 		console.log(obstacle);
@@ -545,49 +554,5 @@ function obstacleChecker() {
 $(".restartGame").on("click", function() {
 	document.location.reload()
 });
-
-// Character Constructor
-// var Character = function(name, backpack, lifePoints) {
-// 	this.name = name;
-// 	this.backpack = []; // will this work?
-// 	this.lifePoints = lifePoints;
-// 	this.isAlive = function() {
-// 	if (this.hitPoints > 0) {
-// 		console.log(this.name + " is still alive!");
-// 		console.log("\n---------------\n");
-// 		return true;
-// 	}
-// 	console.log(this.name + " has died!");
-// 		return false;
-// 	}
-// 	this.PrintStats = function() {
-// 		console.log(this);	
-// 	}
-// 	this.itemSelect = function(i1, i2, i3, i4) {
-// 		this.backpack.push(selectedItems);
-// 	};
-// }
-
-// // Constructor to use global variables to pass through obstacle and character
-// Character.prototype.reachObstacle = function(obstacle) {
-// 	Character.lifePoints -= Obstacle.damage;
-// }
-
-// var dannyDanger = new Character("Danny Danger", "PUT_ARRAY_HERE", 100);
-// var pennyPeril = new Character("Penny Peril", "PUT ARRAY HERE", 100);
-
-// while (dannyDanger.isAlive() === true) {
-// 	dannyDanger.PrintStats();
-// 	dannyDanger.
-// }	
-
-// // User Constructor
-// var Player = function(initials) {
-// 	this.initials;
-// 	this.score;
-// }
-
-// module.exports = Character;
-// module.exports = Player;
 
 })
