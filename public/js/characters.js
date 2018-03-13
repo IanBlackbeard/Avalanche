@@ -54,9 +54,12 @@ $(".story").on("click", function() {
     groupImage.attr("src", "./img/group.jpg");
     groupImage.attr("class", "bigPicture");
 	$("#groupImage").append(groupImage);
+	document.getElementById("sound").src = "../sounds/avalanche.mp3";
+    $("#sound").trigger("play");
 });
 
 $("#group").on("click", function() {
+	$("#sound").trigger("pause");
 	$("#group").hide();
 	$(".story2").show();
 });
@@ -104,6 +107,8 @@ function chooseCharacter() {
   	}
 
   	$("img").on("click", function() {
+  		document.getElementById("sound").src = "../sounds/computer.mp3";
+    	$("#sound").trigger("play");
 		var chosenCharacter = $(this).attr("data-state");
         var id = $(this).attr("data-id");
         var charImage = $("<br><img>");
@@ -125,6 +130,7 @@ function chooseCharacter() {
 function pennyGenerator() {
 	$("#generateCharacterPenny").show();
 	$("#generateCharacterPenny").on("click", function() {
+		$("#sound").trigger("pause");
 		$("#generateCharacterPenny").hide();
 		$(".black-screen").show();
 		showItems();
@@ -134,6 +140,7 @@ function pennyGenerator() {
 function dannyGenerator() {
 	$("#generateCharacterDanny").show();
 	$("#generateCharacterDanny").on("click", function() {
+		$("#sound").trigger("pause");
 		$("#generateCharacterDanny").hide();
 		$(".black-screen").show();
 		showItems();
@@ -421,8 +428,8 @@ var obstacleList = [
 		lpAffect: -10,
 		timeAffect: 0,
 		speedAffect: 0,
-		dayImage: ["../img/frostbite.jpg", "../img/frostbite.jpg"],
-        nightImage: ["../img/frostbite.jpg", "../img/frostbite.jpg"],
+		dayImage: ["../img/jack.jpg", "../img/jack.jpg"],
+        nightImage: ["../img/jack.jpg", "../img/jack.jpg"],
 		sound: "../sounds/frost_bite.mp3",
 		deterrent: "Hand-Warmers",
 		text: "The cold has finally caught up with you and Jack Frost is nipping. You hands are numb and starting to turn a sickly shade of red. You have frostbite!...  ",
@@ -436,7 +443,7 @@ var obstacleList = [
 		speedAffect: 0,
 		dayImage: ["../img/dannyBarfDay.gif", "../img/pennyBarfDay.gif"],
         nightImage: ["../img/dannyBarfNight.gif", "../img/pennyBarfNight.gif"],
-		sound: "../sounds/vomit.wav",
+		sound: "../sounds/vomit.mp3",
 		deterrent: "Water",
 		text: "The altitude is getting to you and that big breakfast you had is starting to seem like a bad idea. You have altitude sickness!...  ",
 		success: "Good thing you brought some water with you. You can chug it an feel better in no time.",
