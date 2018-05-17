@@ -82,6 +82,10 @@ svg {
   padding: 0px 150px;
 }
 
+#anime-demo svg {
+  max-height: 60vh;
+}
+
 #generateCharacterPenny {
   padding: 2.5%
 }
@@ -156,8 +160,8 @@ img.bigPicture {
     position: absolute;
     background: rgba(0, 0, 0, 0.8);
     color: white;
-    top: 40px;
-    left: 315px;
+    top: 6vh;
+    left: 20vw;
     border-radius: 10px;
     padding: 10px;
     font-size: 16px;
@@ -172,8 +176,8 @@ img.bigPicture {
     position: absolute;
     background: rgba(0, 0, 0, 0.8);
     color: white;
-    top: 40px;
-    left: 470px;
+    top: 6vh;
+    left: 35vw;
     border-radius: 10px;
     padding: 10px;
     font-size: 24px;
