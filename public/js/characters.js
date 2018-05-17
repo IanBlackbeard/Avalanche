@@ -479,7 +479,23 @@ var obstacleList = [
 
 var obstacleOdds = 0;
 var obstacle = {};
+var obstacleHit = [];
+var obstacleList2 = [0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8];
 
+function obstacleSelector() {
+	var randomIndex = Math.floor(Math.random() * obstacleList2.length);
+	console.log("random index: " + randomIndex);
+	obstacleHit = randomIndex;
+		if (obstacle === obstacleHit.length - 1) {
+			obstacleSelector();
+		} else {
+			var spliced = obstacleList2.splice(randomIndex, 1);
+			console.log("array after splice: " + obstacleList2);
+			console.log(spliced);
+			obstacle = obstacleList[spliced];
+			console.log("obstacle: " + obstacle);
+		}
+};
 
 function obstacleChecker() {
 	var obstacleChance = Math.floor(Math.random() * 100);
@@ -487,26 +503,28 @@ function obstacleChecker() {
 		obstacleChance = 101;
 	}
 	if (obstacleChance <= obstacleOdds) {
-		var obstacleNumber = Math.floor(Math.random() * 100);
-		if (obstacleNumber < 11) {
-			obstacle = obstacleList[0]
-		} else if (obstacleNumber < 22) {
-			obstacle = obstacleList[1]
-		} else if (obstacleNumber < 33) {
-			obstacle = obstacleList[2]
-		} else if (obstacleNumber < 44) {
-			obstacle = obstacleList[3]
-		} else if (obstacleNumber < 55) {
-			obstacle = obstacleList[4]
-		} else if (obstacleNumber < 66) {
-			obstacle = obstacleList[5]
-		} else if (obstacleNumber < 77) {
-			obstacle = obstacleList[6]
-		} else if (obstacleNumber < 88) {
-			obstacle = obstacleList[7]
-		} else {
-			obstacle = obstacleList[8]
-		}
+		obstacleSelector();
+
+	// 	var obstacleNumber = Math.floor(Math.random() * 100);
+	// 	if (obstacleNumber < 11) {
+	// 		obstacle = obstacleList[0]
+	// 	} else if (obstacleNumber < 22) {
+	// 		obstacle = obstacleList[1]
+	// 	} else if (obstacleNumber < 33) {
+	// 		obstacle = obstacleList[2]
+	// 	} else if (obstacleNumber < 44) {
+	// 		obstacle = obstacleList[3]
+	// 	} else if (obstacleNumber < 55) {
+	// 		obstacle = obstacleList[4]
+	// 	} else if (obstacleNumber < 66) {
+	// 		obstacle = obstacleList[5]
+	// 	} else if (obstacleNumber < 77) {
+	// 		obstacle = obstacleList[6]
+	// 	} else if (obstacleNumber < 88) {
+	// 		obstacle = obstacleList[7]
+	// 	} else {
+	// 		obstacle = obstacleList[8]
+	// 	}
 		$(".updateBox").empty();
 		$(".updateBox").append(obstacle.text + "<br>");
 		obstacleOdds = 10;
