@@ -289,39 +289,26 @@ function topScores() {
 
 $("#game").on("click", function() {
 	event.preventDefault();
-	speedTimeMath();
+	statsUpdate();
 	distanceMath();
 	game();
 });
 
-function speedTimeMath() {
-	if (timeCount < 11) {
-		statsUpdate()
-	} else if (timeCount === 11) {
-		$(".updateBox").empty()
-		lpph = 8;
-		var hasFlashlight = false;
-		for (var b = 0; b < backpack.length; b++) {
-			if (backpack[b] === "Flashlight") {
-				hasFlashlight = true;
-			}
-		}
-		if (!hasFlashlight) {
-			speed -= .25;
-			$(".updateBox").append(" It is also very had to move quickly in the dark without a flashlight.  Your speed has decreased by .25 mph!!")
-		} else {
-			$(".updateBox").append(" Thankfully you brought a flashlight, so you can at least keep moving at the same speed as during the day!!")
-		}
-		statsUpdate()
-	} else {
-		statsUpdate()
-	}
-}
-
 function darkness() {
 	$(".updateBox").empty()
-	$(".updateBox").prepend("The bitter cold of night has come.  Your life points are now decreasing at twice the rate as before. If you brought a flashlight, you get to keep up your current speed.  But if not, you'll slow down by .25 mph.");
-	// statsUpdate()
+	lpph = 8;
+	var hasFlashlight = false;
+	for (var b = 0; b < backpack.length; b++) {
+		if (backpack[b] === "Flashlight") {
+			hasFlashlight = true;
+		}
+	}
+	if (!hasFlashlight) {
+		speed -= .25;
+		$(".updateBox").append("The bitter cold of night has come.  Your life points are now decreasing at twice the rate as before. It is also very hard to move quickly in the dark without a flashlight.  Your speed has decreased by .25 mph!!")
+	} else {
+		$(".updateBox").append("The bitter cold of night has come.  Your life points are now decreasing at twice the rate as before. Thankfully you brought a flashlight, so you can at least keep moving at the same speed as during the day!!")
+	}
 }
 
 function statsUpdate() {
