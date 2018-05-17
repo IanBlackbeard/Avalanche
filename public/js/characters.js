@@ -174,6 +174,7 @@ function showItems() {
 	        showItems();
 	    })
 	} else {
+		$("li").off("click");
 		console.log("backpack full");
 		$("#ci").text("Here are your game choices!!");
 		$(".itemColumns").hide()
