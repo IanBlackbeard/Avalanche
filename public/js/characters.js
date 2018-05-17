@@ -13,6 +13,7 @@ var imageCount = 0;
 var characters = [
 	{
 		name: "Danny Danger",
+		firstName: "Danny",
 		image: "./img/danny.jpg",
 		avatar: "./img/DannyDangerSmall.png",
 		mainMovement: ["./img/dannyLeft.jpg", "./img/dannyMid.jpg", "./img/dannyRight.jpg"],
@@ -20,6 +21,7 @@ var characters = [
 	},
 	{
 		name: "Penny Peril",
+		firstName: "Penny",
 		image: "./img/penny.jpg",
 		avatar: "./img/PennyPerilSmall.png",
 		mainMovement: ["./img/pennyLeft.jpg", "./img/pennyMid.jpg", "./img/pennyRight.jpg"],
@@ -113,34 +115,18 @@ function chooseCharacter() {
         var charImage = $("<br><img>");
         charImage.attr("src", characters[id].avatar);
         character = id;
-        console.log(character);
+        console.log(chosenCharacter);
         $("#characterChosen").append(chosenCharacter, charImage);
         $("#chooseCharacter").hide();
-        if (id === "1") {
-        	pennyGenerator()
-        	console.log("penny has been clicked!")
-    	} else {
-    		console.log("danny has been clicked!")
-    		dannyGenerator()
-    	}
+        characterGenerator(characters[id].firstName)
   	})
 }
 
-function pennyGenerator() {
-	$("#generateCharacterPenny").show();
-	$("#generateCharacterPenny").on("click", function() {
+function characterGenerator(name) {
+	$("#generateCharacter" + name).show();
+	$("#generateCharacter" + name).on("click", function() {
 		$("#sound").trigger("pause");
-		$("#generateCharacterPenny").hide();
-		$(".black-screen").show();
-		showItems();
-	})
-}
-
-function dannyGenerator() {
-	$("#generateCharacterDanny").show();
-	$("#generateCharacterDanny").on("click", function() {
-		$("#sound").trigger("pause");
-		$("#generateCharacterDanny").hide();
+		$("#generateCharacter" + name).hide();
 		$(".black-screen").show();
 		showItems();
 	})
@@ -497,6 +483,9 @@ var obstacle = {};
 
 function obstacleChecker() {
 	var obstacleChance = Math.floor(Math.random() * 100);
+	if (timeCount === 10) {
+		obstacleChance = 101;
+	}
 	if (obstacleChance <= obstacleOdds) {
 		var obstacleNumber = Math.floor(Math.random() * 100);
 		if (obstacleNumber < 11) {
