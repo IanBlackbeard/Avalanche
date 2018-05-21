@@ -248,7 +248,7 @@ function loseGame() {
 	$(".updateBox").append("You have been consumed by the mountain.");
 	lifePoints = 0;
 	var loserImage = $("<img>");
-    loserImage.attr("src", "./img/dead.jpg");
+    loserImage.attr("src", "./img/dannyDeath.gif");
     loserImage.attr("class", "bigPicture");
 	$("#gameOverImage").append(loserImage);
 	document.getElementById("sound").src = "../sounds/soundOfSilence.mp3";
