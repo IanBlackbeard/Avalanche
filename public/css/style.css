@@ -83,6 +83,10 @@ svg {
   padding: 0px 150px;
 }
 
+#anime-demo svg {
+  max-height: 60vh;
+}
+
 #generateCharacterPenny {
   padding: 2.5%
 }
@@ -157,8 +161,8 @@ img.bigPicture {
     position: absolute;
     background: rgba(0, 0, 0, 0.8);
     color: white;
-    top: 40px;
-    left: 315px;
+    top: 6vh;
+    left: 20vw;
     border-radius: 10px;
     padding: 10px;
     font-size: 16px;
@@ -173,8 +177,8 @@ img.bigPicture {
     position: absolute;
     background: rgba(0, 0, 0, 0.8);
     color: white;
-    top: 40px;
-    left: 470px;
+    top: 6vh;
+    left: 35vw;
     border-radius: 10px;
     padding: 10px;
     font-size: 24px;
@@ -240,6 +244,10 @@ img.bigPicture {
   80% { transform: translate(-1px, -1px) rotate(1deg); }
   90% { transform: translate(1px, 2px) rotate(0deg); }
   100% { transform: translate(1px, -2px) rotate(-1deg); }
+}
+
+.highScores {
+  text-align: center;
 }
 
 #demo {
